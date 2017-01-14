@@ -7,6 +7,8 @@ public class Log {
      * General
      */
     public static final String PROFILING = "Profiling";
+    public static final String ENTER = "Enter: ";
+    public static final String WRONG_ENTER = "Invalid input! Try again.";
 
     /**
      * Debug and info

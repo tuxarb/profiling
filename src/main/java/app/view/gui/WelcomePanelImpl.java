@@ -1,4 +1,4 @@
-package app.view;
+package app.view.gui;
 
 import app.model.enums.OperatingSystems;
 import app.utils.Log;
@@ -35,7 +35,6 @@ public class WelcomePanelImpl extends JPanel implements Panel {
         paint();
         setVisible(true);
     }
-
 
     private void paint() {
         JLabel labWelcome = createLabel(Log.WELCOME);

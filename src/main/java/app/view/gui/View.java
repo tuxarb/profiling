@@ -1,4 +1,4 @@
-package app.view;
+package app.view.gui;
 
 import app.controller.EventListener;
 import app.model.enums.OperatingSystems;
@@ -19,7 +19,7 @@ import java.io.InputStream;
 
 public class View extends JFrame {
     private Panel panel;
-    private volatile EventListener eventListener;
+    private EventListener eventListener;
     private Image backgroundImage;
     private BufferedImage buttonImage;
     private OperatingSystems operatingSystem;

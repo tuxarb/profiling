@@ -64,4 +64,6 @@ public class Utils {
     public static boolean isMemoryLine(String str) {
         return str.contains("память") || str.contains("mem");
     }
+
+
 }

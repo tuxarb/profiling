@@ -1,4 +1,4 @@
-package app.view;
+package app.view.gui;
 
 import app.utils.exceptions.WrongSelectedDatabaseException;
 import app.model.enums.DatabaseTypes;

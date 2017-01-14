@@ -1,4 +1,4 @@
-package app.view;
+package app.view.gui;
 
 
 import app.utils.Log;

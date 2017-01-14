@@ -6,8 +6,9 @@ import app.model.enums.DatabaseTypes;
 import app.model.enums.OperatingSystems;
 import app.utils.exceptions.ClientProcessException;
 import app.utils.exceptions.WrongSelectedDatabaseException;
-import app.view.WelcomePanelImpl;
-import app.view.View;
+import app.view.console.ConsoleView;
+import app.view.gui.WelcomePanelImpl;
+import app.view.gui.View;
 
 import javax.swing.*;
 import java.io.File;
@@ -15,18 +16,25 @@ import java.io.IOException;
 
 public class Profiling implements EventListener {
     private View view;
+    private ConsoleView consoleView;
     private Model model;
 
     public Profiling() {
         model = new Model(new Characteristic());
 
-        SwingUtilities.invokeLater(() -> {
-            view = new View();
-            view.setEventListener(Profiling.this);
-            view.initFrame();
-            view.setPanel(new WelcomePanelImpl(view));
-            view.getPanel().init();
-        });
+        boolean flag = true;
+        if (!flag) {
+            SwingUtilities.invokeLater(() -> {
+                view = new View();
+                view.setEventListener(Profiling.this);
+                view.initFrame();
+                view.setPanel(new WelcomePanelImpl(view));
+                view.getPanel().init();
+            });
+        } else {
+            consoleView = new ConsoleView();
+            consoleView.setEventListener(Profiling.this);
+        }
     }
 
     @Override
