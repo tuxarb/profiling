@@ -11,8 +11,18 @@ public class ConsoleView {
     private OperatingSystems operatingSystem;
 
     public ConsoleView() {
-        ConsoleWelcome menu = new ConsoleWelcome(this);
+    }
+
+    public void init() {
+        ConsoleWelcome welcome = new ConsoleWelcome(this);
+        welcome.init();
+    }
+
+    void renderMenu() {
+        print("\n--------------------\n");
+        ConsoleMenu menu = new ConsoleMenu(this);
         menu.init();
+        getEventListener().setCompleted(false);
     }
 
     EventListener getEventListener() {
@@ -29,12 +39,5 @@ public class ConsoleView {
 
     void setOperatingSystem(OperatingSystems operatingSystem) {
         this.operatingSystem = operatingSystem;
-    }
-
-    void renderMenu() {
-        print("\n--------------------\n");
-        ConsoleMenu menu = new ConsoleMenu(this);
-        menu.init();
-        getEventListener().setCompleted(false);
     }
 }

@@ -34,6 +34,7 @@ public class Profiling implements EventListener {
         } else {
             consoleView = new ConsoleView();
             consoleView.setEventListener(Profiling.this);
+            consoleView.init();
         }
     }
 
@@ -60,15 +61,15 @@ public class Profiling implements EventListener {
         model.completed();
     }
 
-    private void startTestForWindows() throws IOException {
+    private void startTestForWindows() throws IOException, ClientProcessException {
         model.startTestForWindows();
     }
 
-    private void startTestForLinux() throws IOException {
+    private void startTestForLinux() throws IOException, ClientProcessException {
         model.startTestForLinux();
     }
 
-    private void startTestForMac() throws IOException {
+    private void startTestForMac() throws IOException, ClientProcessException {
         model.startTestForMac();
     }
 

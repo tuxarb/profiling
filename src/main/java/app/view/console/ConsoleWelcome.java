@@ -14,6 +14,7 @@ class ConsoleWelcome {
     }
 
     void init() {
+        println("--------------------");
         println(Log.WELCOME);
         println("--------------------");
         println(Log.SELECT_OS + ":\n");
@@ -24,7 +25,7 @@ class ConsoleWelcome {
 
         while (true) {
             print("\n" + Log.ENTER);
-            switch (readln().toLowerCase()) {
+            switch (readLine().toLowerCase()) {
                 case "1":
                 case "w":
                 case "windows":

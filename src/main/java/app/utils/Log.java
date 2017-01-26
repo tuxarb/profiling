@@ -20,7 +20,7 @@ public class Log {
     public static final String VALID_OS = "Selected operating system is available for the test.";
     public static final String PROCESS_INFO_START = "The process info has started. Processing...";
     public static final String PROCESS_INFO_END = "The process info has finished. Closing...";
-    public static final String PROPERTY_READ = "The property file was read.";
+    public static final String PROPERTY_READ = "The property file was successfully read!";
     public static final String PROPERTY_UPDATE = "The property file was successfully updated!";
     public static final String PREPARATION_FOR_WRITING_IN_THE_FILE = "Preparation for writing in a file...";
     public static final String WRITING_IN_THE_FILE = "Writing in the file...";
@@ -93,6 +93,9 @@ public class Log {
     public static final String SELECT_OS = "Select your operating system";
     public static final String MENU = "Menu";
     public static final String RESULTS = "The results of your program:";
+    public static final String MENU_CHOICE = "Choose one of the options (1 or 2):";
+    public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path to your property file. Try again.";
+    public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your property file: ";
 
     /**
      * Buttons
