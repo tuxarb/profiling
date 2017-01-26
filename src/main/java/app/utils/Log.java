@@ -93,9 +93,12 @@ public class Log {
     public static final String SELECT_OS = "Select your operating system";
     public static final String MENU = "Menu";
     public static final String RESULTS = "The results of your program:";
-    public static final String MENU_CHOICE = "Choose one of the options (1 or 2):";
+    public static final String MENU_CHOICE = "Choose one of the options (using 1-2 number):";
+    public static final String RESULT_PANEL_CHOICE = "Choose one of the options (using 1-5 number):";
     public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path to your property file. Try again.";
     public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your property file: ";
+    public static final String SAVE_TO_DATABASE = "Save to database";
+    public static final String UPDATE_PROPERTY_FILE = "Update property file";
 
     /**
      * Buttons
@@ -132,5 +135,4 @@ public class Log {
     public static org.slf4j.Logger createLog(Class clazz) {
         return LoggerFactory.getLogger(clazz);
     }
-
 }

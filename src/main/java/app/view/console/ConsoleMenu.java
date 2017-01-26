@@ -52,7 +52,9 @@ class ConsoleMenu {
     }
 
     public void update() {
-        println("--------- " + Log.PROCESSING + " ---------");
+        println("+--------------+");
+        println("| " + Log.PROCESSING + "|");
+        println("+--------------+");
         while (true) {
             if (isExceptionOccurred) {
                 return;
@@ -61,13 +63,13 @@ class ConsoleMenu {
                 break;
             }
         }
-        ConsoleResult consoleResult = new ConsoleResult();
-        //consoleResult.init();
+        ConsoleResult consoleResult = new ConsoleResult(view);
+        consoleResult.init();
     }
 
     private void findOutOS() {
+        isExceptionOccurred = false;
         new Thread(() -> {
-            isExceptionOccurred = false;
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {

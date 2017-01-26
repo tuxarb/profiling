@@ -14,7 +14,6 @@ class ConsoleWelcome {
     }
 
     void init() {
-        println("--------------------");
         println(Log.WELCOME);
         println("--------------------");
         println(Log.SELECT_OS + ":\n");
