@@ -3,9 +3,9 @@ package app.view.console;
 
 import app.utils.Log;
 
-import static app.utils.ConsoleWorker.print;
-import static app.utils.ConsoleWorker.println;
-import static app.utils.ConsoleWorker.readLine;
+import java.io.IOException;
+
+import static app.utils.ConsoleWorker.*;
 
 class ConsoleResult {
     private ConsoleView view;
@@ -56,10 +56,12 @@ class ConsoleResult {
             String input = readLine();
             switch (input) {
                 case "1":
+                    writeToFile();
                     break;
                 case "2":
                     break;
                 case "3":
+                    updatePropertyFile();
                     break;
                 case "4":
                     println(Log.RETURNING_TO_MENU + "(y|n)");
@@ -84,5 +86,23 @@ class ConsoleResult {
     private void exit() {
         println(Log.CLOSING_APP);
         view.getEventListener().exit();
+    }
+
+    private void writeToFile() {
+        try {
+            view.getEventListener().writeToFile();
+            println(Log.FILE_DATA_DISPLAY_SUCCESS);
+        } catch (IOException e) {
+            println(Log.FILE_DATA_DISPLAY_ERROR);
+        }
+    }
+
+    private void updatePropertyFile() {
+        try {
+            view.getEventListener().updatePropertyFile();
+            println(Log.PROPERTY_UPDATE);
+        } catch (Exception e) {
+            println(Log.PROPERTY_READ_ERROR);
+        }
     }
 }

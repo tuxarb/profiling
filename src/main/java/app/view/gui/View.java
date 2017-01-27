@@ -119,12 +119,12 @@ public class View extends JFrame {
         if (operatingSystem == null) {
             return;
         }
+        getEventListener().setCompleted(false);
         getContentPane().remove(jPanel);
         getContentPane().revalidate();
         MenuPanelImpl menuPanelImpl = new MenuPanelImpl(this);
         setPanel(menuPanelImpl);
         menuPanelImpl.init();
-        getEventListener().setCompleted(false);
     }
 
     OperatingSystems getOperatingSystem() {
