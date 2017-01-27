@@ -14,7 +14,7 @@ class ConsoleWelcome {
     }
 
     void init() {
-        println(Log.WELCOME);
+        println((char)27 + "[30m" + Log.WELCOME + (char)27 + "[0m");
         println("--------------------");
         println(Log.SELECT_OS + ":\n");
 

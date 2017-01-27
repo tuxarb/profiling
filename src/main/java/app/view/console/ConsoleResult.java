@@ -1,7 +1,10 @@
 package app.view.console;
 
 
+import app.model.enums.DatabaseTypes;
 import app.utils.Log;
+import app.utils.Utils;
+import app.utils.exceptions.WrongSelectedDatabaseException;
 
 import java.io.IOException;
 
@@ -33,7 +36,7 @@ class ConsoleResult {
     }
 
     void init() {
-        println("\n  " + Log.RESULTS);
+        println("\n   " + Log.RESULTS);
         println("+-------------------------------+");
         println("| " + Log.RUNTIME + " \t\t" + runtime + " \t\t|");
         println("| " + Log.CAPACITY + " \t" + capacity + "  \t\t|");
@@ -45,11 +48,11 @@ class ConsoleResult {
             print("\n");
             println(Log.RESULT_PANEL_CHOICE);
             print("\n");
-            println("1. " + Log.SAVE_TO_FILE);
-            println("2. " + Log.SAVE_TO_DATABASE);
-            println("3. " + Log.UPDATE_PROPERTY_FILE);
-            println("4. " + Log.REPEAT_TEST);
-            println("5. " + Log.EXIT);
+            println("\t1. " + Log.SAVE_TO_FILE);
+            println("\t2. " + Log.SAVE_TO_DATABASE);
+            println("\t3. " + Log.UPDATE_PROPERTY_FILE);
+            println("\t4. " + Log.REPEAT_TEST);
+            println("\t5. " + Log.EXIT);
             print("\n");
 
             print(Log.ENTER);
@@ -59,14 +62,19 @@ class ConsoleResult {
                     writeToFile();
                     break;
                 case "2":
+                    DatabaseTypes type = readDatabaseType();
+                    if (type == null) {
+                        break;
+                    }
+                    writeToDatabase(type);
                     break;
                 case "3":
-                    updatePropertyFile();
+                    if (isYes(Log.CONFIRMATION_OF_UPDATE_PROPERTY_FILE)) {
+                        updatePropertyFile();
+                    }
                     break;
                 case "4":
-                    println(Log.RETURNING_TO_MENU + "(y|n)");
-                    String action = readLine();
-                    if (action.startsWith("y")) {
+                    if (isYes(Log.RETURNING_TO_MENU)) {
                         break L;
                     }
                     break;
@@ -79,8 +87,23 @@ class ConsoleResult {
         returnToMenu();
     }
 
+    private boolean isYes(String message) {
+        println(message + "(y|n)");
+        String answer = readLine();
+        return answer.startsWith("y") || answer.startsWith("у");
+    }
+
     private void returnToMenu() {
         view.renderMenu();
+    }
+
+    private void updatePropertyFile() {
+        try {
+            view.getEventListener().updatePropertyFile();
+            println(Log.PROPERTY_UPDATE);
+        } catch (Exception e) {
+            println(Log.PROPERTY_READ_ERROR);
+        }
     }
 
     private void exit() {
@@ -97,12 +120,50 @@ class ConsoleResult {
         }
     }
 
-    private void updatePropertyFile() {
+    private void writeToDatabase(DatabaseTypes type) {
         try {
-            view.getEventListener().updatePropertyFile();
-            println(Log.PROPERTY_UPDATE);
-        } catch (Exception e) {
-            println(Log.PROPERTY_READ_ERROR);
+            view.getEventListener().writeToDatabase(type);
+            println(Log.WRITING_DATABASE_SUCCESS);
+        } catch (IOException e) {
+            println(Log.WRITING_DATABASE_ERROR);
+        } catch (WrongSelectedDatabaseException e) {
+            println(Log.WRONG_DATABASE_URL);
+        }
+    }
+
+    private DatabaseTypes readDatabaseType() {
+        while (true) {
+            print("\n");
+            println(Log.DATABASE_INPUT);
+            print("\n");
+            println("1." + Utils.POSTGRESQL);
+            println("2." + Utils.MYSQL);
+            println("3." + Utils.ORACLE);
+            println("4." + Utils.SQL_SERVER);
+            println("5." + Utils.OTHER_DBMS);
+            println("------------");
+            println("6." + Log.EXIT);
+            print("\n");
+
+            print(Log.ENTER);
+            String type = readLine();
+            switch (type) {
+                case "1":
+                    return DatabaseTypes.POSTGRESQL;
+                case "2":
+                    return DatabaseTypes.MYSQL;
+                case "3":
+                    return DatabaseTypes.ORACLE;
+                case "4":
+                    return DatabaseTypes.SQLSERVER;
+                case "5":
+                    return DatabaseTypes.OTHER;
+                case "6":
+                    println(Log.TYPE_DATABASE_IS_NOT_SELECTED);
+                    return null;
+                default:
+                    println(Log.WRONG_ENTER);
+            }
         }
     }
 }

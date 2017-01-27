@@ -79,8 +79,8 @@ public class Log {
     public static final String NOT_LINUX_OS = "Your operation system is not Linux.";
     public static final String NOT_MAC_OS = "Your operation system is not Mac.";
     public static final String PROPERTIES_IS_NULL = "Properties file was not specified.";
-    public static final String WRONG_DATABASE_URL = "Your url doesn't match selected database";
-    public static final String WRITING_DATABASE_ERROR = "Error occurred when writing in the database";
+    public static final String WRONG_DATABASE_URL = "Your url doesn't match selected database.";
+    public static final String WRITING_DATABASE_ERROR = "Error occurred when writing in the database.";
     public static final String WRITING_DATABASE_SUCCESS = "Data was successfully written in the database!";
     public static final String CLIENT_PROCESS_ERROR = "Error occurred when running your program.";
     public static final String EMPTY_PATH_MESSAGE = "Path to your program wasn't specified.";
@@ -93,12 +93,15 @@ public class Log {
     public static final String SELECT_OS = "Select your operating system";
     public static final String MENU = "Menu";
     public static final String RESULTS = "The results of your program:";
-    public static final String MENU_CHOICE = "Choose one of the options (using 1-2 number):";
-    public static final String RESULT_PANEL_CHOICE = "Choose one of the options (using 1-5 number):";
+    public static final String MENU_CHOICE = "Choose one of the options (using number between 1-2):";
+    public static final String RESULT_PANEL_CHOICE = "Choose one of the options (using number between 1-5):";
     public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path to your property file. Try again.";
     public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your property file: ";
+    public static final String DATABASE_INPUT = "Choose the type of database (using number between 1-5) or exit (using 6):";
     public static final String SAVE_TO_DATABASE = "Save to database";
+    public static final String TYPE_DATABASE_IS_NOT_SELECTED = "The type of database was not selected.";
     public static final String UPDATE_PROPERTY_FILE = "Update property file";
+    public static final String CONFIRMATION_OF_UPDATE_PROPERTY_FILE = "Do you want to update the property file?";
 
     /**
      * Buttons
