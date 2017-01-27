@@ -36,12 +36,14 @@ class ConsoleResult {
     }
 
     void init() {
-        println("\n   " + Log.RESULTS);
-        println("+-------------------------------+");
-        println("| " + Log.RUNTIME + " \t\t" + runtime + " \t\t|");
-        println("| " + Log.CAPACITY + " \t" + capacity + "  \t\t|");
-        println("| " + Log.SPEED + " \t\t" + speed + "   \t|");
-        println("+-------------------------------+");
+        print("\n");
+        println("+-------------------------------------+");
+        println("|\t" + Log.RESULTS);
+        println("+-------------------------------------+");
+        println("| " + Log.RUNTIME + " \t\t" + runtime);
+        println("| " + Log.CAPACITY + " \t" + capacity);
+        println("| " + Log.SPEED + " \t\t" + speed);
+        println("+-------------------------------------+");
         //println(Log.DATA_DISPLAY_SUCCESS);
         L:
         while (true) {
@@ -136,13 +138,13 @@ class ConsoleResult {
             print("\n");
             println(Log.DATABASE_INPUT);
             print("\n");
-            println("1." + Utils.POSTGRESQL);
-            println("2." + Utils.MYSQL);
-            println("3." + Utils.ORACLE);
-            println("4." + Utils.SQL_SERVER);
-            println("5." + Utils.OTHER_DBMS);
+            println("\t1." + Utils.POSTGRESQL);
+            println("\t2." + Utils.MYSQL);
+            println("\t3." + Utils.ORACLE);
+            println("\t4." + Utils.SQL_SERVER);
+            println("\t5." + Utils.OTHER_DBMS);
             println("------------");
-            println("6." + Log.EXIT);
+            println("\t6." + Log.EXIT);
             print("\n");
 
             print(Log.ENTER);

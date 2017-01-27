@@ -15,17 +15,18 @@ class ConsoleWelcome {
 
     void init() {
         println((char)27 + "[30m" + Log.WELCOME + (char)27 + "[0m");
-        println("--------------------");
+        println("-----------------------------");
         println(Log.SELECT_OS + ":\n");
 
         for (int i = 0; i < OperatingSystems.values().length; i++) {
-            println(i + 1 + ". " + OperatingSystems.values()[i]);
+            println("\t" + (i + 1) + ". " + OperatingSystems.values()[i]);
         }
 
         while (true) {
             print("\n" + Log.ENTER);
             switch (readLine().toLowerCase()) {
                 case "1":
+                case "1.":
                 case "w":
                 case "windows":
                 case "win":
@@ -36,6 +37,7 @@ class ConsoleWelcome {
                     view.setOperatingSystem(OperatingSystems.WINDOWS);
                     break;
                 case "2":
+                case "2.":
                 case "linux":
                 case "lin":
                 case "l":
@@ -46,6 +48,7 @@ class ConsoleWelcome {
                     view.setOperatingSystem(OperatingSystems.LINUX);
                     break;
                 case "3":
+                case "3.":
                 case "m":
                 case "mac":
                     if (!Utils.isMac()) {

@@ -17,7 +17,7 @@ public class Log {
     public static final String END_RUNNING_CODE = "The client process has finished!";
     public static final String START_READING_PROCESS = "There is creating a new process, received from the user...";
     public static final String END_READING_PROCESS = "The data was successfully read!";
-    public static final String VALID_OS = "Selected operating system is available for the test.";
+    public static final String VALID_OS = "The selected operating system is available for the test.";
     public static final String PROCESS_INFO_START = "The process info has started. Processing...";
     public static final String PROCESS_INFO_END = "The process info has finished. Closing...";
     public static final String PROPERTY_READ = "The property file was successfully read!";
@@ -102,6 +102,7 @@ public class Log {
     public static final String TYPE_DATABASE_IS_NOT_SELECTED = "The type of database was not selected.";
     public static final String UPDATE_PROPERTY_FILE = "Update property file";
     public static final String CONFIRMATION_OF_UPDATE_PROPERTY_FILE = "Do you want to update the property file?";
+    public static final String PROCCESING_WAS_FINISHED = "The processing was successfully finished.";
 
     /**
      * Buttons

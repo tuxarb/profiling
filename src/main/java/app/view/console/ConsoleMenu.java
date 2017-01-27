@@ -17,15 +17,15 @@ class ConsoleMenu {
     }
 
     public void init() {
-        println(Log.MENU);
-        println("--------------------");
-
         while (true) {
+            print("\n+-------------------+\n");
+            println("|\t\t" + Log.MENU + "\t\t|");
+            println("+-------------------+");
             print("\n");
             println(Log.MENU_CHOICE);
             print("\n");
-            println("1. " + Log.START_TEST_BUTTON_MESSAGE);
-            println("2. " + Log.OPEN_PROPERTY_FILE);
+            println("\t1. " + Log.START_TEST_BUTTON_MESSAGE);
+            println("\t2. " + Log.OPEN_PROPERTY_FILE);
             print("\n");
             print(Log.ENTER);
             String input = readLine();
@@ -34,9 +34,10 @@ class ConsoleMenu {
                     println(Log.PROPERTIES_IS_NULL);
                 } else {
                     findOutOS();
-                    update();
-                    if (!isExceptionOccurred)
+                    waitForEndProcessing();
+                    if (!isExceptionOccurred) {
                         break;
+                    }
                 }
             } else if (input.startsWith("2")) {
                 try {
@@ -49,12 +50,13 @@ class ConsoleMenu {
                 println(Log.WRONG_ENTER);
             }
         }
+        update();
     }
 
-    public void update() {
-        println("+--------------+");
-        println("| " + Log.PROCESSING + "|");
-        println("+--------------+");
+    private void waitForEndProcessing() {
+        println("+--------------------------------+");
+        println("| \t\t" + Log.PROCESSING);
+        println("+--------------------------------+");
         while (true) {
             if (isExceptionOccurred) {
                 return;
@@ -63,6 +65,10 @@ class ConsoleMenu {
                 break;
             }
         }
+    }
+
+    private void update() {
+        println(Log.PROCCESING_WAS_FINISHED);
         ConsoleResult consoleResult = new ConsoleResult(view);
         consoleResult.init();
     }

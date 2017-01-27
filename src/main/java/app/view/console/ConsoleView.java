@@ -19,7 +19,6 @@ public class ConsoleView {
     }
 
     void renderMenu() {
-        print("\n--------------------\n");
         getEventListener().setCompleted(false);
         ConsoleMenu menu = new ConsoleMenu(this);
         menu.init();

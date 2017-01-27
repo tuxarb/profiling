@@ -92,7 +92,7 @@ class ResultPanelImpl extends JPanel implements Panel {
             }
         });
 
-        JButton addToDatabase = createButton(Log.SAVE_TO_DATABASE, Log.SAVE_DB_BUTTON_MESSAGE);
+        JButton addToDatabase = createButton(Log.SAVE_TO_DB, Log.SAVE_DB_BUTTON_MESSAGE);
         addToDatabase.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -151,7 +151,7 @@ class ResultPanelImpl extends JPanel implements Panel {
             }
         });
 
-        JButton updatePropertyFile = createButton(Log.UPDATE_PROPERTY_FILE, Log.UPDATE_FILE_BUTTON_MESSAGE);
+        JButton updatePropertyFile = createButton(Log.UPDATE_FILE, Log.UPDATE_FILE_BUTTON_MESSAGE);
         updatePropertyFile.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
