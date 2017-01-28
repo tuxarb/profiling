@@ -9,7 +9,12 @@ public class ConsoleWorker {
     }
 
     public static String readLine() {
-        return SCANNER.nextLine();
+        String line = SCANNER.nextLine();
+        if (isExit(line)) {
+            println(Log.CLOSING_APP);
+            System.exit(0);
+        }
+        return line;
     }
 
     public static void println(String s) {
@@ -18,5 +23,9 @@ public class ConsoleWorker {
 
     public static void print(String s) {
         System.out.print(s);
+    }
+
+    private static boolean isExit(String line) {
+        return "exit".equalsIgnoreCase(line);
     }
 }
