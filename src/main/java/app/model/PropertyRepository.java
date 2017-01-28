@@ -45,11 +45,11 @@ public class PropertyRepository {
             for (Object key : properties.keySet()) {
                 store.computeIfPresent(key, (k, v) -> properties.get(k));
             }
-            LOG.info(Log.PROPERTY_READ);
+            LOG.info(Log.PROPERTY_FILE_READ);
         }
         catch (Exception e) {
             LOG.error(Log.PROPERTY_READ_ERROR);
-            e.printStackTrace();
+            //e.printStackTrace();
             throw e;
         }
     }

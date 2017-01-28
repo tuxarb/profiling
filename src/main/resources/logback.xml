@@ -5,16 +5,25 @@
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <file>D:/file.log</file>
+        <append>true</append>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%-5level %date [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <charset>UTF-8</charset>
             <pattern>%red(%-5level) %blue(%date [%thread] [%file:%line] %msg%n)</pattern>
         </encoder>
-    </appender>
+    </appender>-->
 
     <logger name="app" level="debug"/>
 
     <root level="warn">
-        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
     </root>
 </configuration>

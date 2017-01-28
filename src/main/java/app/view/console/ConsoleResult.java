@@ -5,6 +5,7 @@ import app.model.enums.DatabaseTypes;
 import app.utils.Log;
 import app.utils.Utils;
 import app.utils.exceptions.WrongSelectedDatabaseException;
+import org.slf4j.Logger;
 
 import java.io.IOException;
 
@@ -15,6 +16,7 @@ class ConsoleResult {
     private String capacity;
     private String runtime;
     private String speed;
+    private static final Logger LOG = Log.createLog(ConsoleResult.class);
 
     ConsoleResult(ConsoleView view) {
         this.view = view;
@@ -22,7 +24,7 @@ class ConsoleResult {
     }
 
     private void initResultData() {
-        //println(Log.DATA_INIT_FOR_DISPLAY);
+        LOG.info(Log.DATA_INIT_FOR_DISPLAY);
         this.capacity = view.getEventListener().getModel().getCharacteristic().getCapacity();
         this.runtime = view.getEventListener().getModel().getCharacteristic().getRuntime();
         this.speed = view.getEventListener().getModel().getCharacteristic().getSpeed();
@@ -36,15 +38,15 @@ class ConsoleResult {
     }
 
     void init() {
-        print("\n");
-        println("+-------------------------------------+");
+        print("\n\n");
+        println("+----------------------------------------+");
         println("|\t" + Log.RESULTS);
-        println("+-------------------------------------+");
-        println("| " + Log.RUNTIME + " \t\t" + runtime);
+        println("+----------------------------------------+");
+        println("| " + Log.RUNTIME + " \t" + runtime);
         println("| " + Log.CAPACITY + " \t" + capacity);
-        println("| " + Log.SPEED + " \t\t" + speed);
-        println("+-------------------------------------+");
-        //println(Log.DATA_DISPLAY_SUCCESS);
+        println("| " + Log.SPEED + " \t" + speed);
+        println("+---------------------------------------+");
+        LOG.info(Log.DATA_DISPLAY_SUCCESS);
         L:
         while (true) {
             print("\n");
@@ -102,7 +104,7 @@ class ConsoleResult {
     private void updatePropertyFile() {
         try {
             view.getEventListener().updatePropertyFile();
-            println(Log.PROPERTY_UPDATE);
+            println(Log.PROPERTY_FILE_UPDATE);
         } catch (Exception e) {
             println(Log.PROPERTY_READ_ERROR);
         }

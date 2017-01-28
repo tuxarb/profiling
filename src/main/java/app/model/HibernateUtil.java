@@ -80,7 +80,7 @@ class HibernateUtil {
 
     private static void validateDatabaseUser(String url, String database) throws WrongSelectedDatabaseException {
         if (!url.toLowerCase().contains(database.toLowerCase())) {
-            LOG.error(Log.URL_MATCHING_DATABASE_ERROR);
+            LOG.error(Log.WRONG_DATABASE_URL);
             throw new WrongSelectedDatabaseException();
         }
     }

@@ -159,7 +159,7 @@ class ResultPanelImpl extends JPanel implements Panel {
                     try {
                         view.getEventListener().updatePropertyFile();
                         SwingUtilities.invokeLater(() ->
-                                JOptionPane.showMessageDialog(view, Log.PROPERTY_UPDATE, Log.INFORMATION,
+                                JOptionPane.showMessageDialog(view, Log.PROPERTY_FILE_UPDATE, Log.INFORMATION,
                                         JOptionPane.INFORMATION_MESSAGE)
                         );
                     } catch (Exception e1) {

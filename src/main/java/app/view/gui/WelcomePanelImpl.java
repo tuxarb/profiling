@@ -37,12 +37,12 @@ public class WelcomePanelImpl extends JPanel implements Panel {
     }
 
     private void paint() {
-        JLabel labWelcome = createLabel(Log.WELCOME);
+        JLabel labWelcome = createLabel(Log.WELCOME_GUI);
         Font font = new Font("Hiragino Kaku Gothic Pro", Font.ITALIC, 36);
         labWelcome.setFont(font);
         labWelcome.setForeground(Color.YELLOW);
 
-        JLabel labelAction = createLabel(Log.SELECT_OS);
+        JLabel labelAction = createLabel(Log.CHOICE_OS);
         font = new Font("Copperplate Gothic Light", Font.HANGING_BASELINE, 28);
         labelAction.setFont(font);
         labelAction.setForeground(Color.WHITE);

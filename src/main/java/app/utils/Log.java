@@ -7,8 +7,9 @@ public class Log {
      * General
      */
     public static final String PROFILING = "Profiling";
-    public static final String ENTER = "Enter: ";
-    public static final String WRONG_ENTER = "Invalid input! Try again.";
+    public static final String CAPACITY = "Capacity:";
+    public static final String RUNTIME = "Runtime:";
+    public static final String SPEED = "Speed:";
 
     /**
      * Debug and info
@@ -17,11 +18,11 @@ public class Log {
     public static final String END_RUNNING_CODE = "The client process has finished!";
     public static final String START_READING_PROCESS = "There is creating a new process, received from the user...";
     public static final String END_READING_PROCESS = "The data was successfully read!";
-    public static final String VALID_OS = "The selected operating system is available for the test.";
+    public static final String VALID_OS = "The selected operating system is available for the test. Redirecting to the menu...";
     public static final String PROCESS_INFO_START = "The process info has started. Processing...";
     public static final String PROCESS_INFO_END = "The process info has finished. Closing...";
-    public static final String PROPERTY_READ = "The property file was successfully read!";
-    public static final String PROPERTY_UPDATE = "The property file was successfully updated!";
+    public static final String PROPERTY_FILE_READ = "The properties file was successfully read!";
+    public static final String PROPERTY_FILE_UPDATE = "The properties file was successfully updated!";
     public static final String PREPARATION_FOR_WRITING_IN_THE_FILE = "Preparation for writing in a file...";
     public static final String WRITING_IN_THE_FILE = "Writing in the file...";
     public static final String WRITING_IN_THE_FILE_SUCCESS = "Writing was successfully finished!";
@@ -52,17 +53,15 @@ public class Log {
     public static final String SESSION_FACTORY_IS_NULL = "sessionFactory object is null";
     public static final String URL_TO_DATABASE_IS_NULL = "Specify url for connecting.";
     public static final String DRIVER_CLASS_NOT_FOUND_ERROR = "Driver class was not found for your DBMS.";
-    public static final String URL_MATCHING_DATABASE_ERROR = "Your url doesn't match the selected database";
     public static final String PROPERTY_READ_ERROR = "Error occurred when reading the property file";
     public static final String SMALL_PROGRAM_ERROR = "Your program is too small to profile.";
-    public static final String CANCELLING_PROPERTY_FILE = "Pressed cancel when trying to open property file.";
+    public static final String CANCELLING_PROPERTY_FILE = "Pressed 'cancel' when trying to open .properties file.";
     public static final String FILE_DATA_DISPLAY_ERROR = "Error occurred when writing in the file.";
     public static final String DATA_DISPLAY_ERROR = "One of the characteristics or everyone weren't got when processing";
     public static final String CREATING_FILE_ERROR = "Error when creating the file";
     public static final String WRITING_IN_FILE_ERROR = "Errors when writing to file";
     public static final String SETTING_BACKGROUND_ERROR = "Failed to set the background image";
     public static final String SETTING_BUTTON_IMAGE_ERROR = "Failed to set the button's image";
-
 
     /**
      * Dialog's headers
@@ -79,7 +78,7 @@ public class Log {
     public static final String NOT_LINUX_OS = "Your operation system is not Linux.";
     public static final String NOT_MAC_OS = "Your operation system is not Mac.";
     public static final String PROPERTIES_IS_NULL = "Properties file was not specified.";
-    public static final String WRONG_DATABASE_URL = "Your url doesn't match selected database.";
+    public static final String WRONG_DATABASE_URL = "Your url doesn't match the selected database.";
     public static final String WRITING_DATABASE_ERROR = "Error occurred when writing in the database.";
     public static final String WRITING_DATABASE_SUCCESS = "Data was successfully written in the database!";
     public static final String CLIENT_PROCESS_ERROR = "Error occurred when running your program.";
@@ -89,20 +88,10 @@ public class Log {
     /**
      * Text
      */
-    public static final String WELCOME = "Welcome to the program profiling!";
-    public static final String SELECT_OS = "Select your operating system";
-    public static final String MENU = "Menu";
+    public static final String WELCOME_GUI = "Welcome to the program profiling!";
+    public static final String CHOICE_OS = "Select your operating system";
+    public static final String MENU_GUI = "Menu";
     public static final String RESULTS = "The results of your program:";
-    public static final String MENU_CHOICE = "Choose one of the options (using number between 1-2):";
-    public static final String RESULT_PANEL_CHOICE = "Choose one of the options (using number between 1-5):";
-    public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path to your property file. Try again.";
-    public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your property file: ";
-    public static final String DATABASE_INPUT = "Choose the type of database (using number between 1-5) or exit (using 6):";
-    public static final String SAVE_TO_DATABASE = "Save to database";
-    public static final String TYPE_DATABASE_IS_NOT_SELECTED = "The type of database was not selected.";
-    public static final String UPDATE_PROPERTY_FILE = "Update property file";
-    public static final String CONFIRMATION_OF_UPDATE_PROPERTY_FILE = "Do you want to update the property file?";
-    public static final String PROCCESING_WAS_FINISHED = "The processing was successfully finished.";
 
     /**
      * Buttons
@@ -116,13 +105,6 @@ public class Log {
     public static final String EXIT = "Exit";
 
     /**
-     * Characteristics
-     */
-    public static final String CAPACITY = "Capacity:";
-    public static final String RUNTIME = "Runtime:";
-    public static final String SPEED = "Speed:";
-
-    /**
      * Tooltips for buttons
      */
     public static final String START_TEST_BUTTON_MESSAGE = "Start test";
@@ -132,6 +114,24 @@ public class Log {
     public static final String UPDATE_FILE_BUTTON_MESSAGE = "Update selected .properties file";
     public static final String REPEAT_TEST_BUTTON_MESSAGE = "Return on the menu where you can repeat the test.";
     public static final String EXIT_BUTTON_MESSAGE = "Exit from the application";
+
+    /**
+     * Console
+     */
+    public static final String ENTER = "Enter: ";
+    public static final String WRONG_ENTER = "Invalid input! Try again.";
+    public static final String WELCOME_CONSOLE = "WELCOME TO THE PROGRAM PROFILING!";
+    public static final String MENU_CONSOLE = "M E N U";
+    public static final String MENU_CHOICE = "Choose one of the next options (using 1-2):";
+    public static final String RESULT_PANEL_CHOICE = "Choose one of the next options (using 1-5):";
+    public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path. Try again or enter 'cancel'.";
+    public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your .properties file: ";
+    public static final String DATABASE_INPUT = "Choose the type of database (using 1-5) or exit (using 6):";
+    public static final String SAVE_TO_DATABASE = "Save to database";
+    public static final String TYPE_DATABASE_IS_NOT_SELECTED = "The type of database was not selected.";
+    public static final String UPDATE_PROPERTY_FILE = "Update .properties file";
+    public static final String CONFIRMATION_OF_UPDATE_PROPERTY_FILE = "Do you want to update the property file?";
+    public static final String PROCESSING_WAS_FINISHED = "The processing was successfully finished!";
 
     private Log() {
     }

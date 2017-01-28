@@ -14,13 +14,17 @@ class ConsoleWelcome {
     }
 
     void init() {
-        println((char)27 + "[30m" + Log.WELCOME + (char)27 + "[0m");
-        println("-----------------------------");
-        println(Log.SELECT_OS + ":\n");
+        print("\n");
+        println("+-----------------------------------------------+");
+        println("\t" + Log.WELCOME_CONSOLE + "\t");
+        println("+-----------------------------------------------+");
+        print("\n");
+        println("\t  " + Log.CHOICE_OS + ":\n");
 
         for (int i = 0; i < OperatingSystems.values().length; i++) {
-            println("\t" + (i + 1) + ". " + OperatingSystems.values()[i]);
+            println("\t\t" + (i + 1) + ". " + OperatingSystems.values()[i] + "\t");
         }
+        println("\n+-----------------------------------------------+");
 
         while (true) {
             print("\n" + Log.ENTER);
