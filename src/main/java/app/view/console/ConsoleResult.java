@@ -38,39 +38,25 @@ class ConsoleResult {
     }
 
     void init() {
-        print("\n\n");
-        println("+----------------------------------------+");
-        println("|\t" + Log.RESULTS);
-        println("+----------------------------------------+");
-        println("| " + Log.RUNTIME + " \t" + runtime);
-        println("| " + Log.CAPACITY + " \t" + capacity);
-        println("| " + Log.SPEED + " \t" + speed);
-        println("+---------------------------------------+");
+        displayResultPanel();
         LOG.info(Log.DATA_DISPLAY_SUCCESS);
         L:
         while (true) {
-            print("\n");
-            println(Log.RESULT_PANEL_CHOICE);
-            print("\n");
-            println("\t1. " + Log.SAVE_TO_FILE);
-            println("\t2. " + Log.SAVE_TO_DATABASE);
-            println("\t3. " + Log.UPDATE_PROPERTY_FILE);
-            println("\t4. " + Log.REPEAT_TEST);
-            println("\t5. " + Log.EXIT);
-            print("\n");
-
-            print(Log.ENTER);
+            print("\n" + Log.ENTER);
             String input = readLine();
             switch (input) {
                 case "1":
                     writeToFile();
                     break;
                 case "2":
-                    DatabaseTypes type = readDatabaseType();
-                    if (type == null) {
-                        break;
+                    displayDatabaseList();
+                    while (true) {
+                        DatabaseTypes type = readDatabaseType();
+                        if (type == null || writeToDatabase(type)) {
+                            displayResultPanel();
+                            break;
+                        }
                     }
-                    writeToDatabase(type);
                     break;
                 case "3":
                     if (isYes(Log.CONFIRMATION_OF_UPDATE_PROPERTY_FILE)) {
@@ -92,9 +78,10 @@ class ConsoleResult {
     }
 
     private boolean isYes(String message) {
-        println(message + "(y|n)");
-        String answer = readLine();
-        return answer.startsWith("y") || answer.startsWith("у");
+        println(message + " (y | n)");
+        print(">");
+        String answer = readLine().toLowerCase();
+        return answer.startsWith("y");
     }
 
     private void returnToMenu() {
@@ -124,32 +111,23 @@ class ConsoleResult {
         }
     }
 
-    private void writeToDatabase(DatabaseTypes type) {
+    private boolean writeToDatabase(DatabaseTypes type) {
         try {
             view.getEventListener().writeToDatabase(type);
             println(Log.WRITING_DATABASE_SUCCESS);
         } catch (IOException e) {
             println(Log.WRITING_DATABASE_ERROR);
+            return false;
         } catch (WrongSelectedDatabaseException e) {
             println(Log.WRONG_DATABASE_URL);
+            return false;
         }
+        return true;
     }
 
     private DatabaseTypes readDatabaseType() {
         while (true) {
-            print("\n");
-            println(Log.DATABASE_INPUT);
-            print("\n");
-            println("\t1." + Utils.POSTGRESQL);
-            println("\t2." + Utils.MYSQL);
-            println("\t3." + Utils.ORACLE);
-            println("\t4." + Utils.SQL_SERVER);
-            println("\t5." + Utils.OTHER_DBMS);
-            println("------------");
-            println("\t6." + Log.EXIT);
-            print("\n");
-
-            print(Log.ENTER);
+            print("\n>");
             String type = readLine();
             switch (type) {
                 case "1":
@@ -169,5 +147,44 @@ class ConsoleResult {
                     println(Log.WRONG_ENTER);
             }
         }
+    }
+
+    private void displayDatabaseList() {
+        print("\n");
+        println("+---------------------------------------------------------------+");
+        print("\n");
+        println("    " + Log.DATABASE_INPUT);
+        print("\n");
+        println("\t\t1." + Utils.POSTGRESQL);
+        println("\t\t2." + Utils.MYSQL);
+        println("\t\t3." + Utils.ORACLE);
+        println("\t\t4." + Utils.SQL_SERVER);
+        println("\t\t5." + Utils.OTHER_DBMS);
+        println("\t\t-----------");
+        println("\t\t6." + Log.BACK);
+        print("\n");
+        println("+---------------------------------------------------------------+");
+        print("\n");
+    }
+
+    private void displayResultPanel() {
+        print("\n\n");
+        println("+---------------------------------------------------+");
+        println("\t     " + Log.RESULTS);
+        println("+---------------------------------------------------+");
+        println("\t\t" + Log.RUNTIME + "   " + runtime);
+        println("\t\t" + Log.CAPACITY + "  " + capacity);
+        println("\t\t" + Log.SPEED + "     " + speed);
+        println("+---------------------------------------------------+");
+        print("\n");
+        println("\t" + Log.RESULT_PANEL_CHOICE);
+        print("\n");
+        println("\t\t1. " + Log.SAVE_TO_FILE);
+        println("\t\t2. " + Log.SAVE_TO_DATABASE);
+        println("\t\t3. " + Log.UPDATE_PROPERTY_FILE);
+        println("\t\t4. " + Log.REPEAT_TEST);
+        println("\t\t5. " + Log.EXIT);
+        print("\n");
+        println("+---------------------------------------------------+");
     }
 }

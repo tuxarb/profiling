@@ -14,6 +14,7 @@ class ConsoleWelcome {
     }
 
     void init() {
+        clearScreen();
         print("\n");
         println("+-----------------------------------------------+");
         println("\t" + Log.WELCOME_CONSOLE + "\t");
@@ -74,5 +75,11 @@ class ConsoleWelcome {
 
     private void update() {
         view.renderMenu();
+    }
+
+    private void clearScreen() {
+        for (int i = 0; i < 500; i++) {
+            System.out.println();
+        }
     }
 }

@@ -18,7 +18,7 @@ class ConsoleMenu {
 
     public void init() {
         print("\n\n+-------------------------------------------------+\n");
-        println("\t\t    " + Log.MENU_CONSOLE + "\t");
+        println("\t\t   " + Log.MENU_CONSOLE + "\t");
         println("+-------------------------------------------------+");
         print("\n");
         println("    " + Log.MENU_CHOICE);
@@ -50,9 +50,9 @@ class ConsoleMenu {
     }
 
     private void waitForEndProcessing() {
-        println("+--------------------------------+");
-        println("\t" + Log.PROCESSING);
-        println("+--------------------------------+");
+        println("+------------------------------------------------+");
+        println("\t\t" + Log.PROCESSING);
+        println("+------------------------------------------------+");
         while (true) {
             if (isExceptionOccurred) {
                 return;
@@ -92,19 +92,26 @@ class ConsoleMenu {
     private void readPropertyFile() {
         while (true) {
             print(Log.MENU_PATH_TO_PROPERTY_FILE);
-            String path = readLine();
+            String path = readLine().trim();
             if ("cancel".equalsIgnoreCase(path)) {
                 println(Log.CANCELLING_PROPERTY_FILE);
                 return;
             }
             try {
+                if (!isPropertiesFile(path)) {
+                    throw new Exception();
+                }
                 view.getEventListener().readPropertyFile(new File(path));
                 println(Log.PROPERTY_FILE_READ);
                 break;
-            } catch (Exception e1) {
+            } catch (Exception e) {
                 println(Log.MENU_WRONG_PATH_TO_PROPERTY_FILE);
                 print("\n");
             }
         }
+    }
+
+    private boolean isPropertiesFile(String path) {
+        return path.toLowerCase().endsWith(".properties");
     }
 }
