@@ -14,8 +14,8 @@ class ProgressDialog {
     private final JDialog dialog = new JDialog(view, Log.PROCESSING_GUI, false);
     private static final Logger LOG = Log.createLog(ProgressDialog.class);
 
-    ProgressDialog(View view) {
-        this.view = view;
+    ProgressDialog(GuiView guiView) {
+        this.view = guiView;
         init();
         LOG.info(Log.PROCESS_INFO_START);
     }
@@ -66,7 +66,7 @@ class ProgressDialog {
         private ByteArrayOutputStream getBytesStream()
         {
             BufferedInputStream bis = new BufferedInputStream(
-                    ((View) view).getStreamOfResourceFile(Utils.PROGRESS)
+                    ((GuiView) view).getStreamOfResourceFile(Utils.PROGRESS)
             );
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             try {

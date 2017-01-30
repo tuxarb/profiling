@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class View extends JFrame {
+public class GuiView extends JFrame {
     private Panel panel;
     private EventListener eventListener;
     private Image backgroundImage;
@@ -26,7 +26,7 @@ public class View extends JFrame {
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
 
-    public View() {
+    public GuiView() {
         super(Log.PROFILING);
     }
 

@@ -8,14 +8,14 @@ import app.utils.exceptions.ClientProcessException;
 import app.utils.exceptions.WrongSelectedDatabaseException;
 import app.view.console.ConsoleView;
 import app.view.gui.WelcomePanelImpl;
-import app.view.gui.View;
+import app.view.gui.GuiView;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 
 public class Profiling implements EventListener {
-    private View view;
+    private GuiView guiView;
     private ConsoleView consoleView;
     private Model model;
 
@@ -25,11 +25,11 @@ public class Profiling implements EventListener {
         boolean flag = true;
         if (!flag) {
             SwingUtilities.invokeLater(() -> {
-                view = new View();
-                view.setEventListener(Profiling.this);
-                view.initFrame();
-                view.setPanel(new WelcomePanelImpl(view));
-                view.getPanel().init();
+                guiView = new GuiView();
+                guiView.setEventListener(Profiling.this);
+                guiView.initFrame();
+                guiView.setPanel(new WelcomePanelImpl(guiView));
+                guiView.getPanel().init();
             });
         } else {
             consoleView = new ConsoleView();
@@ -78,7 +78,7 @@ public class Profiling implements EventListener {
     }
 
     public void update() {
-        view.update();
+        guiView.update();
     }
 
     public Model getModel() {

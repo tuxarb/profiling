@@ -13,41 +13,41 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 class ResultPanelImpl extends JPanel implements Panel {
-    private View view;
+    private GuiView guiView;
     private String capacity;
     private String runtime;
     private String speed;
     private static final Logger LOG = Log.createLog(ResultPanelImpl.class);
 
-    ResultPanelImpl(View view) {
-        this.view = view;
+    ResultPanelImpl(GuiView guiView) {
+        this.guiView = guiView;
         initResultData();
     }
 
     private void initResultData() {
         LOG.info(Log.DATA_INIT_FOR_DISPLAY);
-        this.capacity = view.getEventListener().getModel().getCharacteristic().getCapacity();
-        this.runtime = view.getEventListener().getModel().getCharacteristic().getRuntime();
-        this.speed = view.getEventListener().getModel().getCharacteristic().getSpeed();
+        this.capacity = guiView.getEventListener().getModel().getCharacteristic().getCapacity();
+        this.runtime = guiView.getEventListener().getModel().getCharacteristic().getRuntime();
+        this.speed = guiView.getEventListener().getModel().getCharacteristic().getSpeed();
 
         if (this.capacity == null ||
                 this.runtime == null ||
                 this.speed == null) {
             LOG.error(Log.DATA_DISPLAY_ERROR);
-            view.getEventListener().update();
+            guiView.getEventListener().update();
         }
     }
 
     @Override
     public void init() {
-        view.setSize(View.WIDTH / 2 - 50, View.WIDTH / 2 + 60);
-        view.setLocationRelativeTo(null);
-        view.getContentPane().add(this);
-        view.setColorOptionPane();
+        guiView.setSize(GuiView.WIDTH / 2 - 50, GuiView.WIDTH / 2 + 60);
+        guiView.setLocationRelativeTo(null);
+        guiView.getContentPane().add(this);
+        guiView.setColorOptionPane();
 
         setLayout(new FlowLayout(FlowLayout.CENTER, 35, 17));
         setBackground(Color.BLACK);
-        setSize(view.getSize());
+        setSize(guiView.getSize());
 
         paint();
         setVisible(true);
@@ -78,13 +78,13 @@ class ResultPanelImpl extends JPanel implements Panel {
             public void actionPerformed(ActionEvent e) {
                 new Thread(() -> {
                     try {
-                        view.getEventListener().writeToFile();
+                        guiView.getEventListener().writeToFile();
                         SwingUtilities.invokeLater(() ->
-                                JOptionPane.showMessageDialog(view, Log.FILE_DATA_DISPLAY_SUCCESS, Log.INFORMATION,
+                                JOptionPane.showMessageDialog(guiView, Log.FILE_DATA_DISPLAY_SUCCESS, Log.INFORMATION,
                                         JOptionPane.INFORMATION_MESSAGE)
                         );
                     } catch (IOException e1) {
-                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(view, Log.FILE_DATA_DISPLAY_ERROR, Log.ERROR,
+                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(guiView, Log.FILE_DATA_DISPLAY_ERROR, Log.ERROR,
                                 JOptionPane.ERROR_MESSAGE)
                         );
                     }
@@ -157,13 +157,13 @@ class ResultPanelImpl extends JPanel implements Panel {
             public void actionPerformed(ActionEvent e) {
                 new Thread(() -> {
                     try {
-                        view.getEventListener().updatePropertyFile();
+                        guiView.getEventListener().updatePropertyFile();
                         SwingUtilities.invokeLater(() ->
-                                JOptionPane.showMessageDialog(view, Log.PROPERTY_FILE_UPDATE, Log.INFORMATION,
+                                JOptionPane.showMessageDialog(guiView, Log.PROPERTY_FILE_UPDATE, Log.INFORMATION,
                                         JOptionPane.INFORMATION_MESSAGE)
                         );
                     } catch (Exception e1) {
-                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(view, Log.PROPERTY_READ_ERROR, Log.ERROR,
+                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(guiView, Log.PROPERTY_READ_ERROR, Log.ERROR,
                                 JOptionPane.ERROR_MESSAGE)
                         );
                     }
@@ -175,12 +175,12 @@ class ResultPanelImpl extends JPanel implements Panel {
         returningOnMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int result = JOptionPane.showConfirmDialog(view, Log.RETURNING_TO_MENU, Log.QUESTION,
+                int result = JOptionPane.showConfirmDialog(guiView, Log.RETURNING_TO_MENU, Log.QUESTION,
                         JOptionPane.YES_NO_OPTION);
                 if (result != JOptionPane.YES_OPTION) {
                     return;
                 }
-                view.getEventListener().update();
+                guiView.getEventListener().update();
             }
         });
 
@@ -189,7 +189,7 @@ class ResultPanelImpl extends JPanel implements Panel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Thread(() ->
-                        view.getEventListener().exit()
+                        guiView.getEventListener().exit()
                 ).start();
             }
         });
@@ -202,7 +202,7 @@ class ResultPanelImpl extends JPanel implements Panel {
     }
 
     private JButton createButton(String name, String message) {
-        JButton jButton = new JButton(name, new ImageIcon(view.getButtonImage()));
+        JButton jButton = new JButton(name, new ImageIcon(guiView.getButtonImage()));
         jButton.setPreferredSize(new Dimension(115, 65));
         jButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jButton.setHorizontalTextPosition(JButton.CENTER);
@@ -217,21 +217,21 @@ class ResultPanelImpl extends JPanel implements Panel {
 
     @Override
     public void update() {
-        view.renderMenu(this);
+        guiView.renderMenu(this);
     }
 
     private void writeToDatabase(DatabaseTypes type) {
         new Thread(() -> {
             try {
-                view.getEventListener().writeToDatabase(type);
-                JOptionPane.showMessageDialog(view, Log.WRITING_DATABASE_SUCCESS, Log.INFORMATION,
+                guiView.getEventListener().writeToDatabase(type);
+                JOptionPane.showMessageDialog(guiView, Log.WRITING_DATABASE_SUCCESS, Log.INFORMATION,
                         JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e1) {
                 SwingUtilities.invokeLater(() ->
-                        JOptionPane.showMessageDialog(view, Log.WRITING_DATABASE_ERROR, Log.ERROR,
+                        JOptionPane.showMessageDialog(guiView, Log.WRITING_DATABASE_ERROR, Log.ERROR,
                                 JOptionPane.ERROR_MESSAGE));
             } catch (WrongSelectedDatabaseException e) {
-                SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(view, Log.WRONG_DATABASE_URL, Log.ERROR,
+                SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(guiView, Log.WRONG_DATABASE_URL, Log.ERROR,
                         JOptionPane.ERROR_MESSAGE));
             }
         }).start();
@@ -240,6 +240,6 @@ class ResultPanelImpl extends JPanel implements Panel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(view.getBackgroundImage(), 0, 0, this);
+        g.drawImage(guiView.getBackgroundImage(), 0, 0, this);
     }
 }

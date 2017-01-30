@@ -12,25 +12,25 @@ import java.awt.*;
 import java.util.*;
 
 class MenuPanelImpl extends JPanel implements Panel {
-    private View view;
+    private GuiView guiView;
     private List<JButton> buttons = new ArrayList<>();
     private static volatile boolean isExceptionOccurred;
     private static final Logger LOG = Log.createLog(MenuPanelImpl.class);
 
-    MenuPanelImpl(View view) {
-        this.view = view;
+    MenuPanelImpl(GuiView guiView) {
+        this.guiView = guiView;
     }
 
     @Override
     public void init() {
-        view.setSize(View.HEIGHT / 2, View.WIDTH / 2);
-        view.setLocationRelativeTo(null);
-        view.getContentPane().add(this);
-        view.setColorOptionPane();
+        guiView.setSize(GuiView.HEIGHT / 2, GuiView.WIDTH / 2);
+        guiView.setLocationRelativeTo(null);
+        guiView.getContentPane().add(this);
+        guiView.setColorOptionPane();
 
         setLayout(new FlowLayout(FlowLayout.CENTER, 50, 30));
         setBackground(Color.BLACK);
-        setSize(view.getSize());
+        setSize(guiView.getSize());
 
         paint();
         setVisible(true);
@@ -45,9 +45,9 @@ class MenuPanelImpl extends JPanel implements Panel {
 
         JButton startingTest = createButton(Log.START_TEST, Log.START_TEST_BUTTON_MESSAGE);
         startingTest.addActionListener(e -> {
-            if (!view.getEventListener().isPropertiesFileExists()) {
+            if (!guiView.getEventListener().isPropertiesFileExists()) {
                 LOG.error(Log.PROPERTIES_IS_NULL);
-                JOptionPane.showMessageDialog(view, Log.PROPERTIES_IS_NULL, Log.ERROR, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(guiView, Log.PROPERTIES_IS_NULL, Log.ERROR, JOptionPane.ERROR_MESSAGE);
                 return;
             }
             changeButtonState(false);
@@ -60,7 +60,7 @@ class MenuPanelImpl extends JPanel implements Panel {
         openingPropertyFile.addActionListener(e -> {
             new Thread(() -> {
                 try {
-                    view.getEventListener().readPropertyFile(view.getSelectedPropertyFile());
+                    guiView.getEventListener().readPropertyFile(guiView.getSelectedPropertyFile());
                 } catch (Exception e1) {
                     LOG.warn(Log.CANCELLING_PROPERTY_FILE);
                 }
@@ -84,16 +84,16 @@ class MenuPanelImpl extends JPanel implements Panel {
                 e.printStackTrace();
             }
             try {
-                view.getEventListener().findOutOS(view.getOperatingSystem());
+                guiView.getEventListener().findOutOS(guiView.getOperatingSystem());
             } catch (ClientProcessException ex) {
                 isExceptionOccurred = true;
                 if (ex.getLocalizedMessage() != null && !ex.getLocalizedMessage().isEmpty()) {
                     SwingUtilities.invokeLater(() ->
-                            JOptionPane.showMessageDialog(view, ex.getLocalizedMessage(), Log.ERROR, JOptionPane.ERROR_MESSAGE)
+                            JOptionPane.showMessageDialog(guiView, ex.getLocalizedMessage(), Log.ERROR, JOptionPane.ERROR_MESSAGE)
                     );
                 } else
                     SwingUtilities.invokeLater(() ->
-                            JOptionPane.showMessageDialog(view, Log.CLIENT_PROCESS_ERROR, Log.ERROR, JOptionPane.ERROR_MESSAGE)
+                            JOptionPane.showMessageDialog(guiView, Log.CLIENT_PROCESS_ERROR, Log.ERROR, JOptionPane.ERROR_MESSAGE)
                     );
             }
             changeButtonState(true);
@@ -101,7 +101,7 @@ class MenuPanelImpl extends JPanel implements Panel {
     }
 
     private JButton createButton(String name, String message) {
-        JButton jButton = new JButton(name, new ImageIcon(view.getButtonImage()));
+        JButton jButton = new JButton(name, new ImageIcon(guiView.getButtonImage()));
         jButton.setPreferredSize(new Dimension(145, 65));
         jButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jButton.setHorizontalTextPosition(JButton.CENTER);
@@ -115,34 +115,34 @@ class MenuPanelImpl extends JPanel implements Panel {
     }
 
     private void updatePanel() {
-        new Thread(() -> view.getEventListener().update())
+        new Thread(() -> guiView.getEventListener().update())
                 .start();
     }
 
     @Override
     public void update() {
-        ProgressDialog progressDialog = new ProgressDialog(view);
+        ProgressDialog progressDialog = new ProgressDialog(guiView);
 
         while (true) {
             if (isExceptionOccurred) {
                 progressDialog.closeDialog();
                 return;
             }
-            if (view.getEventListener().isCompleted()) {
+            if (guiView.getEventListener().isCompleted()) {
                 progressDialog.closeDialog();
                 break;
             }
         }
-        view.getContentPane().remove(this);
-        view.getContentPane().revalidate();
-        ResultPanelImpl resultPanelImpl = new ResultPanelImpl(view);
-        view.setPanel(resultPanelImpl);
+        guiView.getContentPane().remove(this);
+        guiView.getContentPane().revalidate();
+        ResultPanelImpl resultPanelImpl = new ResultPanelImpl(guiView);
+        guiView.setPanel(resultPanelImpl);
         resultPanelImpl.init();
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(view.getBackgroundImage(), 0, 0, this);
+        g.drawImage(guiView.getBackgroundImage(), 0, 0, this);
     }
 }

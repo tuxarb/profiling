@@ -12,26 +12,26 @@ import java.awt.event.ActionListener;
 
 
 public class WelcomePanelImpl extends JPanel implements Panel {
-    private View view;
+    private GuiView guiView;
     private static final Logger LOG = Log.createLog(WelcomePanelImpl.class);
 
-    public WelcomePanelImpl(View view) {
-        this.view = view;
-        view.setBackgroundImage(Utils.BACKGROUND_IMAGE, LOG);
-        view.setButtonImage(Utils.BUTTON_IMAGE, LOG);
+    public WelcomePanelImpl(GuiView guiView) {
+        this.guiView = guiView;
+        guiView.setBackgroundImage(Utils.BACKGROUND_IMAGE, LOG);
+        guiView.setButtonImage(Utils.BUTTON_IMAGE, LOG);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(view.getBackgroundImage(), 0, 0, this);
+        g.drawImage(guiView.getBackgroundImage(), 0, 0, this);
     }
 
     @Override
     public void init() {
-        setSize(view.getSize());
+        setSize(guiView.getSize());
         setLayout(new FlowLayout(FlowLayout.CENTER, 500, 40));
-        view.getContentPane().add(this);
+        guiView.getContentPane().add(this);
         paint();
         setVisible(true);
     }
@@ -62,7 +62,7 @@ public class WelcomePanelImpl extends JPanel implements Panel {
     }
 
     private JButton createButton(String name) {
-        JButton jButton = new JButton(name, new ImageIcon(view.getButtonImage()));
+        JButton jButton = new JButton(name, new ImageIcon(guiView.getButtonImage()));
         jButton.setPreferredSize(new Dimension(100, 70));
         jButton.setHorizontalTextPosition(JButton.CENTER);
         jButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -82,13 +82,13 @@ public class WelcomePanelImpl extends JPanel implements Panel {
 
     @Override
     public void update() {
-        view.renderMenu(this);
+        guiView.renderMenu(this);
     }
 
     private class ActionHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.setColorOptionPane();
+            guiView.setColorOptionPane();
             String command = e.getActionCommand();
 
             switch (command) {
@@ -118,13 +118,13 @@ public class WelcomePanelImpl extends JPanel implements Panel {
 
         private void updateView(OperatingSystems operatingSystem) {
             LOG.debug(Log.VALID_OS);
-            view.setOperatingSystem(operatingSystem);
-            view.getEventListener().update();
+            guiView.setOperatingSystem(operatingSystem);
+            guiView.getEventListener().update();
         }
 
         private void showMessageAboutError(String s) {
             LOG.warn(Log.WRONG_OS);
-            JOptionPane.showMessageDialog(view, s, Log.ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(guiView, s, Log.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 }
