@@ -21,9 +21,7 @@ public class Profiling implements EventListener {
 
     public Profiling() {
         model = new Model(new Characteristic());
-
-        boolean flag = true;
-        if (!flag) {
+        if (isGUI()) {
             SwingUtilities.invokeLater(() -> {
                 guiView = new GuiView();
                 guiView.setEventListener(Profiling.this);
@@ -55,7 +53,7 @@ public class Profiling implements EventListener {
             if (os.name().equals(OperatingSystems.MAC.toString()))
                 startTestForMac();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
         model.completed();
@@ -114,6 +112,11 @@ public class Profiling implements EventListener {
     @Override
     public void setCompleted(boolean isCompleted) {
         model.setCompleted(isCompleted);
+    }
+
+    private boolean isGUI() {
+        String mode = System.getProperty("mode");
+        return "gui".equalsIgnoreCase(mode);
     }
 
     public static void main(String[] args) {
