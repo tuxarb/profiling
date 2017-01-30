@@ -10,6 +10,7 @@ import static app.utils.ConsoleWorker.*;
 
 class ConsoleMenu {
     private ConsoleView view;
+    private int second = 0;
     private static volatile boolean isExceptionOccurred;
 
     ConsoleMenu(ConsoleView view) {
@@ -27,6 +28,7 @@ class ConsoleMenu {
         println("\t\t2. " + Log.OPEN_PROPERTY_FILE);
         print("\n");
         println("+-------------------------------------------------+");
+
         while (true) {
             print("\n" + Log.ENTER);
             String input = readLine();
@@ -50,11 +52,11 @@ class ConsoleMenu {
     }
 
     private void waitForEndProcessing() {
-        println("+------------------------------------------------+");
-        println("\t\t" + Log.PROCESSING);
-        println("+------------------------------------------------+");
         while (true) {
+            displayInfoAboutProcessing();
             if (isExceptionOccurred) {
+                second = 0;
+                print("\n");
                 return;
             }
             if (view.getEventListener().isCompleted()) {
@@ -64,6 +66,7 @@ class ConsoleMenu {
     }
 
     private void update() {
+        print("\n");
         println(Log.PROCESSING_WAS_FINISHED);
         ConsoleResult consoleResult = new ConsoleResult(view);
         consoleResult.init();
@@ -75,12 +78,12 @@ class ConsoleMenu {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
             }
             try {
                 view.getEventListener().findOutOS(view.getOperatingSystem());
             } catch (ClientProcessException ex) {
                 isExceptionOccurred = true;
+                print("\n");
                 if (ex.getLocalizedMessage() != null && !ex.getLocalizedMessage().isEmpty()) {
                     println(ex.getLocalizedMessage());
                 } else
@@ -113,5 +116,13 @@ class ConsoleMenu {
 
     private boolean isPropertiesFile(String path) {
         return path.toLowerCase().endsWith(".properties");
+    }
+
+    private void displayInfoAboutProcessing() {
+        System.out.print("\r" + Log.PROCESSING_CONSOLE + " " + (second++) + " sec.");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
     }
 }

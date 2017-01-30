@@ -68,7 +68,7 @@ class ConsoleResult {
                         break L;
                     }
                     break;
-                case "5":
+                case "0":
                     exit();
                 default:
                     println(Log.WRONG_ENTER);
@@ -140,7 +140,7 @@ class ConsoleResult {
                     return DatabaseTypes.SQLSERVER;
                 case "5":
                     return DatabaseTypes.OTHER;
-                case "6":
+                case "0":
                     println(Log.TYPE_DATABASE_IS_NOT_SELECTED);
                     return null;
                 default:
@@ -161,7 +161,7 @@ class ConsoleResult {
         println("\t\t4." + Utils.SQL_SERVER);
         println("\t\t5." + Utils.OTHER_DBMS);
         println("\t\t-----------");
-        println("\t\t6." + Log.BACK);
+        println("\t\t0." + Log.BACK);
         print("\n");
         println("+---------------------------------------------------------------+");
         print("\n");
@@ -183,7 +183,7 @@ class ConsoleResult {
         println("\t\t2. " + Log.SAVE_TO_DATABASE);
         println("\t\t3. " + Log.UPDATE_PROPERTY_FILE);
         println("\t\t4. " + Log.REPEAT_TEST);
-        println("\t\t5. " + Log.EXIT);
+        println("\t\t0. " + Log.EXIT);
         print("\n");
         println("+---------------------------------------------------+");
     }

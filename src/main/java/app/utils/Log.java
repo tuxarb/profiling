@@ -69,7 +69,7 @@ public class Log {
     public static final String ERROR = "Error";
     public static final String INFORMATION = "Information";
     public static final String QUESTION = "Question";
-    public static final String PROCESSING = "Processing...";
+    public static final String PROCESSING_GUI = "Processing...";
 
     /**
      * Dialog's message
@@ -123,15 +123,16 @@ public class Log {
     public static final String WELCOME_CONSOLE = "WELCOME TO THE PROGRAM PROFILING!";
     public static final String MENU_CONSOLE = "M E N U";
     public static final String MENU_CHOICE = "Choose one of the next options (using 1-2):";
-    public static final String RESULT_PANEL_CHOICE = "Choose one of the next options (using 1-5):";
+    public static final String RESULT_PANEL_CHOICE = "Choose one of the next options (using 0-4):";
     public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path. Try again or enter 'cancel'.";
     public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your .properties file: ";
-    public static final String DATABASE_INPUT = "Choose the type of database (using 1-5) or exit (using 6):";
+    public static final String DATABASE_INPUT = "Choose the type of database (using 1-5) or exit (using 0):";
     public static final String SAVE_TO_DATABASE = "Save to database";
     public static final String TYPE_DATABASE_IS_NOT_SELECTED = "The type of database was not selected. Returning back...";
     public static final String UPDATE_PROPERTY_FILE = "Update .properties file";
     public static final String CONFIRMATION_OF_UPDATE_PROPERTY_FILE = "Do you want to update the property file?";
-    public static final String PROCESSING_WAS_FINISHED = "The processing was successfully finished!";
+    public static final String PROCESSING_CONSOLE = "P r o c e s s i n g... <=";
+    public static final String PROCESSING_WAS_FINISHED = "The profiling was successfully finished!";
     public static final String BACK = "<--";
 
     private Log() {

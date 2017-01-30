@@ -4,8 +4,6 @@ package app.view.console;
 import app.controller.EventListener;
 import app.model.enums.OperatingSystems;
 
-import static app.utils.ConsoleWorker.print;
-
 public class ConsoleView {
     private EventListener eventListener;
     private OperatingSystems operatingSystem;

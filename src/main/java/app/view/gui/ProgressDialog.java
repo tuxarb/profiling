@@ -11,7 +11,7 @@ import java.io.IOException;
 
 class ProgressDialog {
     private JFrame view;
-    private final JDialog dialog = new JDialog(view, Log.PROCESSING, false);
+    private final JDialog dialog = new JDialog(view, Log.PROCESSING_GUI, false);
     private static final Logger LOG = Log.createLog(ProgressDialog.class);
 
     ProgressDialog(View view) {

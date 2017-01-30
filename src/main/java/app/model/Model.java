@@ -176,7 +176,7 @@ public class Model {
         } catch (Exception e) {
             killAllChildrenProcesses();
             LOG.error(Log.PATH_TO_PROGRAM_INCORRECT);
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new ClientProcessException();
         }
     }
@@ -256,7 +256,7 @@ public class Model {
             dw.write(characteristic);
         } catch (Exception e) {
             LOG.error(Log.HIBERNATE_ERROR);
-            e.printStackTrace();
+            //e.printStackTrace();
             throw new IOException(e);
         }
     }
