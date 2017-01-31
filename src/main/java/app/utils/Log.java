@@ -14,26 +14,26 @@ public class Log {
     /**
      * Debug and info
      */
-    public static final String START_RUNNING_CODE = "There is running of the client process...";
-    public static final String END_RUNNING_CODE = "The client process has finished!";
+    public static final String START_RUNNING_CODE = "Run the client process...";
+    public static final String END_RUNNING_CODE = "The client process was finished!";
     public static final String START_READING_PROCESS = "There is creating a new process, received from the user...";
-    public static final String END_READING_PROCESS = "The data was successfully read!";
+    public static final String END_READING_PROCESS = "The resulting data were successfully got!";
     public static final String VALID_OS = "The selected operating system is available for the test. Redirecting to the menu...";
-    public static final String PROCESS_INFO_START = "The process info has started. Processing...";
-    public static final String PROCESS_INFO_END = "The process info has finished. Closing...";
+    public static final String PROCESS_INFO_START = "The progress info dialog was started. Processing...";
+    public static final String PROCESS_INFO_END = "The progress info dialog was finished. Closing...";
     public static final String PROPERTY_FILE_READ = "The .properties file was successfully read!";
     public static final String PROPERTY_FILE_UPDATE = "The .properties file was successfully updated!";
-    public static final String PREPARATION_FOR_WRITING_IN_THE_FILE = "Preparation for writing to a file...";
-    public static final String WRITING_IN_THE_FILE = "Writing in the file...";
+    public static final String PREPARATION_FOR_WRITING_IN_THE_FILE = "Preparation to write to a file...";
+    public static final String WRITING_IN_THE_FILE = "Writing to the file....";
     public static final String WRITING_IN_THE_FILE_SUCCESS = "Writing was successfully finished!";
-    public static final String START_INIT_PROPERTIES = "Start initialization properties...";
-    public static final String START_SAVING_TO_DATABASE = "Start saving to database...";
+    public static final String START_INIT_PROPERTIES = "Start of the initialization properties...";
+    public static final String START_SAVING_TO_DATABASE = "Start saving to the database...";
     public static final String END_SAVING_TO_DATABASE = "Data was successfully written to the database!";
-    public static final String END_INIT_PROPERTIES = "Initialization properties has finished.";
-    public static final String DATA_INIT_FOR_DISPLAY = "There is data initialization...";
-    public static final String DATA_DISPLAY_SUCCESS = "Data was successfully displayed on the screen.";
+    public static final String END_INIT_PROPERTIES = "Initialization the properties was finished.";
+    public static final String DATA_INIT_FOR_DISPLAY = "The resulting data are being initialized for displaying...";
+    public static final String DATA_DISPLAY_SUCCESS = "The resulting data were successfully displayed on the screen.";
     public static final String FILE_DATA_DISPLAY_SUCCESS = "Data was successfully written to the file!";
-    public static final String CREATING_DIR_FOR_WRITING = "Creating a directory for writing the result data...";
+    public static final String CREATING_DIR_FOR_WRITING = "Creating a directory for writing the resulting data...";
     public static final String RETURNING_TO_THE_MENU_SUCCESS = "Returning to the menu was finished successfully!";
     public static final String CLOSING_APP = "It is closing the application...";
 
@@ -41,7 +41,7 @@ public class Log {
      * Errors and warnings
      */
     public static final String WRONG_OS = "This operating system is not for you. Select your operating system.";
-    public static final String LOADING_PROGRESS_IMAGE_ERROR = "Error when loading the progress image.";
+    public static final String LOADING_PROGRESS_IMAGE_ERROR = "Error when loading the image for ProgressDialog.";
     public static final String PATH_TO_PROGRAM_INCORRECT = "Cannot run user's program. Please, check that path to program is correct and your command has the correct syntax.";
     public static final String TIP = "\nTip: Don't specify any commands for start a new process at the path to your program. " +
             "(For example: cmd, start, etc.)\nThe correct examples(WINDOWS):\nC:/../task.exe\njava -classpath C:/../folder main.Main";
