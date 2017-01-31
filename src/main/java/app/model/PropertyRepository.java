@@ -37,7 +37,7 @@ public class PropertyRepository {
         saveProperties();
     }
 
-    private void saveProperties() throws Exception{
+    private void saveProperties() throws Exception {
         Properties properties = new Properties();
         try {
             properties.load(new FileReader(propertyFile));
@@ -46,10 +46,8 @@ public class PropertyRepository {
                 store.computeIfPresent(key, (k, v) -> properties.get(k));
             }
             LOG.info(Log.PROPERTY_FILE_READ);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             LOG.error(Log.PROPERTY_READ_ERROR);
-            //e.printStackTrace();
             throw e;
         }
     }

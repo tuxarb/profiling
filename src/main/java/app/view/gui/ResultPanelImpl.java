@@ -1,9 +1,9 @@
 package app.view.gui;
 
-import app.utils.exceptions.WrongSelectedDatabaseException;
 import app.model.enums.DatabaseTypes;
 import app.utils.Log;
 import app.utils.Utils;
+import app.utils.exceptions.WrongSelectedDatabaseException;
 import org.slf4j.Logger;
 
 import javax.swing.*;

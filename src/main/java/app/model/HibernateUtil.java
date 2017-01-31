@@ -1,9 +1,9 @@
 package app.model;
 
-import app.utils.exceptions.WrongSelectedDatabaseException;
 import app.model.enums.DatabaseTypes;
 import app.utils.Log;
 import app.utils.Utils;
+import app.utils.exceptions.WrongSelectedDatabaseException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.slf4j.Logger;
@@ -24,7 +24,6 @@ class HibernateUtil {
                     .buildSessionFactory();
         } catch (Exception ex) {
             LOG.error(Log.CREATING_SESSION_FACTORY_ERROR + "\n" + ex);
-            ex.printStackTrace();
         }
         return null;
     }
@@ -72,7 +71,6 @@ class HibernateUtil {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
             LOG.error(Log.DRIVER_CLASS_NOT_FOUND_ERROR);
-            e.printStackTrace();
         }
         properties.setProperty("connection.driver_class", driver);
         properties.setProperty("hibernate.dialect", dialect);

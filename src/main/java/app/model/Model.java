@@ -19,7 +19,6 @@ public class Model {
     private long processId;
     private static final PropertyRepository PROPERTY_REPOSITORY = PropertyRepository.getInstance();
     private ProcessHandle task;
-
     private volatile boolean isCompleted = false;
     private static final Logger LOG = Log.createLog(Model.class);
 
@@ -40,7 +39,6 @@ public class Model {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                //System.out.println(line);
                 if (Utils.isMemoryLine(line.toLowerCase())) {
                     capacity += Utils.getNumberFromString(line);
                     countIterations++;
@@ -124,7 +122,6 @@ public class Model {
         try {
             Thread.sleep(50);
         } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
@@ -176,7 +173,6 @@ public class Model {
         } catch (Exception e) {
             killAllChildrenProcesses();
             LOG.error(Log.PATH_TO_PROGRAM_INCORRECT);
-            //e.printStackTrace();
             throw new ClientProcessException();
         }
     }
@@ -256,7 +252,6 @@ public class Model {
             dw.write(characteristic);
         } catch (Exception e) {
             LOG.error(Log.HIBERNATE_ERROR);
-            //e.printStackTrace();
             throw new IOException(e);
         }
     }

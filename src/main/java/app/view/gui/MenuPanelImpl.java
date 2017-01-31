@@ -5,11 +5,10 @@ import app.utils.Log;
 import app.utils.exceptions.ClientProcessException;
 import org.slf4j.Logger;
 
-import java.util.List;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 class MenuPanelImpl extends JPanel implements Panel {
     private GuiView guiView;
@@ -81,7 +80,6 @@ class MenuPanelImpl extends JPanel implements Panel {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
             }
             try {
                 guiView.getEventListener().findOutOS(guiView.getOperatingSystem());

@@ -33,9 +33,8 @@ public class Utils {
     public static String formatNumber(long number) {
         Locale loc = new Locale(Locale.ENGLISH.getLanguage());
         NumberFormat formatter = NumberFormat.getInstance(loc);
-        String result = formatter.format(number);
 
-        return result;
+        return formatter.format(number);
     }
 
     public static boolean isWindows() {

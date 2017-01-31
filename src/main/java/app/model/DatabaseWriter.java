@@ -1,12 +1,13 @@
 package app.model;
 
-import app.utils.exceptions.WrongSelectedDatabaseException;
 import app.model.beans.Characteristic;
 import app.model.enums.DatabaseTypes;
 import app.utils.Log;
+import app.utils.exceptions.WrongSelectedDatabaseException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
+
 import java.io.IOException;
 
 class DatabaseWriter {
@@ -21,7 +22,7 @@ class DatabaseWriter {
         this.databaseType = databaseType;
     }
 
-    void write(Characteristic ch) throws Exception{
+    void write(Characteristic ch) throws Exception {
         LOG.info(Log.START_SAVING_TO_DATABASE);
         Session session = sessionFactory.openSession();
         session.beginTransaction();

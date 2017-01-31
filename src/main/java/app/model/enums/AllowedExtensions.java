@@ -1,4 +1,5 @@
 package app.model.enums;
+
 import java.util.Arrays;
 
 public enum AllowedExtensions {

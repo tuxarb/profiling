@@ -3,6 +3,7 @@ package app.view.gui;
 import app.utils.Log;
 import app.utils.Utils;
 import org.slf4j.Logger;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedInputStream;
@@ -63,8 +64,7 @@ class ProgressDialog {
             }
         }
 
-        private ByteArrayOutputStream getBytesStream()
-        {
+        private ByteArrayOutputStream getBytesStream() {
             BufferedInputStream bis = new BufferedInputStream(
                     ((GuiView) view).getStreamOfResourceFile(Utils.PROGRESS)
             );

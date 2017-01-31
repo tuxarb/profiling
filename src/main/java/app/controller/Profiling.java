@@ -7,8 +7,8 @@ import app.model.enums.OperatingSystems;
 import app.utils.exceptions.ClientProcessException;
 import app.utils.exceptions.WrongSelectedDatabaseException;
 import app.view.console.ConsoleView;
-import app.view.gui.WelcomePanelImpl;
 import app.view.gui.GuiView;
+import app.view.gui.WelcomePanelImpl;
 
 import javax.swing.*;
 import java.io.File;
@@ -53,7 +53,7 @@ public class Profiling implements EventListener {
             if (os.name().equals(OperatingSystems.MAC.toString()))
                 startTestForMac();
         } catch (IOException e) {
-            //e.printStackTrace();
+            //возникла неизвестная ошибка на сервере.
         }
 
         model.completed();

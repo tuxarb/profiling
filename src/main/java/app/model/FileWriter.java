@@ -2,8 +2,8 @@ package app.model;
 
 import app.model.beans.Characteristic;
 import app.utils.Log;
-import org.slf4j.Logger;
 import app.utils.Utils;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +44,6 @@ class FileWriter {
             }
         } catch (IOException e) {
             LOG.error(Log.WRITING_IN_FILE_ERROR);
-            e.printStackTrace();
             throw e;
         }
     }
