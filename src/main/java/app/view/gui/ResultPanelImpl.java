@@ -157,7 +157,14 @@ class ResultPanelImpl extends JPanel implements Panel {
             public void actionPerformed(ActionEvent e) {
                 new Thread(() -> {
                     try {
+                        int result = JOptionPane.showConfirmDialog(guiView, Log.CONFIRMATION_OF_UPDATE_PROPERTY_FILE, Log.QUESTION,
+                                JOptionPane.YES_NO_OPTION);
+                        if (result != JOptionPane.YES_OPTION) {
+                            LOG.debug(Log.NO_OPTION_WHEN_UPDATE_THE_PROPERTY_FILE);
+                            return;
+                        }
                         guiView.getEventListener().updatePropertyFile();
+                        LOG.info(Log.PROPERTY_FILE_UPDATE);
                         SwingUtilities.invokeLater(() ->
                                 JOptionPane.showMessageDialog(guiView, Log.PROPERTY_FILE_UPDATE, Log.INFORMATION,
                                         JOptionPane.INFORMATION_MESSAGE)
@@ -175,9 +182,10 @@ class ResultPanelImpl extends JPanel implements Panel {
         returningOnMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int result = JOptionPane.showConfirmDialog(guiView, Log.RETURNING_TO_MENU, Log.QUESTION,
+                int result = JOptionPane.showConfirmDialog(guiView, Log.CONFIRMATION_OF_RETURNING_TO_MENU, Log.QUESTION,
                         JOptionPane.YES_NO_OPTION);
                 if (result != JOptionPane.YES_OPTION) {
+                    LOG.debug(Log.NO_OPTION_WHEN_RETURNING_TO_THE_MENU);
                     return;
                 }
                 guiView.getEventListener().update();
@@ -217,6 +225,7 @@ class ResultPanelImpl extends JPanel implements Panel {
 
     @Override
     public void update() {
+        LOG.info(Log.RETURNING_TO_THE_MENU_SUCCESS);
         guiView.renderMenu(this);
     }
 

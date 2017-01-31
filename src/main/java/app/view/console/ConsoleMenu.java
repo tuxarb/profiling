@@ -24,7 +24,7 @@ class ConsoleMenu {
         print("\n");
         println("    " + Log.MENU_CHOICE);
         print("\n");
-        println("\t\t1. " + Log.START_TEST_BUTTON_MESSAGE);
+        println("\t\t1. " + Log.START_TEST);
         println("\t\t2. " + Log.OPEN_PROPERTY_FILE);
         print("\n");
         println("+-------------------------------------------------+");

@@ -34,6 +34,7 @@ public class Log {
     public static final String DATA_DISPLAY_SUCCESS = "Data was successfully displayed on the screen.";
     public static final String FILE_DATA_DISPLAY_SUCCESS = "Data was successfully written to the file!";
     public static final String CREATING_DIR_FOR_WRITING = "Creating a directory for writing the result data...";
+    public static final String RETURNING_TO_THE_MENU_SUCCESS = "Returning to the menu was finished successfully!";
     public static final String CLOSING_APP = "It is closing the application...";
 
     /**
@@ -49,9 +50,9 @@ public class Log {
             "you can create some executable file (bat, cmd, com or sh), write at it your command for start and specify path to this file at your .properties file.\nFor example: program_path=C:/../test.bat\n" +
             "Note: the profiling program can test only ONE process.";
     public static final String HIBERNATE_ERROR = "Error occurred when hibernate trying to save data to the database.";
-    public static final String CREATING_SESSION_FACTORY_ERROR = "Failed to create sessionFactory object.";
-    public static final String SESSION_FACTORY_IS_NULL = "sessionFactory object is null";
-    public static final String URL_TO_DATABASE_IS_NULL = "Specify url for connecting.";
+    public static final String CREATING_SESSION_FACTORY_ERROR = "Failed to create sessionFactory instance.";
+    public static final String SESSION_FACTORY_IS_NULL = "sessionFactory instance is null";
+    public static final String URL_TO_DATABASE_IS_NULL = "Specify url for the connecting.";
     public static final String DRIVER_CLASS_NOT_FOUND_ERROR = "Driver class was not found for your DBMS.";
     public static final String PROPERTY_READ_ERROR = "Error occurred when reading the property file";
     public static final String SMALL_PROGRAM_ERROR = "Your program is too small to profile.";
@@ -62,6 +63,8 @@ public class Log {
     public static final String WRITING_IN_FILE_ERROR = "Errors when writing to file";
     public static final String SETTING_BACKGROUND_ERROR = "Failed to set the background image";
     public static final String SETTING_BUTTON_IMAGE_ERROR = "Failed to set the button's image";
+    public static final String NO_OPTION_WHEN_UPDATE_THE_PROPERTY_FILE = "The .properties file did not update because user chose 'no'.";
+    public static final String NO_OPTION_WHEN_RETURNING_TO_THE_MENU = "Returning to the menu was not because user chose 'no'.";
 
     /**
      * Dialog's headers
@@ -83,7 +86,8 @@ public class Log {
     public static final String WRITING_DATABASE_SUCCESS = "Data was successfully written to the database!";
     public static final String CLIENT_PROCESS_ERROR = "Error occurred when running your program.";
     public static final String EMPTY_PATH_MESSAGE = "Path to your program wasn't specified.";
-    public static final String RETURNING_TO_MENU = "Do you want to return to the menu?";
+    public static final String CONFIRMATION_OF_RETURNING_TO_MENU = "Do you want to return to the menu?";
+    public static final String CONFIRMATION_OF_UPDATE_PROPERTY_FILE = "Do you want to update the property file?";
 
     /**
      * Text
@@ -107,10 +111,10 @@ public class Log {
     /**
      * Tooltips for buttons
      */
-    public static final String START_TEST_BUTTON_MESSAGE = "Start test";
-    public static final String OPEN_PROPERTY_BUTTON_MESSAGE = "Set .properties file with some attributes before starting the test";
-    public static final String SAVE_FILE_BUTTON_MESSAGE = "Save the results of your program in .txt file";
-    public static final String SAVE_DB_BUTTON_MESSAGE = "Save the results of your program in a database";
+    public static final String START_TEST_BUTTON_MESSAGE = "Start test the user's program";
+    public static final String OPEN_PROPERTY_BUTTON_MESSAGE = "Set .properties file with the attributes before to start the test";
+    public static final String SAVE_FILE_BUTTON_MESSAGE = "Save the results of the user's program to a .txt file";
+    public static final String SAVE_DB_BUTTON_MESSAGE = "Save the results of the user's program to a database";
     public static final String UPDATE_FILE_BUTTON_MESSAGE = "Update selected .properties file";
     public static final String REPEAT_TEST_BUTTON_MESSAGE = "Return on the menu where you can repeat the test.";
     public static final String EXIT_BUTTON_MESSAGE = "Exit from the application";
@@ -130,7 +134,6 @@ public class Log {
     public static final String SAVE_TO_DATABASE = "Save to database";
     public static final String TYPE_DATABASE_IS_NOT_SELECTED = "The type of database was not selected. Returning back...";
     public static final String UPDATE_PROPERTY_FILE = "Update .properties file";
-    public static final String CONFIRMATION_OF_UPDATE_PROPERTY_FILE = "Do you want to update the property file?";
     public static final String PROCESSING_CONSOLE = "P r o c e s s i n g... <=";
     public static final String PROCESSING_WAS_FINISHED = "The profiling was successfully finished!";
     public static final String BACK = "<--";

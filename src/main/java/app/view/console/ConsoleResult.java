@@ -59,15 +59,18 @@ class ConsoleResult {
                     }
                     break;
                 case "3":
-                    if (isYes(Log.CONFIRMATION_OF_UPDATE_PROPERTY_FILE)) {
-                        updatePropertyFile();
+                    if (!isAnswerYes(Log.CONFIRMATION_OF_UPDATE_PROPERTY_FILE)) {
+                        LOG.debug(Log.NO_OPTION_WHEN_UPDATE_THE_PROPERTY_FILE);
+                        break;
                     }
+                    updatePropertyFile();
                     break;
                 case "4":
-                    if (isYes(Log.RETURNING_TO_MENU)) {
-                        break L;
+                    if (!isAnswerYes(Log.CONFIRMATION_OF_RETURNING_TO_MENU)) {
+                        LOG.debug(Log.NO_OPTION_WHEN_RETURNING_TO_THE_MENU);
+                        break;
                     }
-                    break;
+                    break L;
                 case "0":
                     exit();
                 default:
@@ -77,7 +80,7 @@ class ConsoleResult {
         returnToMenu();
     }
 
-    private boolean isYes(String message) {
+    private boolean isAnswerYes(String message) {
         println(message + " (y | n)");
         print(">");
         String answer = readLine().toLowerCase();
@@ -85,6 +88,7 @@ class ConsoleResult {
     }
 
     private void returnToMenu() {
+        LOG.info(Log.RETURNING_TO_THE_MENU_SUCCESS);
         view.renderMenu();
     }
 
@@ -92,6 +96,7 @@ class ConsoleResult {
         try {
             view.getEventListener().updatePropertyFile();
             println(Log.PROPERTY_FILE_UPDATE);
+            LOG.info(Log.PROPERTY_FILE_UPDATE);
         } catch (Exception e) {
             println(Log.PROPERTY_READ_ERROR);
         }
