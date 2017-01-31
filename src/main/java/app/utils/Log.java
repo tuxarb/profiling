@@ -54,9 +54,10 @@ public class Log {
     public static final String SESSION_FACTORY_IS_NULL = "sessionFactory instance is null";
     public static final String URL_TO_DATABASE_IS_NULL = "Specify url for the connecting.";
     public static final String DRIVER_CLASS_NOT_FOUND_ERROR = "Driver class was not found for your DBMS.";
-    public static final String PROPERTY_READ_ERROR = "Error occurred when reading the property file";
+    public static final String PROPERTY_READ_ERROR = "Error occurred when reading the property file.";
     public static final String SMALL_PROGRAM_ERROR = "Your program is too small to profile.";
     public static final String CANCELLING_PROPERTY_FILE = "Pressed 'cancel' when trying to open .properties file.";
+    public static final String A_PROPERTY_FILE_WAS_NOT_SELECTED = "The .properties file was not selected.";
     public static final String FILE_DATA_DISPLAY_ERROR = "Error occurred when writing in the file.";
     public static final String DATA_DISPLAY_ERROR = "Error!One of the characteristics or everyone weren't got when processing";
     public static final String CREATING_FILE_ERROR = "Error when creating the file";
@@ -65,6 +66,7 @@ public class Log {
     public static final String SETTING_BUTTON_IMAGE_ERROR = "Failed to set the button's image";
     public static final String NO_OPTION_WHEN_UPDATE_THE_PROPERTY_FILE = "The .properties file did not update because user chose 'no'.";
     public static final String NO_OPTION_WHEN_RETURNING_TO_THE_MENU = "Returning to the menu was not because user chose 'no'.";
+    public static final String THE_FILE_IS_NOT_PROPERTIES = "The selected file is not .properties file.";
 
     /**
      * Dialog's headers
@@ -115,7 +117,7 @@ public class Log {
     public static final String OPEN_PROPERTY_BUTTON_MESSAGE = "Set .properties file with the attributes before to start the test";
     public static final String SAVE_FILE_BUTTON_MESSAGE = "Save the results of the user's program to a .txt file";
     public static final String SAVE_DB_BUTTON_MESSAGE = "Save the results of the user's program to a database";
-    public static final String UPDATE_FILE_BUTTON_MESSAGE = "Update selected .properties file";
+    public static final String UPDATE_FILE_BUTTON_MESSAGE = "Update the selected .properties file";
     public static final String REPEAT_TEST_BUTTON_MESSAGE = "Return on the menu where you can repeat the test.";
     public static final String EXIT_BUTTON_MESSAGE = "Exit from the application";
 
@@ -128,12 +130,12 @@ public class Log {
     public static final String MENU_CONSOLE = "M E N U";
     public static final String MENU_CHOICE = "Choose one of the next options (using 1-2):";
     public static final String RESULT_PANEL_CHOICE = "Choose one of the next options (using 0-4):";
-    public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path. Try again or enter 'cancel'.";
+    public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path. Try again or press 'enter'.";
     public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your .properties file: ";
     public static final String DATABASE_INPUT = "Choose the type of database (using 1-5) or exit (using 0):";
     public static final String SAVE_TO_DATABASE = "Save to database";
     public static final String TYPE_DATABASE_IS_NOT_SELECTED = "The type of database was not selected. Returning back...";
-    public static final String UPDATE_PROPERTY_FILE = "Update .properties file";
+    public static final String UPDATE_PROPERTY_FILE = "Update the .properties file";
     public static final String PROCESSING_CONSOLE = "P r o c e s s i n g... <=";
     public static final String PROCESSING_WAS_FINISHED = "The profiling was successfully finished!";
     public static final String BACK = "<--";

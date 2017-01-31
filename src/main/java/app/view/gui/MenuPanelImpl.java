@@ -3,6 +3,7 @@ package app.view.gui;
 
 import app.utils.Log;
 import app.utils.exceptions.ClientProcessException;
+import app.utils.exceptions.TheFileIsNotPropertiesException;
 import org.slf4j.Logger;
 
 import javax.swing.*;
@@ -60,7 +61,12 @@ class MenuPanelImpl extends JPanel implements Panel {
             new Thread(() -> {
                 try {
                     guiView.getEventListener().readPropertyFile(guiView.getSelectedPropertyFile());
-                } catch (Exception e1) {
+                } catch (TheFileIsNotPropertiesException e1) {
+                    LOG.error(Log.PROPERTY_READ_ERROR + " " + Log.THE_FILE_IS_NOT_PROPERTIES);
+                    SwingUtilities.invokeLater(() ->
+                            JOptionPane.showMessageDialog(guiView, Log.THE_FILE_IS_NOT_PROPERTIES, Log.ERROR, JOptionPane.ERROR_MESSAGE)
+                    );
+                } catch (Exception e2) {
                     LOG.warn(Log.CANCELLING_PROPERTY_FILE);
                 }
             }).start();

@@ -1,6 +1,7 @@
 package app.model;
 
 import app.utils.Log;
+import app.utils.exceptions.TheFileIsNotPropertiesException;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -33,6 +34,10 @@ public class PropertyRepository {
     }
 
     void setPropertyFile(File propertyFile) throws Exception {
+        if (!isPropertiesFile(propertyFile.getAbsolutePath())) {
+            this.propertyFile = null;
+            throw new TheFileIsNotPropertiesException();
+        }
         this.propertyFile = propertyFile;
         saveProperties();
     }
@@ -50,6 +55,10 @@ public class PropertyRepository {
             LOG.error(Log.PROPERTY_READ_ERROR);
             throw e;
         }
+    }
+
+    private boolean isPropertiesFile(String path) {
+        return path.toLowerCase().trim().endsWith(".properties");
     }
 
     Properties getProperties() {

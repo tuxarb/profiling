@@ -3,6 +3,7 @@ package app.view.console;
 
 import app.utils.Log;
 import app.utils.exceptions.ClientProcessException;
+import org.slf4j.Logger;
 
 import java.io.File;
 
@@ -12,6 +13,7 @@ class ConsoleMenu {
     private ConsoleView view;
     private int second = 0;
     private static volatile boolean isExceptionOccurred;
+    private static final Logger LOG = Log.createLog(ConsoleMenu.class);
 
     ConsoleMenu(ConsoleView view) {
         this.view = view;
@@ -96,14 +98,11 @@ class ConsoleMenu {
         while (true) {
             print(Log.MENU_PATH_TO_PROPERTY_FILE);
             String path = readLine().trim();
-            if ("cancel".equalsIgnoreCase(path)) {
-                println(Log.CANCELLING_PROPERTY_FILE);
+            if ("".equals(path)) {
+                println(Log.A_PROPERTY_FILE_WAS_NOT_SELECTED);
                 return;
             }
             try {
-                if (!isPropertiesFile(path)) {
-                    throw new Exception();
-                }
                 view.getEventListener().readPropertyFile(new File(path));
                 println(Log.PROPERTY_FILE_READ);
                 break;
@@ -112,10 +111,6 @@ class ConsoleMenu {
                 print("\n");
             }
         }
-    }
-
-    private boolean isPropertiesFile(String path) {
-        return path.toLowerCase().endsWith(".properties");
     }
 
     private void displayInfoAboutProcessing() {
