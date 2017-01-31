@@ -4,11 +4,13 @@ import app.model.Model;
 import app.model.beans.Characteristic;
 import app.model.enums.DatabaseTypes;
 import app.model.enums.OperatingSystems;
+import app.utils.Log;
 import app.utils.exceptions.ClientProcessException;
 import app.utils.exceptions.WrongSelectedDatabaseException;
 import app.view.console.ConsoleView;
 import app.view.gui.GuiView;
 import app.view.gui.WelcomePanelImpl;
+import org.slf4j.Logger;
 
 import javax.swing.*;
 import java.io.File;
@@ -18,6 +20,8 @@ public class Profiling implements EventListener {
     private GuiView guiView;
     private ConsoleView consoleView;
     private Model model;
+    private static final Logger LOG = Log.createLog(Profiling.class);
+
 
     public Profiling() {
         model = new Model(new Characteristic());
@@ -53,7 +57,7 @@ public class Profiling implements EventListener {
             if (os.name().equals(OperatingSystems.MAC.toString()))
                 startTestForMac();
         } catch (IOException e) {
-            //возникла неизвестная ошибка на сервере.
+            LOG.error(Log.INTERNAL_APPLICATION_ERROR);
         }
 
         model.completed();

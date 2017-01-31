@@ -19,8 +19,8 @@ public class Log {
     public static final String START_READING_PROCESS = "There is creating a new process, received from the user...";
     public static final String END_READING_PROCESS = "The resulting data were successfully got!";
     public static final String VALID_OS = "The selected operating system is available for the test. Redirecting to the menu...";
-    public static final String PROCESS_INFO_START = "The progress info dialog was started. Processing...";
-    public static final String PROCESS_INFO_END = "The progress info dialog was finished. Closing...";
+    public static final String PROCESS_INFO_START = "The progress info bar was started. Processing...";
+    public static final String PROCESS_INFO_END = "The progress info bar was finished. Closing...";
     public static final String PROPERTY_FILE_READ = "The .properties file was successfully read!";
     public static final String PROPERTY_FILE_UPDATE = "The .properties file was successfully updated!";
     public static final String PREPARATION_FOR_WRITING_IN_THE_FILE = "Preparation to write to a file...";
@@ -40,6 +40,7 @@ public class Log {
     /**
      * Errors and warnings
      */
+    public static final String INTERNAL_APPLICATION_ERROR = "Sorry. An internal error occurred in the application.";
     public static final String WRONG_OS = "This operating system is not for you. Select your operating system.";
     public static final String LOADING_PROGRESS_IMAGE_ERROR = "Error when loading the image for ProgressDialog.";
     public static final String PATH_TO_PROGRAM_INCORRECT = "Cannot run user's program. Please, check that path to program is correct and your command has the correct syntax.";
@@ -57,7 +58,7 @@ public class Log {
     public static final String PROPERTY_READ_ERROR = "Error occurred when reading the property file.";
     public static final String SMALL_PROGRAM_ERROR = "Your program is too small to profile.";
     public static final String CANCELLING_PROPERTY_FILE = "Pressed 'cancel' when trying to open .properties file.";
-    public static final String A_PROPERTY_FILE_WAS_NOT_SELECTED = "The .properties file was not selected.";
+    public static final String A_PROPERTY_FILE_WAS_NOT_SELECTED = "Path to a .properties file was not specified.";
     public static final String FILE_DATA_DISPLAY_ERROR = "Error occurred when writing in the file.";
     public static final String DATA_DISPLAY_ERROR = "Error!One of the characteristics or everyone weren't got when processing";
     public static final String CREATING_FILE_ERROR = "Error when creating the file";
@@ -67,6 +68,7 @@ public class Log {
     public static final String NO_OPTION_WHEN_UPDATE_THE_PROPERTY_FILE = "The .properties file did not update because user chose 'no'.";
     public static final String NO_OPTION_WHEN_RETURNING_TO_THE_MENU = "Returning to the menu was not because user chose 'no'.";
     public static final String THE_FILE_IS_NOT_PROPERTIES = "The selected file is not .properties file.";
+    public static final String PROPERTIES_IS_NULL_LOG = "A .properties file was not specified. Can't start the test.";
 
     /**
      * Dialog's headers
@@ -82,7 +84,7 @@ public class Log {
     public static final String NOT_WINDOWS_OS = "Your operation system is not Windows.";
     public static final String NOT_LINUX_OS = "Your operation system is not Linux.";
     public static final String NOT_MAC_OS = "Your operation system is not Mac.";
-    public static final String PROPERTIES_IS_NULL = "Properties file was not specified.";
+    public static final String PROPERTIES_IS_NULL_DIALOG = "A .properties file was not specified.";
     public static final String WRONG_DATABASE_URL = "Your url doesn't match the selected database.";
     public static final String WRITING_DATABASE_ERROR = "Error occurred when writing to the database.";
     public static final String WRITING_DATABASE_SUCCESS = "Data was successfully written to the database!";

@@ -36,10 +36,12 @@ class ConsoleMenu {
             String input = readLine();
             if (input.startsWith("1")) {
                 if (!view.getEventListener().isPropertiesFileExists()) {
-                    println(Log.PROPERTIES_IS_NULL);
+                    println(Log.PROPERTIES_IS_NULL_LOG);
+                    LOG.warn(Log.PROPERTIES_IS_NULL_LOG);
                 } else {
                     findOutOS();
                     waitForEndProcessing();
+                    LOG.info(Log.PROCESS_INFO_END);
                     if (!isExceptionOccurred) {
                         break;
                     }
@@ -54,6 +56,7 @@ class ConsoleMenu {
     }
 
     private void waitForEndProcessing() {
+        LOG.info(Log.PROCESS_INFO_START);
         while (true) {
             displayInfoAboutProcessing();
             if (isExceptionOccurred) {
@@ -100,6 +103,7 @@ class ConsoleMenu {
             String path = readLine().trim();
             if ("".equals(path)) {
                 println(Log.A_PROPERTY_FILE_WAS_NOT_SELECTED);
+                LOG.warn(Log.A_PROPERTY_FILE_WAS_NOT_SELECTED);
                 return;
             }
             try {

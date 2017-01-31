@@ -46,8 +46,8 @@ class MenuPanelImpl extends JPanel implements Panel {
         JButton startingTest = createButton(Log.START_TEST, Log.START_TEST_BUTTON_MESSAGE);
         startingTest.addActionListener(e -> {
             if (!guiView.getEventListener().isPropertiesFileExists()) {
-                LOG.error(Log.PROPERTIES_IS_NULL);
-                JOptionPane.showMessageDialog(guiView, Log.PROPERTIES_IS_NULL, Log.ERROR, JOptionPane.ERROR_MESSAGE);
+                LOG.error(Log.PROPERTIES_IS_NULL_LOG);
+                JOptionPane.showMessageDialog(guiView, Log.PROPERTIES_IS_NULL_DIALOG, Log.ERROR, JOptionPane.ERROR_MESSAGE);
                 return;
             }
             changeButtonState(false);

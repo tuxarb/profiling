@@ -3,11 +3,13 @@ package app.view.console;
 import app.model.enums.OperatingSystems;
 import app.utils.Log;
 import app.utils.Utils;
+import org.slf4j.Logger;
 
 import static app.utils.ConsoleWorker.*;
 
 class ConsoleWelcome {
     private ConsoleView view;
+    private static final Logger LOG = Log.createLog(ConsoleWelcome.class);
 
     ConsoleWelcome(ConsoleView view) {
         this.view = view;
@@ -37,6 +39,7 @@ class ConsoleWelcome {
                 case "win":
                     if (!Utils.isWindows()) {
                         println(Log.NOT_WINDOWS_OS);
+                        LOG.warn(Log.WRONG_OS);
                         break;
                     }
                     view.setOperatingSystem(OperatingSystems.WINDOWS);
@@ -48,6 +51,7 @@ class ConsoleWelcome {
                 case "l":
                     if (!Utils.isLinux()) {
                         println(Log.NOT_LINUX_OS);
+                        LOG.warn(Log.WRONG_OS);
                         break;
                     }
                     view.setOperatingSystem(OperatingSystems.LINUX);
@@ -58,6 +62,7 @@ class ConsoleWelcome {
                 case "mac":
                     if (!Utils.isMac()) {
                         println(Log.NOT_MAC_OS);
+                        LOG.warn(Log.WRONG_OS);
                         break;
                     }
                     view.setOperatingSystem(OperatingSystems.MAC);
@@ -69,6 +74,7 @@ class ConsoleWelcome {
                 break;
             }
         }
+        LOG.debug(Log.VALID_OS);
         println(Log.VALID_OS);
         update();
     }
