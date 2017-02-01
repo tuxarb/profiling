@@ -29,7 +29,7 @@ class DatabaseWriter {
         session.save(ch);
         session.getTransaction().commit();
         session.close();
-        LOG.info(Log.END_SAVING_TO_DATABASE);
+        LOG.info(Log.END_SAVING_TO_DATABASE + "[ " + databaseType + " ]");
     }
 
     void setSessionFactory() throws IOException {

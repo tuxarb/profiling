@@ -33,7 +33,7 @@ class ResultPanelImpl extends JPanel implements Panel {
         if (this.capacity == null ||
                 this.runtime == null ||
                 this.speed == null) {
-            LOG.error(Log.DATA_DISPLAY_ERROR);
+            LOG.error(Log.DATA_DISPLAYING_ERROR);
             guiView.getEventListener().update();
         }
     }
@@ -70,7 +70,7 @@ class ResultPanelImpl extends JPanel implements Panel {
         textArea.append(Log.CAPACITY + " \t" + capacity + "\n");
         textArea.append(Log.SPEED + " \t" + speed);
         add(textArea);
-        LOG.info(Log.DATA_DISPLAY_SUCCESS);
+        LOG.info(Log.DATA_DISPLAYING_SUCCESS);
 
         JButton print = createButton(Log.SAVE_TO_FILE, Log.SAVE_FILE_BUTTON_MESSAGE);
         print.addActionListener(new ActionListener() {
@@ -80,11 +80,11 @@ class ResultPanelImpl extends JPanel implements Panel {
                     try {
                         guiView.getEventListener().writeToFile();
                         SwingUtilities.invokeLater(() ->
-                                JOptionPane.showMessageDialog(guiView, Log.FILE_DATA_DISPLAY_SUCCESS, Log.INFORMATION,
+                                JOptionPane.showMessageDialog(guiView, Log.FILE_DATA_DISPLAYING_SUCCESS, Log.INFORMATION,
                                         JOptionPane.INFORMATION_MESSAGE)
                         );
                     } catch (IOException e1) {
-                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(guiView, Log.FILE_DATA_DISPLAY_ERROR, Log.ERROR,
+                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(guiView, Log.FILE_DATA_DISPLAYING_ERROR, Log.ERROR,
                                 JOptionPane.ERROR_MESSAGE)
                         );
                     }

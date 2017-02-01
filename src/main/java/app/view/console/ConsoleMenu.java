@@ -90,9 +90,10 @@ class ConsoleMenu {
                 isExceptionOccurred = true;
                 print("\n");
                 if (ex.getLocalizedMessage() != null && !ex.getLocalizedMessage().isEmpty()) {
-                    println(ex.getLocalizedMessage());
+                    print(ex.getLocalizedMessage());
                 } else
-                    println(Log.CLIENT_PROCESS_ERROR);
+                    print(Log.CLIENT_PROCESS_ERROR + " " + Log.SEE_LOGS + "[ " +
+                            System.getProperty("user.home") + "\\.profiling_logs\\ ]");
             }
         }).start();
     }

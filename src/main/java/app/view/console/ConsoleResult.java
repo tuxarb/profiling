@@ -32,14 +32,14 @@ class ConsoleResult {
         if (this.capacity == null ||
                 this.runtime == null ||
                 this.speed == null) {
-            println(Log.DATA_DISPLAY_ERROR);
+            println(Log.DATA_DISPLAYING_ERROR);
             returnToMenu();
         }
     }
 
     void init() {
         displayResultPanel();
-        LOG.info(Log.DATA_DISPLAY_SUCCESS);
+        LOG.info(Log.DATA_DISPLAYING_SUCCESS);
         L:
         while (true) {
             print("\n" + Log.ENTER);
@@ -110,9 +110,9 @@ class ConsoleResult {
     private void writeToFile() {
         try {
             view.getEventListener().writeToFile();
-            println(Log.FILE_DATA_DISPLAY_SUCCESS);
+            println(Log.FILE_DATA_DISPLAYING_SUCCESS);
         } catch (IOException e) {
-            println(Log.FILE_DATA_DISPLAY_ERROR);
+            println(Log.FILE_DATA_DISPLAYING_ERROR);
         }
     }
 

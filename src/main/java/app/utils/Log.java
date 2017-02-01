@@ -33,8 +33,8 @@ public class Log {
     public static final String END_SAVING_TO_DATABASE = "Data was successfully written to the database!";
     public static final String END_INIT_PROPERTIES = "Initialization the properties was finished.";
     public static final String DATA_INIT_FOR_DISPLAY = "The resulting data are being initialized for displaying...";
-    public static final String DATA_DISPLAY_SUCCESS = "The resulting data were successfully displayed on the screen.";
-    public static final String FILE_DATA_DISPLAY_SUCCESS = "Data was successfully written to the file!";
+    public static final String DATA_DISPLAYING_SUCCESS = "The resulting data were successfully displayed on the screen.";
+    public static final String FILE_DATA_DISPLAYING_SUCCESS = "Data was successfully written to the file!";
     public static final String CREATING_DIR_FOR_WRITING = "Creating a directory for writing the resulting data...";
     public static final String RETURNING_TO_THE_MENU_SUCCESS = "Returning to the menu was finished successfully!";
     public static final String CLOSING_APP = "It is closing the application...";
@@ -61,8 +61,8 @@ public class Log {
     public static final String SMALL_PROGRAM_ERROR = "Your program is too small to profile.";
     public static final String CANCELLING_PROPERTY_FILE = "Pressed 'cancel' when trying to open .properties file.";
     public static final String A_PROPERTY_FILE_WAS_NOT_SELECTED = "Path to a .properties file was not specified.";
-    public static final String FILE_DATA_DISPLAY_ERROR = "Error occurred when writing in the file.";
-    public static final String DATA_DISPLAY_ERROR = "Error!One of the characteristics or everyone weren't got when processing";
+    public static final String FILE_DATA_DISPLAYING_ERROR = "Error occurred when writing in the file.";
+    public static final String DATA_DISPLAYING_ERROR = "Error!One of the characteristics or everyone weren't got when processing";
     public static final String CREATING_FILE_ERROR = "Error when creating the file";
     public static final String WRITING_IN_FILE_ERROR = "Errors when writing to file";
     public static final String SETTING_BACKGROUND_ERROR = "Failed to set the background image";
@@ -143,6 +143,7 @@ public class Log {
     public static final String PROCESSING_CONSOLE = "P r o c e s s i n g... <=";
     public static final String PROCESSING_WAS_FINISHED = "The profiling was successfully finished!";
     public static final String BACK = "<--";
+    public static final String SEE_LOGS = "See log files -> ";
 
     private Log() {
     }
