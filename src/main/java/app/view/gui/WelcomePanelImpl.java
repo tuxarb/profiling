@@ -34,6 +34,7 @@ public class WelcomePanelImpl extends JPanel implements Panel {
         guiView.getContentPane().add(this);
         paint();
         setVisible(true);
+        LOG.debug(Log.APP_IS_READY);
     }
 
     private void paint() {

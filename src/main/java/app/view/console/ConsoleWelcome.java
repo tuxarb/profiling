@@ -16,6 +16,7 @@ class ConsoleWelcome {
     }
 
     void init() {
+        LOG.debug(Log.APP_IS_READY);
         clearScreen();
         print("\n");
         println("+-----------------------------------------------+");

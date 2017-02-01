@@ -52,10 +52,10 @@ class FileWriter {
         if (!pathToUserFolder.isEmpty()) {
             pathToFolder = pathToUserFolder;
         } else {
-            pathToFolder = System.getProperty("user.dir");
+            pathToFolder = System.getProperty("user.home");
         }
         LOG.info(Log.CREATING_DIR_FOR_WRITING);
-        File dir = new File(pathToFolder + File.separator + "result");
+        File dir = new File(pathToFolder + File.separator + ".profiling_result");
         dir.mkdir();
         return dir;
     }

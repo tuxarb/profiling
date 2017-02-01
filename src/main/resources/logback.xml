@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
 
+    <property scope="system" name="mode" value="${mode}"/>
+    <property scope="local" name="isGUI" value='property("mode").equalsIgnoreCase("gui")'/>
+
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>D:/file.log</file>
+        <if condition='${isGUI}'>
+            <then>
+                <file>${user.home}/.profiling_logs/app_gui.log</file>
+            </then>
+            <else>
+                <file>${user.home}/.profiling_logs/app_console.log</file>
+            </else>
+        </if>
         <append>true</append>
         <encoder>
             <charset>UTF-8</charset>
@@ -14,12 +23,20 @@
         </encoder>
     </appender>
 
-    <!--<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <charset>UTF-8</charset>
-            <pattern>%red(%-5level) %blue(%date [%thread] [%file:%line] %msg%n)</pattern>
-        </encoder>
-    </appender>-->
+    <if condition='${isGUI}'>
+        <then>
+            <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+                <encoder>
+                    <charset>UTF-8</charset>
+                    <pattern>%-5level %date [%file:%line] %msg%n</pattern>
+                </encoder>
+            </appender>
+
+            <root level="warn">
+                <appender-ref ref="console"/>
+            </root>
+        </then>
+    </if>
 
     <logger name="app" level="debug"/>
 

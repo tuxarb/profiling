@@ -14,6 +14,8 @@ public class Log {
     /**
      * Debug and info
      */
+    public static final String APP_IS_BEING_INITIALIZED = "The application is being initialized...";
+    public static final String APP_IS_READY = "The application was successfully initialized!";
     public static final String START_RUNNING_CODE = "Run the client process...";
     public static final String END_RUNNING_CODE = "The client process was finished!";
     public static final String START_READING_PROCESS = "There is creating a new process, received from the user...";

@@ -24,6 +24,8 @@ public class Profiling implements EventListener {
 
 
     public Profiling() {
+        LOG.debug(Log.APP_IS_BEING_INITIALIZED);
+
         model = new Model(new Characteristic());
         if (isGUI()) {
             SwingUtilities.invokeLater(() -> {
