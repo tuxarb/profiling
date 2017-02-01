@@ -40,7 +40,7 @@ class FileWriter {
                 LOG.error(Log.CREATING_FILE_ERROR);
                 throw new IOException();
             }
-            LOG.info(Log.WRITING_IN_THE_FILE_SUCCESS + "[ " + file.getAbsolutePath() + " ]");
+            LOG.info(Log.WRITING_IN_THE_FILE_SUCCESS + "[ " + file.getAbsolutePath().trim() + " ]");
         } catch (IOException e) {
             LOG.error(Log.WRITING_IN_FILE_ERROR);
             throw e;

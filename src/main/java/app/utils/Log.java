@@ -84,7 +84,7 @@ public class Log {
     public static final String NOT_WINDOWS_OS = "Your operation system is not Windows.";
     public static final String NOT_LINUX_OS = "Your operation system is not Linux.";
     public static final String NOT_MAC_OS = "Your operation system is not Mac.";
-    public static final String PROPERTIES_IS_NULL_DIALOG = "A .properties file was not specified.";
+    public static final String PROPERTIES_IS_NULL_DIALOG = "Properties file was not specified.";
     public static final String WRONG_DATABASE_URL = "Your url doesn't match the selected database.";
     public static final String WRITING_DATABASE_ERROR = "Error occurred when writing to the database.";
     public static final String WRITING_DATABASE_SUCCESS = "Data was successfully written to the database!";

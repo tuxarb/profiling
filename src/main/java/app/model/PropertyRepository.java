@@ -50,15 +50,19 @@ public class PropertyRepository {
             for (Object key : properties.keySet()) {
                 store.computeIfPresent(key, (k, v) -> properties.get(k));
             }
-            LOG.info(Log.PROPERTY_FILE_READ + "[ " + propertyFile.getAbsolutePath() + " ]");
+            LOG.info(Log.PROPERTY_FILE_READ + getPathToPropertyFile());
         } catch (Exception e) {
-            LOG.error(Log.PROPERTY_READ_ERROR + "[ " + propertyFile.getAbsolutePath() + " ]");
+            LOG.error(Log.PROPERTY_READ_ERROR + getPathToPropertyFile());
             throw e;
         }
     }
 
     private boolean isPropertiesFile(String path) {
         return path.toLowerCase().trim().endsWith(".properties");
+    }
+
+    private String getPathToPropertyFile() {
+        return "[ " + propertyFile.getAbsolutePath().trim() + " ]";
     }
 
     Properties getProperties() {
