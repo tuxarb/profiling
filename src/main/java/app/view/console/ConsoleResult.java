@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import java.io.IOException;
 
 import static app.utils.ConsoleWorker.*;
+import static app.utils.Utils.getPathToLogs;
 
 class ConsoleResult {
     private ConsoleView view;
@@ -32,7 +33,7 @@ class ConsoleResult {
         if (this.capacity == null ||
                 this.runtime == null ||
                 this.speed == null) {
-            println(Log.DATA_DISPLAYING_ERROR);
+            println(Log.DATA_DISPLAYING_ERROR + "\n" + getPathToLogs());
             returnToMenu();
         }
     }
@@ -98,7 +99,7 @@ class ConsoleResult {
             println(Log.PROPERTY_FILE_UPDATE);
             LOG.info(Log.PROPERTY_FILE_UPDATE);
         } catch (Exception e) {
-            println(Log.PROPERTY_READ_ERROR);
+            println(Log.PROPERTY_READ_ERROR + " " + getPathToLogs());
         }
     }
 
@@ -112,7 +113,7 @@ class ConsoleResult {
             view.getEventListener().writeToFile();
             println(Log.FILE_DATA_DISPLAYING_SUCCESS);
         } catch (IOException e) {
-            println(Log.FILE_DATA_DISPLAYING_ERROR);
+            println(Log.FILE_DATA_DISPLAYING_ERROR + " " + getPathToLogs());
         }
     }
 
@@ -121,7 +122,7 @@ class ConsoleResult {
             view.getEventListener().writeToDatabase(type);
             println(Log.WRITING_DATABASE_SUCCESS);
         } catch (IOException e) {
-            println(Log.WRITING_DATABASE_ERROR);
+            println(Log.WRITING_DATABASE_ERROR + " " + getPathToLogs());
             return false;
         } catch (WrongSelectedDatabaseException e) {
             println(Log.WRONG_DATABASE_URL);

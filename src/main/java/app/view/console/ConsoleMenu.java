@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import java.io.File;
 
 import static app.utils.ConsoleWorker.*;
+import static app.utils.Utils.getPathToLogs;
 
 class ConsoleMenu {
     private ConsoleView view;
@@ -90,10 +91,9 @@ class ConsoleMenu {
                 isExceptionOccurred = true;
                 print("\n");
                 if (ex.getLocalizedMessage() != null && !ex.getLocalizedMessage().isEmpty()) {
-                    print(ex.getLocalizedMessage());
+                    print(ex.getMessage() + "\n" + getPathToLogs());
                 } else
-                    print(Log.CLIENT_PROCESS_ERROR + " " + Log.SEE_LOGS + "[ " +
-                            System.getProperty("user.home") + "\\.profiling_logs\\ ]");
+                    print(Log.CLIENT_PROCESS_ERROR + " " + getPathToLogs());
             }
         }).start();
     }

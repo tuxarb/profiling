@@ -23,7 +23,7 @@ class HibernateUtil {
                     .configure()
                     .buildSessionFactory();
         } catch (Exception ex) {
-            LOG.error(Log.CREATING_SESSION_FACTORY_ERROR + "\n" + ex);
+            LOG.error(Log.CREATING_SESSION_FACTORY_ERROR + "\n" + ex.getMessage());
         }
         return null;
     }

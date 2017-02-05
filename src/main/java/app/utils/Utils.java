@@ -2,6 +2,7 @@ package app.utils;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
@@ -14,6 +15,7 @@ public class Utils {
     public static final String ORACLE = "Oracle";
     public static final String SQL_SERVER = "SqlServer";
     public static final String OTHER_DBMS = "Other";
+    public static final String SEPARATOR = System.getProperty("file.separator");
 
     private Utils() {
     }
@@ -64,5 +66,20 @@ public class Utils {
         return str.contains("память") || str.contains("mem");
     }
 
+    public static String getPathToLogs() {
+        return Log.SEE_LOGS + "[ " +
+                System.getProperty("user.home") + SEPARATOR +
+                ".profiling_logs" + SEPARATOR + " ]";
+    }
 
+    public static String getUserCommand(ProcessHandle.Info info) {
+        boolean flag = false;
+        if (info.arguments().isPresent()) {
+            flag = true;
+        }
+        return " [ " +
+                info.command().orElse("") +
+                (flag ? " " + Arrays.toString(info.arguments().get()) : "") +
+                " ]";
+    }
 }

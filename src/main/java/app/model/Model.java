@@ -1,7 +1,6 @@
 package app.model;
 
 import app.model.beans.Characteristic;
-import app.model.enums.AllowedExtensions;
 import app.model.enums.DatabaseTypes;
 import app.utils.Log;
 import app.utils.Utils;
@@ -13,6 +12,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
+
+import static app.utils.Utils.getUserCommand;
 
 public class Model {
     private final Characteristic characteristic;
@@ -29,13 +30,16 @@ public class Model {
     public void startTestForWindows() throws IOException, ClientProcessException {
         LOG.info(Log.START_READING_PROCESS);
 
+        //for (int i = 0; i < 1000; i++) {
         long capacity = 0;
         long countIterations = 0;
         long startTime = startTestAndGetStartTime();
 
+        Process process;
+        Scanner scanner;
         while (task.isAlive()) {
-            Process process = execute("tasklist /v /fo list /fi \"PID eq \"" + processId);
-            Scanner scanner = new Scanner(process.getInputStream(), "cp866");
+            process = execute("tasklist /v /fo list /fi \"PID eq \"" + processId);
+            scanner = new Scanner(process.getInputStream(), "cp866");
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -45,7 +49,7 @@ public class Model {
                     break;
                 }
             }
-            waitSomeTime();
+            waitSomeTime(25);
         }
         checkCountOfIterationsOnZero(countIterations);
 
@@ -55,6 +59,7 @@ public class Model {
 
         setResultData(capacity, speed, time);
         LOG.info(Log.END_READING_PROCESS);
+        // }
     }
 
     public void startTestForLinux() throws IOException, ClientProcessException {
@@ -64,9 +69,11 @@ public class Model {
         long countIterations = 0;
         long startTime = startTestAndGetStartTime();
 
+        Process process;
+        Scanner scanner;
         while (task.isAlive()) {
-            Process process = execute("ps -p " + processId + " -o rss");
-            Scanner scanner = new Scanner(process.getInputStream());
+            process = execute("ps -p " + processId + " -o rss");
+            scanner = new Scanner(process.getInputStream());
             while (scanner.hasNext()) {
                 String newLine = scanner.nextLine();
                 if ((!newLine.matches("^\\D*"))) {
@@ -75,7 +82,7 @@ public class Model {
                     break;
                 }
             }
-            waitSomeTime();
+            waitSomeTime(25);
         }
         checkCountOfIterationsOnZero(countIterations);
 
@@ -94,9 +101,11 @@ public class Model {
         long countIterations = 0;
         long startTime = startTestAndGetStartTime();
 
+        Process process;
+        Scanner scanner;
         while (task.isAlive()) {
-            Process process = execute("top -ncols 8" + " -pid " + processId);
-            Scanner scanner = new Scanner(process.getInputStream());
+            process = execute("top -ncols 8" + " -pid " + processId);
+            scanner = new Scanner(process.getInputStream());
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
                 if (line.contains("java")) {
@@ -106,7 +115,7 @@ public class Model {
                     process.destroy();
                 }
             }
-            waitSomeTime();
+            waitSomeTime(25);
         }
         checkCountOfIterationsOnZero(countIterations);
 
@@ -118,9 +127,9 @@ public class Model {
         LOG.info(Log.END_READING_PROCESS);
     }
 
-    private void waitSomeTime() {
+    private void waitSomeTime(long millis) {
         try {
-            Thread.sleep(50);
+            Thread.sleep(millis);
         } catch (InterruptedException e) {
         }
     }
@@ -128,7 +137,6 @@ public class Model {
     private long startTestAndGetStartTime() throws ClientProcessException {
         long startTime = System.currentTimeMillis();
         createAndRunNewProcess();
-        LOG.info(Log.START_RUNNING_CODE);
 
         return startTime;
     }
@@ -140,53 +148,25 @@ public class Model {
             throw new ClientProcessException(Log.EMPTY_PATH_MESSAGE);
         }
         try {
-            Process cmdProcess;
-            if (isScriptFile(pathToProgram)) {
-                cmdProcess = execute(pathToProgram);
-            } else {
-                cmdProcess = getCmdProcess(pathToProgram);
-            }
-            Process pidClientProcess;
-            if (Utils.isWindows()) {
-                pidClientProcess = execute(
-                        "wmic process where (ParentProcessId=" + cmdProcess.getPid() + ") get ProcessID /format:list"
-                );
-            } else {
-                pidClientProcess = execute("pgrep -P " + cmdProcess.getPid());
-            }
-            Scanner scanner = new Scanner(pidClientProcess.getInputStream());
-            while (scanner.hasNext()) {
-                String newLine = scanner.nextLine().toLowerCase();
-                if (!newLine.matches("^\\D*")) {
-                    processId = Utils.getNumberFromString(newLine);
-                    break;
-                }
-            }
+            execute(pathToProgram);
+
+            processId = ProcessHandle.current()
+                    .children()
+                    .findFirst()
+                    .orElseThrow(() -> new Exception(Log.ERROR_WHEN_CREATING_USER_PROCESS))
+                    .getPid();
             task = ProcessHandle.of(processId)
                     .orElseThrow(() -> new Exception(Log.PATH_TO_PROGRAM_INCORRECT));
-            if (task.info()
-                    .command()
-                    .get()
-                    .contains("cmd.exe")) {
-                throw new Exception(Log.PATH_TO_PROGRAM_INCORRECT + Log.TIP);
-            }
         } catch (Exception e) {
             killAllChildrenProcesses();
-            LOG.error(Log.PATH_TO_PROGRAM_INCORRECT);
+            LOG.error(e.getMessage());
             throw new ClientProcessException();
         }
+        LOG.info(Log.START_RUNNING_CODE + getUserCommand(task.info()));
     }
 
     private Process execute(String command) throws IOException {
         return Runtime.getRuntime().exec(command);
-    }
-
-    private Process getCmdProcess(String pathToProgram) throws IOException {
-        if (Utils.isWindows()) {
-            return execute("cmd /c start /B \"task\" " + pathToProgram);
-        } else {
-            return execute("xterm -T \"task\" -e " + pathToProgram);
-        }
     }
 
     private long getTestTime(long startTime) {
@@ -201,10 +181,6 @@ public class Model {
         characteristic.setSpeed(Utils.formatNumber(speed) + " kB/s");
         String timeAsString = Utils.formatNumber(runtime);
         characteristic.setRuntime((runtime < 1000 ? "0," + timeAsString : timeAsString) + " s");
-    }
-
-    private boolean isScriptFile(String path) {
-        return AllowedExtensions.isScriptFile(path);
     }
 
     private void checkCountOfIterationsOnZero(long countIterations) throws ClientProcessException {

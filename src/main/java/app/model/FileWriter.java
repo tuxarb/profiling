@@ -37,12 +37,12 @@ class FileWriter {
             fileWriter.write("\t\t\t" + Utils.getCurrentDate() + "\n");
             fileWriter.write("------------------------------------------\n\n");
             if (directory == null || directory.listFiles().length == 0) {
-                LOG.error(Log.CREATING_FILE_ERROR);
-                throw new IOException();
+                throw new IOException(Log.CREATING_FILE_ERROR);
             }
             LOG.info(Log.WRITING_IN_THE_FILE_SUCCESS + "[ " + file.getAbsolutePath().trim() + " ]");
         } catch (IOException e) {
             LOG.error(Log.WRITING_IN_FILE_ERROR);
+            LOG.error(Log.REASON_ERROR + e.getMessage());
             throw e;
         }
     }

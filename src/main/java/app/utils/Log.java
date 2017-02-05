@@ -52,6 +52,7 @@ public class Log {
             "For example(WINDOWS): program_path=C:/../task.exe.\nAlso, if your program needs additional parameters for start (for example, the compiler), " +
             "you can create some executable file (bat, cmd, com or sh), write at it your command for start and specify path to this file at your .properties file.\nFor example: program_path=C:/../test.bat\n" +
             "Note: the profiling program can test only ONE process.";
+    public static final String ERROR_WHEN_CREATING_USER_PROCESS = "Can't create a new process for user's program. Probably, user specified a wrong path or parameters for start";
     public static final String HIBERNATE_ERROR = "Error occurred when hibernate trying to save data to the database.";
     public static final String CREATING_SESSION_FACTORY_ERROR = "Failed to create sessionFactory instance.";
     public static final String SESSION_FACTORY_IS_NULL = "sessionFactory instance is null";
@@ -62,15 +63,16 @@ public class Log {
     public static final String CANCELLING_PROPERTY_FILE = "Pressed 'cancel' when trying to open .properties file.";
     public static final String A_PROPERTY_FILE_WAS_NOT_SELECTED = "Path to a .properties file was not specified.";
     public static final String FILE_DATA_DISPLAYING_ERROR = "Error occurred when writing in the file.";
-    public static final String DATA_DISPLAYING_ERROR = "Error!One of the characteristics or everyone weren't got when processing";
-    public static final String CREATING_FILE_ERROR = "Error when creating the file";
-    public static final String WRITING_IN_FILE_ERROR = "Errors when writing to file";
-    public static final String SETTING_BACKGROUND_ERROR = "Failed to set the background image";
-    public static final String SETTING_BUTTON_IMAGE_ERROR = "Failed to set the button's image";
+    public static final String DATA_DISPLAYING_ERROR = "Error!One of the characteristics or everyone weren't got when processing.";
+    public static final String CREATING_FILE_ERROR = "Error when creating the file.";
+    public static final String WRITING_IN_FILE_ERROR = "Errors when writing the data to the file.";
+    public static final String SETTING_BACKGROUND_ERROR = "Failed to set the background image.";
+    public static final String SETTING_BUTTON_IMAGE_ERROR = "Failed to set the button's image.";
     public static final String NO_OPTION_WHEN_UPDATE_THE_PROPERTY_FILE = "The .properties file did not update because user chose 'no'.";
     public static final String NO_OPTION_WHEN_RETURNING_TO_THE_MENU = "Returning to the menu was not because user chose 'no'.";
     public static final String THE_FILE_IS_NOT_PROPERTIES = "The selected file is not .properties file.";
     public static final String PROPERTIES_IS_NULL_LOG = "A .properties file was not specified. Can't start the test.";
+    public static final String REASON_ERROR = "Cause -> ";
 
     /**
      * Dialog's headers
