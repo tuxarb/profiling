@@ -42,24 +42,27 @@ public class Log {
     /**
      * Errors and warnings
      */
-    public static final String INTERNAL_APPLICATION_ERROR = "Sorry. An internal error occurred in the application.";
+    public static final String INTERNAL_APPLICATION_ERROR = "Sorry. An internal error has occurred in the application. Probably, your OS version is out of date and doesn't support some types of commands.";
     public static final String WRONG_OS = "This operating system is not for you. Select your operating system.";
     public static final String LOADING_PROGRESS_IMAGE_ERROR = "Error when loading the image for ProgressDialog.";
-    public static final String PATH_TO_PROGRAM_INCORRECT = "Cannot run user's program. Please, check that path to program is correct and your command has the correct syntax.";
-    public static final String TIP = "\nTip: Don't specify any commands for start a new process at the path to your program. " +
-            "(For example: cmd, start, etc.)\nThe correct examples(WINDOWS):\nC:/../task.exe\njava -classpath C:/../folder main.Main";
-    public static final String EMPTY_PATH = "Path to your program wasn't specified. Please, specify it at your .properties file. " +
-            "For example(WINDOWS): program_path=C:/../task.exe.\nAlso, if your program needs additional parameters for start (for example, the compiler), " +
-            "you can create some executable file (bat, cmd, com or sh), write at it your command for start and specify path to this file at your .properties file.\nFor example: program_path=C:/../test.bat\n" +
+    public static final String PATH_TO_PROGRAM_INCORRECT = "Cannot run user's program. Please, check that path to program is correct and your command has the correct syntax.\nAlso note that your program must not be too small otherwise an error may occur.";
+    public static final String EMPTY_PATH = "Path to your program or script file wasn't specified. Please, specify it at your .properties file. " +
+            "For example(WINDOWS): program_path=C:/../task.exe.\nAlso, if your program needs additional parameters for start, " +
+            "you can create some executable script file (bat, cmd, com, bash, sh, etc.), write at it your (ONE) command for start and specify path to this file at your .properties file.\nFor example: script_file_path=C:/../test.bat\n" +
             "Note: the profiling program can test only ONE process.";
-    public static final String ERROR_WHEN_CREATING_USER_PROCESS = "Can't create a new process for user's program. Probably, user specified a wrong path or parameters for start";
+    public static final String ERROR_WHEN_CREATING_USER_PROCESS = "Can't create a new process for user's program. Probably, the user specified a wrong path to the program or a wrong parameters for start.";
+    public static final String ERROR_WHEN_CREATING_USER_PROCESS_FROM_SCRIPT_FILE = "Can't create a new process. Probably, it happened for the following reasons:\n" +
+            "1) The user specified a wrong path to the script file.\n" +
+            "2) The user didn't specify a process inside the script file or provided more than ONE process.\n" +
+            "3) The user specified a wrong path to the process inside the script file or a wrong parameters for start.\n" +
+            "4) The process inside the script file is too small to test.";
     public static final String HIBERNATE_ERROR = "Error occurred when hibernate trying to save data to the database.";
     public static final String CREATING_SESSION_FACTORY_ERROR = "Failed to create sessionFactory instance.";
     public static final String SESSION_FACTORY_IS_NULL = "sessionFactory instance is null";
     public static final String URL_TO_DATABASE_IS_NULL = "Specify url for the connecting.";
     public static final String DRIVER_CLASS_NOT_FOUND_ERROR = "Driver class was not found for your DBMS.";
     public static final String PROPERTY_READ_ERROR = "Error occurred when reading the property file.";
-    public static final String SMALL_PROGRAM_ERROR = "Your program is too small to profile.";
+    public static final String SMALL_PROGRAM_ERROR = "Your program is too small to test.";
     public static final String CANCELLING_PROPERTY_FILE = "Pressed 'cancel' when trying to open .properties file.";
     public static final String A_PROPERTY_FILE_WAS_NOT_SELECTED = "Path to a .properties file was not specified.";
     public static final String FILE_DATA_DISPLAYING_ERROR = "Error occurred when writing in the file.";
@@ -93,7 +96,7 @@ public class Log {
     public static final String WRITING_DATABASE_ERROR = "Error occurred when writing to the database.";
     public static final String WRITING_DATABASE_SUCCESS = "Data was successfully written to the database!";
     public static final String CLIENT_PROCESS_ERROR = "Error occurred when running your program.";
-    public static final String EMPTY_PATH_MESSAGE = "Path to your program wasn't specified.";
+    public static final String EMPTY_PATH_MESSAGE = "Path to your program | script file wasn't specified.";
     public static final String CONFIRMATION_OF_RETURNING_TO_MENU = "Do you want to return to the menu?";
     public static final String CONFIRMATION_OF_UPDATE_PROPERTY_FILE = "Do you want to update the property file?";
 
@@ -124,7 +127,7 @@ public class Log {
     public static final String SAVE_FILE_BUTTON_MESSAGE = "Save the results of the user's program to a .txt file";
     public static final String SAVE_DB_BUTTON_MESSAGE = "Save the results of the user's program to a database";
     public static final String UPDATE_FILE_BUTTON_MESSAGE = "Update the selected .properties file";
-    public static final String REPEAT_TEST_BUTTON_MESSAGE = "Return on the menu where you can repeat the test.";
+    public static final String REPEAT_TEST_BUTTON_MESSAGE = "Return on the menu where you can repeat the test";
     public static final String EXIT_BUTTON_MESSAGE = "Exit from the application";
 
     /**

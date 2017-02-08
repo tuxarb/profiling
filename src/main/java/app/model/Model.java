@@ -13,14 +13,14 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Scanner;
 
-import static app.utils.Utils.getUserCommand;
+import static app.utils.Utils.getUserCommandInfo;
 
 public class Model {
     private final Characteristic characteristic;
     private long processId;
-    private static final PropertyRepository PROPERTY_REPOSITORY = PropertyRepository.getInstance();
     private ProcessHandle task;
     private volatile boolean isCompleted = false;
+    private static final PropertyRepository PROPERTY_REPOSITORY = PropertyRepository.getInstance();
     private static final Logger LOG = Log.createLog(Model.class);
 
     public Model(final Characteristic characteristic) {
@@ -28,9 +28,6 @@ public class Model {
     }
 
     public void startTestForWindows() throws IOException, ClientProcessException {
-        LOG.info(Log.START_READING_PROCESS);
-
-        //for (int i = 0; i < 1000; i++) {
         long capacity = 0;
         long countIterations = 0;
         long startTime = startTestAndGetStartTime();
@@ -42,14 +39,14 @@ public class Model {
             scanner = new Scanner(process.getInputStream(), "cp866");
 
             while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if (Utils.isMemoryLine(line.toLowerCase())) {
-                    capacity += Utils.getNumberFromString(line);
+                String newLine = scanner.nextLine();
+                if (Utils.isMemoryLine(newLine.toLowerCase())) {
+                    capacity += Utils.getNumberFromString(newLine);
                     countIterations++;
                     break;
                 }
             }
-            waitSomeTime(25);
+            waitSomeTime(20);
         }
         checkCountOfIterationsOnZero(countIterations);
 
@@ -59,12 +56,9 @@ public class Model {
 
         setResultData(capacity, speed, time);
         LOG.info(Log.END_READING_PROCESS);
-        // }
     }
 
     public void startTestForLinux() throws IOException, ClientProcessException {
-        LOG.info(Log.START_READING_PROCESS);
-
         long capacity = 0;
         long countIterations = 0;
         long startTime = startTestAndGetStartTime();
@@ -82,7 +76,7 @@ public class Model {
                     break;
                 }
             }
-            waitSomeTime(25);
+            waitSomeTime(20);
         }
         checkCountOfIterationsOnZero(countIterations);
 
@@ -95,8 +89,6 @@ public class Model {
     }
 
     public void startTestForMac() throws IOException, ClientProcessException {
-        LOG.info(Log.START_READING_PROCESS);
-
         long capacity = 0;
         long countIterations = 0;
         long startTime = startTestAndGetStartTime();
@@ -115,7 +107,7 @@ public class Model {
                     process.destroy();
                 }
             }
-            waitSomeTime(25);
+            waitSomeTime(20);
         }
         checkCountOfIterationsOnZero(countIterations);
 
@@ -130,31 +122,58 @@ public class Model {
     private void waitSomeTime(long millis) {
         try {
             Thread.sleep(millis);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
         }
     }
 
     private long startTestAndGetStartTime() throws ClientProcessException {
+        boolean isScriptFile = false;
+        String pathToProgram = PROPERTY_REPOSITORY.getProperties().getProperty("program_path");
+        if (pathToProgram.isEmpty()) {
+            pathToProgram = PROPERTY_REPOSITORY.getProperties().getProperty("script_file_path");
+            if (pathToProgram.isEmpty()) {
+                LOG.error(Log.EMPTY_PATH);
+                throw new ClientProcessException(Log.EMPTY_PATH_MESSAGE);
+            }
+            isScriptFile = true;
+        }
+
         long startTime = System.currentTimeMillis();
-        createAndRunNewProcess();
+        createAndRunUserProcess(pathToProgram, isScriptFile);
 
         return startTime;
     }
 
-    private void createAndRunNewProcess() throws ClientProcessException {
-        String pathToProgram = PROPERTY_REPOSITORY.getProperties().getProperty("program_path");
-        if (pathToProgram.isEmpty()) {
-            LOG.error(Log.EMPTY_PATH);
-            throw new ClientProcessException(Log.EMPTY_PATH_MESSAGE);
-        }
+    private void createAndRunUserProcess(String pathToProgram, boolean isScriptFile) throws ClientProcessException {
+        LOG.info(Log.START_READING_PROCESS);
         try {
             execute(pathToProgram);
 
-            processId = ProcessHandle.current()
-                    .children()
-                    .findFirst()
-                    .orElseThrow(() -> new Exception(Log.ERROR_WHEN_CREATING_USER_PROCESS))
-                    .getPid();
+            if (isScriptFile) {
+                long startTime = System.currentTimeMillis();
+                while (true) {
+                    if (ProcessHandle.current().descendants().count() == 2) {
+                        processId = ProcessHandle.current()
+                                .children()
+                                .findFirst()
+                                .orElseThrow(() -> new Exception(Log.SMALL_PROGRAM_ERROR))
+                                .children()
+                                .findFirst()
+                                .orElseThrow(() -> new Exception(Log.SMALL_PROGRAM_ERROR))
+                                .getPid();
+                        break;
+                    }
+                    if (System.currentTimeMillis() - startTime > 850) {
+                        throw new Exception(Log.ERROR_WHEN_CREATING_USER_PROCESS_FROM_SCRIPT_FILE);
+                    }
+                }
+            } else {
+                processId = ProcessHandle.current()
+                        .children()
+                        .findFirst()
+                        .orElseThrow(() -> new Exception(Log.ERROR_WHEN_CREATING_USER_PROCESS))
+                        .getPid();
+            }
             task = ProcessHandle.of(processId)
                     .orElseThrow(() -> new Exception(Log.PATH_TO_PROGRAM_INCORRECT));
         } catch (Exception e) {
@@ -162,7 +181,7 @@ public class Model {
             LOG.error(e.getMessage());
             throw new ClientProcessException();
         }
-        LOG.info(Log.START_RUNNING_CODE + getUserCommand(task.info()));
+        LOG.info(Log.START_RUNNING_CODE + getUserCommandInfo(task));
     }
 
     private Process execute(String command) throws IOException {

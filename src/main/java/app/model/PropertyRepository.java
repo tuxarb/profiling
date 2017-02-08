@@ -14,6 +14,7 @@ public class PropertyRepository {
     private static final Logger LOG = Log.createLog(PropertyRepository.class);
     private static Properties store = new Properties() {{
         put("program_path", "");
+        put("script_file_path", "");
         put("url", "");
         put("user", "");
         put("password", "");

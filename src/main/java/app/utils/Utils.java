@@ -72,7 +72,8 @@ public class Utils {
                 ".profiling_logs" + SEPARATOR + " ]";
     }
 
-    public static String getUserCommand(ProcessHandle.Info info) {
+    public static String getUserCommandInfo(ProcessHandle processHandle) {
+        ProcessHandle.Info info = processHandle.info();
         boolean flag = false;
         if (info.arguments().isPresent()) {
             flag = true;
@@ -80,6 +81,6 @@ public class Utils {
         return " [ " +
                 info.command().orElse("") +
                 (flag ? " " + Arrays.toString(info.arguments().get()) : "") +
-                " ]";
+                " ]" + ", pid -> " + "[ " + processHandle.getPid() + " ]";
     }
 }
