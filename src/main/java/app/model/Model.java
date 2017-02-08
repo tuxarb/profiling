@@ -163,7 +163,7 @@ public class Model {
                                 .getPid();
                         break;
                     }
-                    if (System.currentTimeMillis() - startTime > 850) {
+                    if (System.currentTimeMillis() - startTime > 999) {
                         throw new Exception(Log.ERROR_WHEN_CREATING_USER_PROCESS_FROM_SCRIPT_FILE);
                     }
                 }

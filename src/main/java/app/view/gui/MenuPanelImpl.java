@@ -91,9 +91,9 @@ class MenuPanelImpl extends JPanel implements Panel {
                 guiView.getEventListener().findOutOS(guiView.getOperatingSystem());
             } catch (ClientProcessException ex) {
                 isExceptionOccurred = true;
-                if (ex.getLocalizedMessage() != null && !ex.getLocalizedMessage().isEmpty()) {
+                if (ex.getMessage() != null && !ex.getMessage().isEmpty()) {
                     SwingUtilities.invokeLater(() ->
-                            JOptionPane.showMessageDialog(guiView, ex.getLocalizedMessage(), Log.ERROR, JOptionPane.ERROR_MESSAGE)
+                            JOptionPane.showMessageDialog(guiView, ex.getMessage(), Log.ERROR, JOptionPane.ERROR_MESSAGE)
                     );
                 } else
                     SwingUtilities.invokeLater(() ->

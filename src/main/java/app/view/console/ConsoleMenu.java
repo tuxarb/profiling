@@ -90,7 +90,7 @@ class ConsoleMenu {
             } catch (ClientProcessException ex) {
                 isExceptionOccurred = true;
                 print("\n");
-                if (ex.getLocalizedMessage() != null && !ex.getLocalizedMessage().isEmpty()) {
+                if (ex.getMessage() != null && !ex.getMessage().isEmpty()) {
                     print(ex.getMessage() + "\n" + getPathToLogs());
                 } else
                     print(Log.CLIENT_PROCESS_ERROR + " " + getPathToLogs());

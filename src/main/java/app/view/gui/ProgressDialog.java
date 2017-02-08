@@ -27,7 +27,7 @@ class ProgressDialog {
         dialog.getContentPane().add(imagePanel);
         dialog.setUndecorated(false);
         dialog.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        dialog.setSize(175, 150);
+        dialog.setSize(172, 145);
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
         dialog.setVisible(true);
