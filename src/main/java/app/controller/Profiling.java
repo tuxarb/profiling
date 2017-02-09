@@ -51,30 +51,18 @@ public class Profiling implements EventListener {
     public void findOutOS(OperatingSystems os) throws ClientProcessException {
         try {
             if (os.name().equals(OperatingSystems.WINDOWS.toString()))
-                startTestForWindows();
+                model.startTestForWindows();
 
             if (os.name().equals(OperatingSystems.LINUX.toString()))
-                startTestForLinux();
+                model.startTestForLinuxOrMac();
 
             if (os.name().equals(OperatingSystems.MAC.toString()))
-                startTestForMac();
+                model.startTestForLinuxOrMac();
         } catch (IOException e) {
             LOG.error(Log.INTERNAL_APPLICATION_ERROR);
+            throw new ClientProcessException();
         }
-
         model.completed();
-    }
-
-    private void startTestForWindows() throws IOException, ClientProcessException {
-        model.startTestForWindows();
-    }
-
-    private void startTestForLinux() throws IOException, ClientProcessException {
-        model.startTestForLinux();
-    }
-
-    private void startTestForMac() throws IOException, ClientProcessException {
-        model.startTestForMac();
     }
 
     public boolean isCompleted() {

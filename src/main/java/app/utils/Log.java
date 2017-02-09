@@ -29,7 +29,7 @@ public class Log {
     public static final String WRITING_IN_THE_FILE = "Writing to the file....";
     public static final String WRITING_IN_THE_FILE_SUCCESS = "Writing was successfully finished!";
     public static final String START_INIT_PROPERTIES = "Start of the initialization properties...";
-    public static final String START_SAVING_TO_DATABASE = "Start saving to the database...";
+    public static final String START_SAVING_TO_DATABASE = "Started saving to the database...";
     public static final String END_SAVING_TO_DATABASE = "Data was successfully written to the database!";
     public static final String END_INIT_PROPERTIES = "Initialization the properties was finished.";
     public static final String DATA_INIT_FOR_DISPLAY = "The resulting data are being initialized for displaying...";
@@ -58,7 +58,7 @@ public class Log {
             "4) The process inside the script file is too small to test.";
     public static final String HIBERNATE_ERROR = "Error occurred when hibernate trying to save data to the database.";
     public static final String CREATING_SESSION_FACTORY_ERROR = "Failed to create sessionFactory instance.";
-    public static final String SESSION_FACTORY_IS_NULL = "sessionFactory instance is null";
+    public static final String SESSION_FACTORY_IS_NULL = "Error. SessionFactory instance is null.";
     public static final String URL_TO_DATABASE_IS_NULL = "Specify url for the connecting.";
     public static final String DRIVER_CLASS_NOT_FOUND_ERROR = "Driver class was not found for your DBMS.";
     public static final String PROPERTY_READ_ERROR = "Error occurred when reading the property file.";

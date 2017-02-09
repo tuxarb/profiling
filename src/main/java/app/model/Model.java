@@ -37,8 +37,7 @@ public class Model {
         while (task.isAlive()) {
             process = execute("tasklist /v /fo list /fi \"PID eq \"" + processId);
             scanner = new Scanner(process.getInputStream(), "cp866");
-
-            while (scanner.hasNextLine()) {
+            while (scanner.hasNext()) {
                 String newLine = scanner.nextLine();
                 if (Utils.isMemoryLine(newLine.toLowerCase())) {
                     capacity += Utils.getNumberFromString(newLine);
@@ -58,7 +57,7 @@ public class Model {
         LOG.info(Log.END_READING_PROCESS);
     }
 
-    public void startTestForLinux() throws IOException, ClientProcessException {
+    public void startTestForLinuxOrMac() throws IOException, ClientProcessException {
         long capacity = 0;
         long countIterations = 0;
         long startTime = startTestAndGetStartTime();
@@ -74,37 +73,6 @@ public class Model {
                     capacity += Utils.getNumberFromString(newLine);
                     countIterations++;
                     break;
-                }
-            }
-            waitSomeTime(20);
-        }
-        checkCountOfIterationsOnZero(countIterations);
-
-        long time = getTestTime(startTime);
-        capacity /= countIterations;
-        long speed = 1000 * capacity / time;
-
-        setResultData(capacity, speed, time);
-        LOG.info(Log.END_READING_PROCESS);
-    }
-
-    public void startTestForMac() throws IOException, ClientProcessException {
-        long capacity = 0;
-        long countIterations = 0;
-        long startTime = startTestAndGetStartTime();
-
-        Process process;
-        Scanner scanner;
-        while (task.isAlive()) {
-            process = execute("top -ncols 8" + " -pid " + processId);
-            scanner = new Scanner(process.getInputStream());
-            while (scanner.hasNext()) {
-                String line = scanner.nextLine();
-                if (line.contains("java")) {
-                    String cap = line.substring(41);
-                    capacity += 1024 * Utils.getNumberFromString(cap);
-                    countIterations++;
-                    process.destroy();
                 }
             }
             waitSomeTime(20);
@@ -163,7 +131,7 @@ public class Model {
                                 .getPid();
                         break;
                     }
-                    if (System.currentTimeMillis() - startTime > 999) {
+                    if (System.currentTimeMillis() - startTime > 700) {
                         throw new Exception(Log.ERROR_WHEN_CREATING_USER_PROCESS_FROM_SCRIPT_FILE);
                     }
                 }

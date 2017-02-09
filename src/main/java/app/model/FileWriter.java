@@ -28,13 +28,13 @@ class FileWriter {
             fileWriter.write("\t  Results for your program:\n\n");
             fileWriter.write("------------------------------------------\n");
             if (!taskName.isEmpty())
-                fileWriter.write("\t\t\t" + taskName + "\n");
+                fileWriter.write("\t\t" + taskName + "\n");
             fileWriter.write("------------------------------------------\n");
             fileWriter.write("Runtime:\t" + ch.getRuntime() + "\n");
             fileWriter.write("Capacity:\t" + ch.getCapacity() + "\n");
             fileWriter.write("Speed:\t\t" + ch.getSpeed() + "\n");
             fileWriter.write("------------------------------------------\n");
-            fileWriter.write("\t\t\t" + Utils.getCurrentDate() + "\n");
+            fileWriter.write("\t\t" + Utils.getCurrentDate() + "\n");
             fileWriter.write("------------------------------------------\n\n");
             if (directory == null || directory.listFiles().length == 0) {
                 throw new IOException(Log.CREATING_FILE_ERROR);
