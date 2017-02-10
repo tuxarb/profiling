@@ -27,7 +27,7 @@ class ProgressDialog {
         dialog.getContentPane().add(imagePanel);
         dialog.setUndecorated(false);
         dialog.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        dialog.setSize(170, 160);
+        dialog.setSize(180, 165);
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
         dialog.setVisible(true);
@@ -42,6 +42,7 @@ class ProgressDialog {
             dialog.getContentPane().validate();
             dialog.setVisible(false);
         }
+        view.setEnabled(true);
     }
 
     private class ImagePanel extends JPanel {

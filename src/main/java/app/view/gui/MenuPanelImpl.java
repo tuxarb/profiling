@@ -8,12 +8,9 @@ import org.slf4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 class MenuPanelImpl extends JPanel implements Panel {
     private GuiView guiView;
-    private List<JButton> buttons = new ArrayList<>();
     private static volatile boolean isExceptionOccurred;
     private static final Logger LOG = Log.createLog(MenuPanelImpl.class);
 
@@ -50,11 +47,9 @@ class MenuPanelImpl extends JPanel implements Panel {
                 JOptionPane.showMessageDialog(guiView, Log.PROPERTIES_IS_NULL_DIALOG, Log.ERROR, JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            changeButtonState(false);
             updatePanel();
             findOutOS();
         });
-        buttons.add(startingTest);
 
         JButton openingPropertyFile = createButton(Log.OPEN_PROPERTY_FILE, Log.OPEN_PROPERTY_BUTTON_MESSAGE);
         openingPropertyFile.addActionListener(e -> {
@@ -71,13 +66,6 @@ class MenuPanelImpl extends JPanel implements Panel {
                 }
             }).start();
         });
-        buttons.add(openingPropertyFile);
-    }
-
-    private void changeButtonState(boolean isEnabled) {
-        for (JButton jButton : buttons) {
-            jButton.setEnabled(isEnabled);
-        }
     }
 
     private void findOutOS() {
@@ -100,7 +88,6 @@ class MenuPanelImpl extends JPanel implements Panel {
                             JOptionPane.showMessageDialog(guiView, Log.CLIENT_PROCESS_ERROR, Log.ERROR, JOptionPane.ERROR_MESSAGE)
                     );
             }
-            changeButtonState(true);
         }).start();
     }
 
@@ -119,13 +106,15 @@ class MenuPanelImpl extends JPanel implements Panel {
     }
 
     private void updatePanel() {
-        new Thread(() -> guiView.getEventListener().update())
-                .start();
+        new Thread(() ->
+                guiView.getEventListener().update()
+        ).start();
     }
 
     @Override
     public void update() {
         ProgressDialog progressDialog = new ProgressDialog(guiView);
+        guiView.setEnabled(false); //it is doing the jframe not moveable
 
         while (true) {
             if (isExceptionOccurred) {
@@ -139,6 +128,8 @@ class MenuPanelImpl extends JPanel implements Panel {
         }
         guiView.getContentPane().remove(this);
         guiView.getContentPane().revalidate();
+        guiView.requestFocus();
+
         ResultPanelImpl resultPanelImpl = new ResultPanelImpl(guiView);
         guiView.setPanel(resultPanelImpl);
         resultPanelImpl.init();
