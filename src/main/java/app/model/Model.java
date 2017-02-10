@@ -149,7 +149,9 @@ public class Model {
             LOG.error(e.getMessage());
             throw new ClientProcessException();
         }
-        LOG.info(Log.START_RUNNING_CODE + getUserCommandInfo(task));
+        new Thread(() ->
+                LOG.info(Log.START_RUNNING_CODE + getUserCommandInfo(task))
+        ).start();
     }
 
     private Process execute(String command) throws IOException {
