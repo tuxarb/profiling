@@ -69,8 +69,8 @@ public class Log {
     public static final String DATA_DISPLAYING_ERROR = "Error!One of the characteristics or everyone weren't got when processing.";
     public static final String CREATING_FILE_ERROR = "Error when creating the file.";
     public static final String WRITING_IN_FILE_ERROR = "Errors when writing the data to the file.";
-    public static final String SETTING_BACKGROUND_ERROR = "Failed to set the background image.";
-    public static final String SETTING_BUTTON_IMAGE_ERROR = "Failed to set the button's image.";
+    public static final String SETTING_BACKGROUND_ERROR = "Failed to set the background image. The .jar file is corrupted.";
+    public static final String SETTING_BUTTON_IMAGE_ERROR = "Failed to set the button's image. The .jar file is corrupted.";
     public static final String NO_OPTION_WHEN_UPDATE_THE_PROPERTY_FILE = "The .properties file did not update because user chose 'no'.";
     public static final String NO_OPTION_WHEN_RETURNING_TO_THE_MENU = "Returning to the menu was not because user chose 'no'.";
     public static final String THE_FILE_IS_NOT_PROPERTIES = "The selected file is not .properties file.";

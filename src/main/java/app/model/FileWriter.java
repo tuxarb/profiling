@@ -30,9 +30,9 @@ class FileWriter {
             if (!taskName.isEmpty())
                 fileWriter.write("\t\t" + taskName + "\n");
             fileWriter.write("------------------------------------------\n");
-            fileWriter.write("Runtime:\t" + ch.getRuntime() + "\n");
+            fileWriter.write("Runtime: \t" + ch.getRuntime() + "\n");
             fileWriter.write("Capacity:\t" + ch.getCapacity() + "\n");
-            fileWriter.write("Speed:\t\t" + ch.getSpeed() + "\n");
+            fileWriter.write("Speed:   \t" + ch.getSpeed() + "\n");
             fileWriter.write("------------------------------------------\n");
             fileWriter.write("\t\t" + Utils.getCurrentDate() + "\n");
             fileWriter.write("------------------------------------------\n\n");

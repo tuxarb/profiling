@@ -69,9 +69,9 @@ public class GuiView extends JFrame {
         try {
             InputStream fileAsStream = getStreamOfResourceFile(path);
             backgroundImage = ImageIO.read(fileAsStream);
-        } catch (IOException e) {
-            LOG.warn(Log.SETTING_BACKGROUND_ERROR);
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOG.error(Log.SETTING_BACKGROUND_ERROR);
+            getEventListener().exit();
         }
     }
 
@@ -79,9 +79,9 @@ public class GuiView extends JFrame {
         try {
             InputStream fileAsStream = getStreamOfResourceFile(path);
             buttonImage = ImageIO.read(fileAsStream);
-        } catch (IOException e) {
-            LOG.warn(Log.SETTING_BUTTON_IMAGE_ERROR);
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOG.error(Log.SETTING_BUTTON_IMAGE_ERROR);
+            getEventListener().exit();
         }
     }
 

@@ -61,14 +61,14 @@ class ResultPanelImpl extends JPanel implements Panel {
 
         JTextArea textArea = new JTextArea();
         textArea.setBackground(Color.ORANGE);
-        textArea.setFont(new Font("Arial", Font.PLAIN, 20));
+        textArea.setFont(new Font("Arial", Font.CENTER_BASELINE, 20));
         textArea.setLayout(new BorderLayout());
         textArea.setBorder(BorderFactory.createLoweredSoftBevelBorder());
         textArea.setEditable(false);
 
-        textArea.append(Log.RUNTIME + " \t" + runtime + "\n");
-        textArea.append(Log.CAPACITY + " \t" + capacity + "\n");
-        textArea.append(Log.SPEED + " \t" + speed);
+        textArea.append(Log.RUNTIME + "   " + runtime + "\n");
+        textArea.append(Log.CAPACITY + "  " + capacity + "\n");
+        textArea.append(Log.SPEED + "      " + speed);
         add(textArea);
         LOG.info(Log.DATA_DISPLAYING_SUCCESS);
 
