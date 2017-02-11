@@ -16,27 +16,30 @@ public class Log {
      */
     public static final String APP_IS_BEING_INITIALIZED = "The application is being initialized...";
     public static final String APP_IS_READY = "The application was successfully initialized!";
-    public static final String START_RUNNING_CODE = "Run the client process...";
-    public static final String END_RUNNING_CODE = "The client process was finished!";
-    public static final String START_READING_PROCESS = "There is creating a new process, received from the user...";
-    public static final String END_READING_PROCESS = "The resulting data were successfully got!";
+    public static final String RUNNING_CODE_STARTED = "Run the client process...";
+    public static final String RUNNING_CODE_ENDED = "The client process was finished!";
+    public static final String READING_PROCESS_STARTED = "There is creating a new process, received from the user...";
+    public static final String READING_PROCESS_ENDED = "The resulting data were successfully got!";
+    public static final String DETAILED_TEST_STARTED = "Started the detailed test for the user's program...";
+    public static final String DETAILED_TEST_ENDED = "The detailed test for the user's program was finished!";
     public static final String VALID_OS = "The selected operating system is available for the test. Redirecting to the menu...";
-    public static final String PROCESS_INFO_START = "The progress info bar was started. Processing...";
-    public static final String PROCESS_INFO_END = "The progress info bar was finished. Closing...";
+    public static final String PROCESS_INFO_STARTED = "The progress info bar was started. Processing...";
+    public static final String PROCESS_INFO_ENDED = "The progress info bar was finished. Closing...";
     public static final String PROPERTY_FILE_READ = "The .properties file was successfully read!";
-    public static final String PROPERTY_FILE_UPDATE = "The .properties file was successfully updated!";
+    public static final String PROPERTY_FILE_UPDATED = "The .properties file was successfully updated!";
     public static final String PREPARATION_FOR_WRITING_IN_THE_FILE = "Preparation to write to a file...";
     public static final String WRITING_IN_THE_FILE = "Writing to the file....";
     public static final String WRITING_IN_THE_FILE_SUCCESS = "Writing was successfully finished!";
-    public static final String START_INIT_PROPERTIES = "Start of the initialization properties...";
-    public static final String START_SAVING_TO_DATABASE = "Started saving to the database...";
-    public static final String END_SAVING_TO_DATABASE = "Data was successfully written to the database!";
-    public static final String END_INIT_PROPERTIES = "Initialization the properties was finished.";
-    public static final String DATA_INIT_FOR_DISPLAY = "The resulting data are being initialized for displaying...";
+    public static final String INIT_PROPERTIES_STARTED = "Start of the initialization properties...";
+    public static final String SAVING_TO_DATABASE_STARTED = "Started saving to the database...";
+    public static final String SAVING_TO_DATABASE_ENDED = "Data was successfully written to the database!";
+    public static final String INIT_PROPERTIES_ENDED = "Initialization the properties was finished.";
+    public static final String DATA_INIT_FOR_DISPLAYING = "The resulting data are being initialized for displaying...";
     public static final String DATA_DISPLAYING_SUCCESS = "The resulting data were successfully displayed on the screen.";
-    public static final String FILE_DATA_DISPLAYING_SUCCESS = "Data was successfully written to the file!";
+    public static final String WRITING_FILE_DATA_SUCCESS = "Data was successfully written to the file!";
     public static final String CREATING_DIR_FOR_WRITING = "Creating a directory for writing the resulting data...";
     public static final String RETURNING_TO_THE_MENU_SUCCESS = "Returning to the menu was finished successfully!";
+    public static final String TEST_NUMBER = "Test № ";
     public static final String CLOSING_APP = "It is closing the application...";
 
     /**
@@ -56,6 +59,7 @@ public class Log {
             "2) The user didn't specify a process inside the script file or provided more than ONE process.\n" +
             "3) The user specified a wrong path to the process inside the script file or a wrong parameters for start.\n" +
             "4) The process inside the script file is too small to test.";
+    public static final String DETAILED_TEST_ENDED_WITH_ERROR = "The detailed test for the user's program was finished with an error.";
     public static final String HIBERNATE_ERROR = "Error occurred when hibernate trying to save data to the database.";
     public static final String CREATING_SESSION_FACTORY_ERROR = "Failed to create sessionFactory instance.";
     public static final String SESSION_FACTORY_IS_NULL = "Error. SessionFactory instance is null.";
@@ -63,8 +67,8 @@ public class Log {
     public static final String DRIVER_CLASS_NOT_FOUND_ERROR = "Driver class was not found for your DBMS.";
     public static final String PROPERTY_READ_ERROR = "Error occurred when reading the property file.";
     public static final String SMALL_PROGRAM_ERROR = "Your program is too small to test.";
-    public static final String CANCELLING_PROPERTY_FILE = "Pressed 'cancel' when trying to open .properties file.";
-    public static final String A_PROPERTY_FILE_WAS_NOT_SELECTED = "Path to a .properties file was not specified.";
+    public static final String CANCELLING_PROPERTY_FILE = "Pressed 'cancel' when trying to open a .properties file.";
+    public static final String PROPERTY_FILE_WAS_NOT_SELECTED = "Path to a .properties file was not specified.";
     public static final String FILE_DATA_DISPLAYING_ERROR = "Error occurred when writing in the file.";
     public static final String DATA_DISPLAYING_ERROR = "Error!One of the characteristics or everyone weren't got when processing.";
     public static final String CREATING_FILE_ERROR = "Error when creating the file.";
@@ -75,7 +79,8 @@ public class Log {
     public static final String NO_OPTION_WHEN_RETURNING_TO_THE_MENU = "Returning to the menu was not because user chose 'no'.";
     public static final String THE_FILE_IS_NOT_PROPERTIES = "The selected file is not .properties file.";
     public static final String PROPERTIES_IS_NULL_LOG = "A .properties file was not specified. Can't start the test.";
-    public static final String REASON_ERROR = "Cause -> ";
+    public static final String NUMBER_TESTS_FORMAT_EXCEPTION = "The user provided the wrong value for { number_tests } or didn't specify it in the .properties file. DEFAULT -> number_tests = ";
+    public static final String NUMBER_TESTS_RANGE_EXCEPTION = "The value { number_tests } in the .properties file must be between 2 and 999. DEFAULT -> number_tests = ";
 
     /**
      * Dialog's headers
@@ -86,7 +91,7 @@ public class Log {
     public static final String PROCESSING_GUI = "Processing...";
 
     /**
-     * Dialog's message
+     * Dialog's messages
      */
     public static final String NOT_WINDOWS_OS = "Your operation system is not Windows.";
     public static final String NOT_LINUX_OS = "Your operation system is not Linux.";
@@ -112,7 +117,8 @@ public class Log {
      * Buttons
      */
     public static final String OPEN_PROPERTY_FILE = "Open file";
-    public static final String START_TEST = "Start test";
+    public static final String STARTING_TEST = "Start test";
+    public static final String STARTING_DETAILED_TEST = "Start detailed test";
     public static final String SAVE_TO_FILE = "Save to file";
     public static final String SAVE_TO_DB = "Save to DB";
     public static final String UPDATE_FILE = "Update file";
@@ -122,7 +128,8 @@ public class Log {
     /**
      * Tooltips for buttons
      */
-    public static final String START_TEST_BUTTON_MESSAGE = "Start test the user's program";
+    public static final String START_TEST_BUTTON_MESSAGE = "Start only one test the user's program";
+    public static final String START_DETAILED_TEST_BUTTON_MESSAGE = "Test the user's program more than once";
     public static final String OPEN_PROPERTY_BUTTON_MESSAGE = "Set .properties file with the attributes before to start the test";
     public static final String SAVE_FILE_BUTTON_MESSAGE = "Save the results of the user's program to a .txt file";
     public static final String SAVE_DB_BUTTON_MESSAGE = "Save the results of the user's program to a database";
@@ -149,6 +156,14 @@ public class Log {
     public static final String PROCESSING_WAS_FINISHED = "The profiling was successfully finished!";
     public static final String BACK = "<--";
     public static final String SEE_LOGS = "See log files -> ";
+
+    /**
+     * Other
+     */
+    public static final String STARTED = " started.";
+    public static final String COMPLETED = " completed!";
+    public static final String A_TEST_ENDED_WITH_ERROR = " was finished with an error. Rerun this test...";
+    public static final String CAUSE = "Cause -> ";
 
     private Log() {
     }

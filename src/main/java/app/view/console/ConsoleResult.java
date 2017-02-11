@@ -25,7 +25,7 @@ class ConsoleResult {
     }
 
     private void initResultData() {
-        LOG.info(Log.DATA_INIT_FOR_DISPLAY);
+        LOG.info(Log.DATA_INIT_FOR_DISPLAYING);
         this.capacity = view.getEventListener().getModel().getCharacteristic().getCapacity();
         this.runtime = view.getEventListener().getModel().getCharacteristic().getRuntime();
         this.speed = view.getEventListener().getModel().getCharacteristic().getSpeed();
@@ -96,8 +96,8 @@ class ConsoleResult {
     private void updatePropertyFile() {
         try {
             view.getEventListener().updatePropertyFile();
-            println(Log.PROPERTY_FILE_UPDATE);
-            LOG.info(Log.PROPERTY_FILE_UPDATE);
+            println(Log.PROPERTY_FILE_UPDATED);
+            LOG.info(Log.PROPERTY_FILE_UPDATED);
         } catch (Exception e) {
             println(Log.PROPERTY_READ_ERROR + " " + getPathToLogs());
         }
@@ -111,7 +111,7 @@ class ConsoleResult {
     private void writeToFile() {
         try {
             view.getEventListener().writeToFile();
-            println(Log.FILE_DATA_DISPLAYING_SUCCESS);
+            println(Log.WRITING_FILE_DATA_SUCCESS);
         } catch (IOException e) {
             println(Log.FILE_DATA_DISPLAYING_ERROR + " " + getPathToLogs());
         }

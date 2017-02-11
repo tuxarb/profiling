@@ -27,7 +27,7 @@ class ConsoleMenu {
         print("\n");
         println("    " + Log.MENU_CHOICE);
         print("\n");
-        println("\t\t1. " + Log.START_TEST);
+        println("\t\t1. " + Log.STARTING_TEST);
         println("\t\t2. " + Log.OPEN_PROPERTY_FILE);
         print("\n");
         println("+-------------------------------------------------+");
@@ -42,7 +42,7 @@ class ConsoleMenu {
                 } else {
                     findOutOS();
                     waitForEndProcessing();
-                    LOG.info(Log.PROCESS_INFO_END);
+                    LOG.info(Log.PROCESS_INFO_ENDED);
                     if (!isExceptionOccurred) {
                         break;
                     }
@@ -57,7 +57,7 @@ class ConsoleMenu {
     }
 
     private void waitForEndProcessing() {
-        LOG.info(Log.PROCESS_INFO_START);
+        LOG.info(Log.PROCESS_INFO_STARTED);
         while (true) {
             displayInfoAboutProcessing();
             if (isExceptionOccurred) {
@@ -103,8 +103,8 @@ class ConsoleMenu {
             print(Log.MENU_PATH_TO_PROPERTY_FILE);
             String path = readLine().trim();
             if ("".equals(path)) {
-                println(Log.A_PROPERTY_FILE_WAS_NOT_SELECTED);
-                LOG.warn(Log.A_PROPERTY_FILE_WAS_NOT_SELECTED);
+                println(Log.PROPERTY_FILE_WAS_NOT_SELECTED);
+                LOG.warn(Log.PROPERTY_FILE_WAS_NOT_SELECTED);
                 return;
             }
             try {

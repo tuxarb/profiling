@@ -20,4 +20,5 @@ public interface EventListener{
     void updatePropertyFile() throws Exception;
     boolean isPropertiesFileExists();
     void setCompleted(boolean isCompleted);
+    void setDetailedTest(boolean isDetailedTest);
 }

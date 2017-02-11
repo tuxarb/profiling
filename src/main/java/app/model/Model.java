@@ -19,7 +19,10 @@ public class Model {
     private final Characteristic characteristic;
     private long processId;
     private ProcessHandle task;
-    private volatile boolean isCompleted = false;
+    private volatile boolean isCompleted;
+    private volatile boolean isDetailedTest;
+    private int numberTests;
+    private static final int DEFAULT_NUMBER_TEST = 3;
     private static final PropertyRepository PROPERTY_REPOSITORY = PropertyRepository.getInstance();
     private static final Logger LOG = Log.createLog(Model.class);
 
@@ -54,7 +57,7 @@ public class Model {
         long speed = 1000 * capacity / time;
 
         setResultData(capacity, speed, time);
-        LOG.info(Log.END_READING_PROCESS);
+        LOG.info(Log.READING_PROCESS_ENDED);
     }
 
     public void startTestForLinuxOrMac() throws IOException, ClientProcessException {
@@ -84,7 +87,7 @@ public class Model {
         long speed = 1000 * capacity / time;
 
         setResultData(capacity, speed, time);
-        LOG.info(Log.END_READING_PROCESS);
+        LOG.info(Log.READING_PROCESS_ENDED);
     }
 
     private void waitSomeTime(long millis) {
@@ -113,7 +116,7 @@ public class Model {
     }
 
     private void createAndRunUserProcess(String pathToProgram, boolean isScriptFile) throws ClientProcessException {
-        LOG.info(Log.START_READING_PROCESS);
+        LOG.info(Log.READING_PROCESS_STARTED);
         try {
             execute(pathToProgram);
 
@@ -150,7 +153,7 @@ public class Model {
             throw new ClientProcessException();
         }
         new Thread(() ->
-                LOG.info(Log.START_RUNNING_CODE + getUserCommandInfo(task))
+                LOG.info(Log.RUNNING_CODE_STARTED + getUserCommandInfo(task))
         ).start();
     }
 
@@ -160,7 +163,7 @@ public class Model {
 
     private long getTestTime(long startTime) {
         long endTime = System.currentTimeMillis();
-        LOG.info(Log.END_RUNNING_CODE);
+        LOG.info(Log.RUNNING_CODE_ENDED);
 
         return endTime - startTime;
     }
@@ -235,6 +238,33 @@ public class Model {
 
     public void setCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
+    }
+
+    public boolean isDetailedTest() {
+        return isDetailedTest;
+    }
+
+    public void setDetailedTest(boolean detailedTest) {
+        isDetailedTest = detailedTest;
+    }
+
+    public int getNumberTests() {
+        return numberTests;
+    }
+
+    public void setNumberTests() {
+        try {
+            numberTests = Integer.valueOf(
+                    PROPERTY_REPOSITORY.getProperties().getProperty("number_tests")
+            );
+            if (numberTests >= 2 && numberTests <= 999) {
+                return;
+            }
+            LOG.warn(Log.NUMBER_TESTS_RANGE_EXCEPTION + DEFAULT_NUMBER_TEST + ".");
+        } catch (NumberFormatException e) {
+            LOG.warn(Log.NUMBER_TESTS_FORMAT_EXCEPTION + DEFAULT_NUMBER_TEST + ".");
+        }
+        numberTests = DEFAULT_NUMBER_TEST;
     }
 
     public Characteristic getCharacteristic() {

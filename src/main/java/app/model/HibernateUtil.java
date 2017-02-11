@@ -33,7 +33,7 @@ class HibernateUtil {
     }
 
     static void initProperties(String url, String username, String password, DatabaseTypes type) throws WrongSelectedDatabaseException {
-        LOG.info(Log.START_INIT_PROPERTIES);
+        LOG.info(Log.INIT_PROPERTIES_STARTED);
         Locale.setDefault(Locale.ENGLISH);
         properties = new Properties();
         properties.setProperty("hibernate.connection.url", url);
@@ -55,7 +55,7 @@ class HibernateUtil {
         } else if (type.name().equalsIgnoreCase(Utils.OTHER_DBMS)) {
             setDriverAndDialect(getDriverFromProperty(), getDialectFromProperty());
         }
-        LOG.info(Log.END_INIT_PROPERTIES);
+        LOG.info(Log.INIT_PROPERTIES_ENDED);
     }
 
     private static String getDriverFromProperty() {

@@ -20,12 +20,12 @@ class MenuPanelImpl extends JPanel implements Panel {
 
     @Override
     public void init() {
-        guiView.setSize(GuiView.HEIGHT / 2, GuiView.WIDTH / 2);
+        guiView.setSize(GuiView.HEIGHT / 2, GuiView.WIDTH / 2 + 45);
         guiView.setLocationRelativeTo(null);
         guiView.getContentPane().add(this);
         guiView.setColorOptionPane();
 
-        setLayout(new FlowLayout(FlowLayout.CENTER, 50, 30));
+        setLayout(new FlowLayout(FlowLayout.CENTER, 40, 30));
         setBackground(Color.BLACK);
         setSize(guiView.getSize());
 
@@ -40,15 +40,20 @@ class MenuPanelImpl extends JPanel implements Panel {
         menu.setForeground(Color.YELLOW);
         add(menu);
 
-        JButton startingTest = createButton(Log.START_TEST, Log.START_TEST_BUTTON_MESSAGE);
+        JButton startingTest = createButton(Log.STARTING_TEST, Log.START_TEST_BUTTON_MESSAGE);
         startingTest.addActionListener(e -> {
-            if (!guiView.getEventListener().isPropertiesFileExists()) {
-                LOG.error(Log.PROPERTIES_IS_NULL_LOG);
-                JOptionPane.showMessageDialog(guiView, Log.PROPERTIES_IS_NULL_DIALOG, Log.ERROR, JOptionPane.ERROR_MESSAGE);
+            if (!isPropertiesFileExists()) {
                 return;
             }
-            updatePanel();
-            findOutOS();
+            startTest(false);
+        });
+
+        JButton startingDetailedTest = createButton(Log.STARTING_DETAILED_TEST, Log.START_DETAILED_TEST_BUTTON_MESSAGE);
+        startingDetailedTest.addActionListener(e -> {
+            if (!isPropertiesFileExists()) {
+                return;
+            }
+            startTest(true);
         });
 
         JButton openingPropertyFile = createButton(Log.OPEN_PROPERTY_FILE, Log.OPEN_PROPERTY_BUTTON_MESSAGE);
@@ -73,7 +78,7 @@ class MenuPanelImpl extends JPanel implements Panel {
             isExceptionOccurred = false;
             try {
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
             try {
                 guiView.getEventListener().findOutOS(guiView.getOperatingSystem());
@@ -89,6 +94,21 @@ class MenuPanelImpl extends JPanel implements Panel {
                     );
             }
         }).start();
+    }
+
+    private boolean isPropertiesFileExists() {
+        if (!guiView.getEventListener().isPropertiesFileExists()) {
+            LOG.error(Log.PROPERTIES_IS_NULL_LOG);
+            JOptionPane.showMessageDialog(guiView, Log.PROPERTIES_IS_NULL_DIALOG, Log.ERROR, JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+
+    private void startTest(boolean isDetailedTest) {
+        guiView.getEventListener().setDetailedTest(isDetailedTest);
+        updatePanel();
+        findOutOS();
     }
 
     private JButton createButton(String name, String message) {

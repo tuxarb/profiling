@@ -18,7 +18,7 @@ class ProgressDialog {
     ProgressDialog(GuiView guiView) {
         this.view = guiView;
         init();
-        LOG.info(Log.PROCESS_INFO_START);
+        LOG.info(Log.PROCESS_INFO_STARTED);
     }
 
     private void init() {
@@ -36,7 +36,7 @@ class ProgressDialog {
     }
 
     void closeDialog() {
-        LOG.info(Log.PROCESS_INFO_END);
+        LOG.info(Log.PROCESS_INFO_ENDED);
         if (dialog.isVisible()) {
             dialog.getContentPane().removeAll();
             dialog.getContentPane().validate();

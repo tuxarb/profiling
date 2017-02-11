@@ -25,7 +25,7 @@ class ResultPanelImpl extends JPanel implements Panel {
     }
 
     private void initResultData() {
-        LOG.info(Log.DATA_INIT_FOR_DISPLAY);
+        LOG.info(Log.DATA_INIT_FOR_DISPLAYING);
         this.capacity = guiView.getEventListener().getModel().getCharacteristic().getCapacity();
         this.runtime = guiView.getEventListener().getModel().getCharacteristic().getRuntime();
         this.speed = guiView.getEventListener().getModel().getCharacteristic().getSpeed();
@@ -80,7 +80,7 @@ class ResultPanelImpl extends JPanel implements Panel {
                     try {
                         guiView.getEventListener().writeToFile();
                         SwingUtilities.invokeLater(() ->
-                                JOptionPane.showMessageDialog(guiView, Log.FILE_DATA_DISPLAYING_SUCCESS, Log.INFORMATION,
+                                JOptionPane.showMessageDialog(guiView, Log.WRITING_FILE_DATA_SUCCESS, Log.INFORMATION,
                                         JOptionPane.INFORMATION_MESSAGE)
                         );
                     } catch (IOException e1) {
@@ -164,9 +164,9 @@ class ResultPanelImpl extends JPanel implements Panel {
                             return;
                         }
                         guiView.getEventListener().updatePropertyFile();
-                        LOG.info(Log.PROPERTY_FILE_UPDATE);
+                        LOG.info(Log.PROPERTY_FILE_UPDATED);
                         SwingUtilities.invokeLater(() ->
-                                JOptionPane.showMessageDialog(guiView, Log.PROPERTY_FILE_UPDATE, Log.INFORMATION,
+                                JOptionPane.showMessageDialog(guiView, Log.PROPERTY_FILE_UPDATED, Log.INFORMATION,
                                         JOptionPane.INFORMATION_MESSAGE)
                         );
                     } catch (Exception e1) {

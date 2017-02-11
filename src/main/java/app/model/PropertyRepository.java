@@ -20,6 +20,7 @@ public class PropertyRepository {
         put("password", "");
         put("program_name", "");
         put("result_file_path", "");
+        put("number_tests", "");
         put("connection.driver_class", "");
         put("hibernate.dialect", "");
     }};

@@ -23,13 +23,13 @@ class DatabaseWriter {
     }
 
     void write(Characteristic ch) throws Exception {
-        LOG.info(Log.START_SAVING_TO_DATABASE);
+        LOG.info(Log.SAVING_TO_DATABASE_STARTED);
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         session.save(ch);
         session.getTransaction().commit();
         session.close();
-        LOG.info(Log.END_SAVING_TO_DATABASE + "[ " + databaseType + " ]");
+        LOG.info(Log.SAVING_TO_DATABASE_ENDED + "[ " + databaseType + " ]");
     }
 
     void setSessionFactory() throws IOException {
