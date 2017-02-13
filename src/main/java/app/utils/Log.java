@@ -145,13 +145,13 @@ public class Log {
     public static final String MENU_CONSOLE = "M E N U";
     public static final String MENU_CHOICE = "Choose one of the next options (using 1-2):";
     public static final String RESULT_PANEL_CHOICE = "Choose one of the next options (using 0-4):";
-    public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path. Try again or press 'enter'.";
+    public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path. Try again or press 'enter' to exit.";
     public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your .properties file: ";
     public static final String DATABASE_INPUT = "Choose the type of database (using 1-5) or exit (using 0):";
     public static final String SAVE_TO_DATABASE = "Save to database";
     public static final String TYPE_DATABASE_IS_NOT_SELECTED = "The type of database was not selected. Returning back...";
     public static final String UPDATE_PROPERTY_FILE = "Update the .properties file";
-    public static final String PROCESSING_CONSOLE = "P r o c e s s i n g... <=";
+    public static final String PROCESSING_CONSOLE = "P r o c e s s i n g... <= ";
     public static final String PROCESSING_WAS_FINISHED = "The profiling was successfully finished!";
     public static final String BACK = "<--";
     static final String SEE_LOGS = "See log files -> ";

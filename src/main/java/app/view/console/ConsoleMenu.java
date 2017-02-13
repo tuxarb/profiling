@@ -28,7 +28,8 @@ class ConsoleMenu {
         println("    " + Log.MENU_CHOICE);
         print("\n");
         println("\t\t1. " + Log.STARTING_TEST);
-        println("\t\t2. " + Log.OPEN_PROPERTY_FILE);
+        println("\t\t2. " + Log.STARTING_DETAILED_TEST);
+        println("\t\t3. " + Log.OPEN_PROPERTY_FILE);
         print("\n");
         println("+-------------------------------------------------+");
 
@@ -36,24 +37,42 @@ class ConsoleMenu {
             print("\n" + Log.ENTER);
             String input = readLine();
             if (input.startsWith("1")) {
-                if (!view.getEventListener().isPropertiesFileExists()) {
-                    println(Log.PROPERTIES_IS_NULL_LOG);
-                    LOG.warn(Log.PROPERTIES_IS_NULL_LOG);
-                } else {
-                    findOutOS();
-                    waitForEndProcessing();
-                    LOG.info(Log.PROCESS_INFO_ENDED);
+                if (isPropertiesFileExists()) {
+                    startTest(false);
                     if (!isExceptionOccurred) {
                         break;
                     }
                 }
             } else if (input.startsWith("2")) {
+                if (isPropertiesFileExists()) {
+                    startTest(true);
+                    if (!isExceptionOccurred) {
+                        break;
+                    }
+                }
+            } else if (input.startsWith("3")) {
                 readPropertyFile();
             } else {
                 println(Log.WRONG_ENTER);
             }
         }
         update();
+    }
+
+    private void startTest(boolean isDetailedTest) {
+        view.getEventListener().setDetailedTest(isDetailedTest);
+        findOutOS();
+        waitForEndProcessing();
+        LOG.info(Log.PROCESS_INFO_ENDED);
+    }
+
+    private boolean isPropertiesFileExists() {
+        if (!view.getEventListener().isPropertiesFileExists()) {
+            println(Log.PROPERTIES_IS_NULL_LOG);
+            LOG.warn(Log.PROPERTIES_IS_NULL_LOG);
+            return false;
+        }
+        return true;
     }
 
     private void waitForEndProcessing() {
@@ -83,7 +102,7 @@ class ConsoleMenu {
         new Thread(() -> {
             try {
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
             }
             try {
                 view.getEventListener().findOutOS(view.getOperatingSystem());
@@ -119,10 +138,10 @@ class ConsoleMenu {
     }
 
     private void displayInfoAboutProcessing() {
-        System.out.print("\r" + Log.PROCESSING_CONSOLE + " " + (second++) + " sec.");
+        System.out.print("\r" + Log.PROCESSING_CONSOLE + (second++) + " sec.");
         try {
             Thread.sleep(1000);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignored) {
         }
     }
 }
