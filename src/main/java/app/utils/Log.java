@@ -30,10 +30,10 @@ public class Log {
     public static final String PREPARATION_FOR_WRITING_IN_THE_FILE = "Preparation to write to a file...";
     public static final String WRITING_IN_THE_FILE = "Writing to the file....";
     public static final String WRITING_IN_THE_FILE_SUCCESS = "Writing was successfully finished!";
-    public static final String INIT_HIBERNATE_PROPERTIES_STARTED = "Start of the initialization properties...";
-    public static final String SAVING_TO_DATABASE_STARTED = "Started saving to the database...";
+    public static final String INIT_HIBERNATE_PROPERTIES_STARTED = "Initialization of the properties was started...";
+    public static final String SAVING_TO_DATABASE_STARTED = "Saving to the database was started...";
     public static final String SAVING_TO_DATABASE_ENDED = "Data was successfully written to the database!";
-    public static final String INIT_HIBERNATE_PROPERTIES_ENDED = "Initialization the properties was finished.";
+    public static final String INIT_HIBERNATE_PROPERTIES_ENDED = "Initialization of the properties was finished.";
     public static final String DATA_INIT_FOR_DISPLAYING = "The resulting data are being initialized for displaying...";
     public static final String DATA_DISPLAYING_SUCCESS = "The resulting data were successfully displayed on the screen.";
     public static final String WRITING_FILE_DATA_SUCCESS = "Data was successfully written to the file!";
@@ -62,7 +62,7 @@ public class Log {
     public static final String HIBERNATE_ERROR = "Error occurred when hibernate trying to save data to the database.";
     public static final String CREATING_SESSION_FACTORY_ERROR = "Failed to create sessionFactory instance.";
     public static final String SESSION_FACTORY_IS_NULL = "Error. SessionFactory instance is null.";
-    public static final String URL_TO_DATABASE_IS_NULL = "Specify url for the connecting.";
+    public static final String URL_TO_DATABASE_IS_NULL = "Specify url for the connecting in your .properties file.";
     public static final String DRIVER_CLASS_NOT_FOUND_ERROR = "Driver class was not found for your DBMS.";
     public static final String PROPERTY_READ_ERROR = "Error occurred when reading the property file.";
     public static final String SMALL_PROGRAM_ERROR = "Your program is too small to test.";

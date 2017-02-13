@@ -8,7 +8,7 @@ import app.utils.exceptions.WrongSelectedDatabaseException;
 import java.io.File;
 import java.io.IOException;
 
-public interface EventListener{
+public interface EventListener {
     void findOutOS(OperatingSystems os);
     void update();
     boolean isCompleted();

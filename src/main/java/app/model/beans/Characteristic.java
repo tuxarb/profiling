@@ -10,13 +10,13 @@ public class Characteristic {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "runtime", length = 12, nullable = false)
+    @Column(name = "runtime", length = 15, nullable = false)
     private String runtime;
 
-    @Column(name = "capacity", length = 12, nullable = false)
+    @Column(name = "capacity", length = 18, nullable = false)
     private String capacity;
 
-    @Column(name = "speed", length = 15, nullable = false)
+    @Column(name = "speed", length = 18, nullable = false)
     private String speed;
 
     @Column(name = "program_name", length = 50, nullable = false)
