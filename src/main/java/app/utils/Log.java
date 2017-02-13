@@ -16,12 +16,12 @@ public class Log {
      */
     public static final String APP_IS_BEING_INITIALIZED = "The application is being initialized...";
     public static final String APP_IS_READY = "The application was successfully initialized!";
-    public static final String RUNNING_CODE_STARTED = "Run the client process...";
+    public static final String RUNNING_CODE_STARTED = "Running the client process...";
     public static final String RUNNING_CODE_ENDED = "The client process was finished!";
     public static final String READING_PROCESS_STARTED = "There is creating a new process, received from the user...";
     public static final String READING_PROCESS_ENDED = "The resulting data were successfully got!";
-    public static final String DETAILED_TEST_STARTED = "Started the detailed test for the user's program...";
-    public static final String DETAILED_TEST_ENDED = "The detailed test for the user's program was finished!";
+    public static final String DETAILED_TEST_STARTED = "Start the detailed test for the user's program...";
+    public static final String DETAILED_TEST_ENDED = "The detailed test for the user's program was successfully finished!";
     public static final String VALID_OS = "The selected operating system is available for the test. Redirecting to the menu...";
     public static final String PROCESS_INFO_STARTED = "The progress info bar was started. Processing...";
     public static final String PROCESS_INFO_ENDED = "The progress info bar was finished. Closing...";
@@ -30,16 +30,15 @@ public class Log {
     public static final String PREPARATION_FOR_WRITING_IN_THE_FILE = "Preparation to write to a file...";
     public static final String WRITING_IN_THE_FILE = "Writing to the file....";
     public static final String WRITING_IN_THE_FILE_SUCCESS = "Writing was successfully finished!";
-    public static final String INIT_PROPERTIES_STARTED = "Start of the initialization properties...";
+    public static final String INIT_HIBERNATE_PROPERTIES_STARTED = "Start of the initialization properties...";
     public static final String SAVING_TO_DATABASE_STARTED = "Started saving to the database...";
     public static final String SAVING_TO_DATABASE_ENDED = "Data was successfully written to the database!";
-    public static final String INIT_PROPERTIES_ENDED = "Initialization the properties was finished.";
+    public static final String INIT_HIBERNATE_PROPERTIES_ENDED = "Initialization the properties was finished.";
     public static final String DATA_INIT_FOR_DISPLAYING = "The resulting data are being initialized for displaying...";
     public static final String DATA_DISPLAYING_SUCCESS = "The resulting data were successfully displayed on the screen.";
     public static final String WRITING_FILE_DATA_SUCCESS = "Data was successfully written to the file!";
     public static final String CREATING_DIR_FOR_WRITING = "Creating a directory for writing the resulting data...";
     public static final String RETURNING_TO_THE_MENU_SUCCESS = "Returning to the menu was finished successfully!";
-    public static final String TEST_NUMBER = "Test № ";
     public static final String CLOSING_APP = "It is closing the application...";
 
     /**
@@ -50,7 +49,7 @@ public class Log {
     public static final String LOADING_PROGRESS_IMAGE_ERROR = "Error when loading the image for ProgressDialog.";
     public static final String PATH_TO_PROGRAM_INCORRECT = "Cannot run user's program. Please, check that path to program is correct and your command has the correct syntax.\nAlso note that your program must not be too small otherwise an error may occur.";
     public static final String EMPTY_PATH = "Path to your program or script file wasn't specified. Please, specify it at your .properties file. " +
-            "For example(WINDOWS): program_path=C:/../task.exe.\nAlso, if your program needs additional parameters for start, " +
+            "For example(WINDOWS): program_path=C:/../task.exe.\nAlso, if your program needs some additional parameters for start, " +
             "you can create some executable script file (bat, cmd, com, bash, sh, etc.), write at it your (ONE) command for start and specify path to this file at your .properties file.\nFor example: script_file_path=C:/../test.bat\n" +
             "Note: the profiling program can test only ONE process.";
     public static final String ERROR_WHEN_CREATING_USER_PROCESS = "Can't create a new process for user's program. Probably, the user specified a wrong path to the program or a wrong parameters for start.";
@@ -80,7 +79,7 @@ public class Log {
     public static final String THE_FILE_IS_NOT_PROPERTIES = "The selected file is not .properties file.";
     public static final String PROPERTIES_IS_NULL_LOG = "A .properties file was not specified. Can't start the test.";
     public static final String NUMBER_TESTS_FORMAT_EXCEPTION = "The user provided the wrong value for { number_tests } or didn't specify it in the .properties file. DEFAULT -> number_tests = ";
-    public static final String NUMBER_TESTS_RANGE_EXCEPTION = "The value { number_tests } in the .properties file must be between 2 and 999. DEFAULT -> number_tests = ";
+    public static final String NUMBER_TESTS_RANGE_EXCEPTION = "The value { number_tests } in the .properties file must be between from 2 to 999. DEFAULT -> number_tests = ";
 
     /**
      * Dialog's headers
@@ -155,14 +154,15 @@ public class Log {
     public static final String PROCESSING_CONSOLE = "P r o c e s s i n g... <=";
     public static final String PROCESSING_WAS_FINISHED = "The profiling was successfully finished!";
     public static final String BACK = "<--";
-    public static final String SEE_LOGS = "See log files -> ";
+    static final String SEE_LOGS = "See log files -> ";
 
     /**
      * Other
      */
-    public static final String STARTED = " started.";
-    public static final String COMPLETED = " completed!";
-    public static final String A_TEST_ENDED_WITH_ERROR = " was finished with an error. Rerun this test...";
+    public static final String TEST_NUMBER = "Test № ";
+    public static final String STARTED = " was started.";
+    public static final String COMPLETED = " was completed!";
+    public static final String A_TEST_ENDED_WITH_ERROR = " was finished with an error. Re-running this test...";
     public static final String CAUSE = "Cause -> ";
 
     private Log() {

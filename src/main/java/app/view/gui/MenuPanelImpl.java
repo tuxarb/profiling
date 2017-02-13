@@ -62,7 +62,7 @@ class MenuPanelImpl extends JPanel implements Panel {
                 try {
                     guiView.getEventListener().readPropertyFile(guiView.getSelectedPropertyFile());
                 } catch (TheFileIsNotPropertiesException e1) {
-                    LOG.error(Log.PROPERTY_READ_ERROR + " " + Log.THE_FILE_IS_NOT_PROPERTIES);
+                    LOG.error(Log.ERROR + ". " + Log.THE_FILE_IS_NOT_PROPERTIES);
                     SwingUtilities.invokeLater(() ->
                             JOptionPane.showMessageDialog(guiView, Log.THE_FILE_IS_NOT_PROPERTIES, Log.ERROR, JOptionPane.ERROR_MESSAGE)
                     );

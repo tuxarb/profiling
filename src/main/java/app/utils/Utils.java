@@ -50,7 +50,6 @@ public class Utils {
     }
 
     public static boolean isLinux() {
-
         String os = System.getProperty("os.name").toLowerCase();
         return (os.contains("nix") || os.contains("nux"));
 
@@ -63,7 +62,7 @@ public class Utils {
     }
 
     public static boolean isMemoryLine(String str) {
-        return str.contains("память") || str.contains("mem");
+        return str.contains("пам") || str.contains("mem");
     }
 
     public static String getPathToLogs() {

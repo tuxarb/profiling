@@ -11,12 +11,12 @@ import org.slf4j.Logger;
 import java.io.IOException;
 
 class DatabaseWriter {
-    private static final Logger LOG = Log.createLog(DatabaseWriter.class);
-    private static SessionFactory sessionFactory;
     private DatabaseTypes databaseType;
     private String url;
     private String username;
     private String password;
+    private static final Logger LOG = Log.createLog(DatabaseWriter.class);
+    private static SessionFactory sessionFactory;
 
     DatabaseWriter(DatabaseTypes databaseType) {
         this.databaseType = databaseType;
@@ -34,7 +34,6 @@ class DatabaseWriter {
 
     void setSessionFactory() throws IOException {
         sessionFactory = HibernateUtil.getSessionFactory();
-
         if (sessionFactory == null) {
             LOG.error(Log.SESSION_FACTORY_IS_NULL);
             throw new IOException();

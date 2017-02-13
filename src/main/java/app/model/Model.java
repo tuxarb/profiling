@@ -31,7 +31,7 @@ public class Model {
     }
 
     public void startTestForWindows() throws IOException, ClientProcessException {
-        long capacity = 0;
+        double capacity = 0;
         long countIterations = 0;
         long startTime = startTestAndGetStartTime();
 
@@ -54,14 +54,14 @@ public class Model {
 
         long time = getTestTime(startTime);
         capacity /= countIterations;
-        long speed = 1000 * capacity / time;
+        long speed = 1000 * (long) capacity / time;
 
-        setResultData(capacity, speed, time);
+        setResultingData((long) capacity, speed, time);
         LOG.info(Log.READING_PROCESS_ENDED);
     }
 
     public void startTestForLinuxOrMac() throws IOException, ClientProcessException {
-        long capacity = 0;
+        double capacity = 0;
         long countIterations = 0;
         long startTime = startTestAndGetStartTime();
 
@@ -84,9 +84,9 @@ public class Model {
 
         long time = getTestTime(startTime);
         capacity /= countIterations;
-        long speed = 1000 * capacity / time;
+        long speed = 1000 * (long) capacity / time;
 
-        setResultData(capacity, speed, time);
+        setResultingData((long) capacity, speed, time);
         LOG.info(Log.READING_PROCESS_ENDED);
     }
 
@@ -168,18 +168,18 @@ public class Model {
         return endTime - startTime;
     }
 
-    private void setResultData(long capacity, long speed, long runtime) {
-        characteristic.setCapacity(Utils.formatNumber(capacity) + " kB");
-        characteristic.setSpeed(Utils.formatNumber(speed) + " kB/s");
-        String timeAsString = Utils.formatNumber(runtime);
-        characteristic.setRuntime((runtime < 1000 ? "0," + timeAsString : timeAsString) + " s");
-    }
-
     private void checkCountOfIterationsOnZero(long countIterations) throws ClientProcessException {
         if (countIterations == 0) {
             LOG.error(Log.SMALL_PROGRAM_ERROR);
             throw new ClientProcessException(Log.SMALL_PROGRAM_ERROR);
         }
+    }
+
+    void setResultingData(long capacity, long speed, long runtime) {
+        characteristic.setCapacity(Utils.formatNumber(capacity) + " kB");
+        characteristic.setSpeed(Utils.formatNumber(speed) + " kB/s");
+        String timeAsString = Utils.formatNumber(runtime);
+        characteristic.setRuntime((runtime < 1000 ? "0," + timeAsString : timeAsString) + " s");
     }
 
     public void exit() {

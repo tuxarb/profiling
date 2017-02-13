@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.model.Model;
+import app.model.ResultsCalculator;
 import app.model.beans.Characteristic;
 import app.model.enums.DatabaseTypes;
 import app.model.enums.OperatingSystems;
@@ -42,77 +43,83 @@ public class Profiling implements EventListener {
     }
 
     @Override
-    public void exit() {
-        model.exit();
-    }
-
-    @Override
     public void findOutOS(OperatingSystems os) throws ClientProcessException {
         try {
-            if (os.name().equals(OperatingSystems.WINDOWS.toString()))
-                startTestForWindows();
-
-            if (os.name().equals(OperatingSystems.LINUX.toString()))
-                startTestForLinuxOrMac();
-
-            if (os.name().equals(OperatingSystems.MAC.toString()))
-                startTestForLinuxOrMac();
+            if (os.name().equals(OperatingSystems.WINDOWS.name())) {
+                if (model.isDetailedTest()) {
+                    startDetailedTest(true);
+                } else {
+                    model.startTestForWindows();
+                }
+            } else if (os.name().equals(OperatingSystems.LINUX.name()) ||
+                    os.name().equals(OperatingSystems.MAC.name())) {
+                if (model.isDetailedTest()) {
+                    startDetailedTest(false);
+                } else {
+                    model.startTestForLinuxOrMac();
+                }
+            }
         } catch (IOException e) {
+            waitSomeTime(40);
             LOG.error(Log.INTERNAL_APPLICATION_ERROR);
             throw new ClientProcessException();
         }
         model.completed();
     }
 
-    private void startTestForWindows() throws ClientProcessException, IOException {
-        if (model.isDetailedTest()) {
-            setNumberTestsForDetailedTest();
-            LOG.info(Log.DETAILED_TEST_STARTED);
-            for (int i = 1; i <= model.getNumberTests(); i++) {
-                LOG.debug(Log.TEST_NUMBER + i + Log.STARTED);
-                try {
-                    model.startTestForWindows();
-                } catch (Exception e) {
-                    try {
-                        Thread.sleep(40);
-                    } catch (InterruptedException ignored) {
-                    }
-                    if (i == 1) {
-                        LOG.error(Log.DETAILED_TEST_ENDED_WITH_ERROR);
-                        throw e;
-                    } else {
-                        LOG.error(Log.TEST_NUMBER + i + Log.A_TEST_ENDED_WITH_ERROR);
-                        i--;
-                        continue;
-                    }
-                }
-                LOG.debug(Log.TEST_NUMBER + i + Log.COMPLETED);
-            }
-            LOG.info(Log.DETAILED_TEST_ENDED);
-        } else {
-            model.startTestForWindows();
-        }
-    }
-
-    private void startTestForLinuxOrMac() throws ClientProcessException, IOException {
-        if (model.isDetailedTest()) {
-            setNumberTestsForDetailedTest();
-        }
-        model.startTestForLinuxOrMac();
-    }
-
-    private void setNumberTestsForDetailedTest() {
+    private void startDetailedTest(boolean isWindows) throws ClientProcessException, IOException {
+        ResultsCalculator calculator = new ResultsCalculator(model);
         model.setNumberTests();
+        LOG.info(Log.DETAILED_TEST_STARTED);
+        for (int i = 1; i <= model.getNumberTests(); i++) {
+            LOG.debug(Log.TEST_NUMBER + i + Log.STARTED);
+            try {
+                if (isWindows) {
+                    model.startTestForWindows();
+                } else {
+                    model.startTestForLinuxOrMac();
+                }
+                calculator.addResultsForTestToSum();
+                LOG.debug(Log.TEST_NUMBER + i + Log.COMPLETED);
+            } catch (Exception e) {
+                waitSomeTime(40);
+                if (i == 1) {
+                    LOG.error(Log.DETAILED_TEST_ENDED_WITH_ERROR);
+                    throw e;
+                } else {
+                    LOG.debug(Log.TEST_NUMBER + i + Log.A_TEST_ENDED_WITH_ERROR);
+                    i--;
+                }
+            }
+        }
+        calculator.computeAverageResultsForAllTests();
+        calculator.setResultingData();
+        LOG.info(Log.DETAILED_TEST_ENDED);
     }
 
+    private boolean isGUI() {
+        String mode = System.getProperty("mode");
+        return "gui".equalsIgnoreCase(mode);
+    }
+
+    private void waitSomeTime(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException ignored) {
+        }
+    }
+
+    @Override
     public boolean isCompleted() {
         return model.isCompleted();
     }
 
+    @Override
     public void update() {
         guiView.update();
     }
 
+    @Override
     public Model getModel() {
         return model;
     }
@@ -153,9 +160,9 @@ public class Profiling implements EventListener {
         model.setDetailedTest(isDetailedTest);
     }
 
-    private boolean isGUI() {
-        String mode = System.getProperty("mode");
-        return "gui".equalsIgnoreCase(mode);
+    @Override
+    public void exit() {
+        model.exit();
     }
 
     public static void main(String[] args) {

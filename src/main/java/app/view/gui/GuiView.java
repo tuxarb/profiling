@@ -104,7 +104,7 @@ public class GuiView extends JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.properties", "properties");
         fileOpen.setAcceptAllFileFilterUsed(false);
         fileOpen.setFileFilter(filter);
-        fileOpen.setDialogTitle("Open file");
+        fileOpen.setDialogTitle(Log.OPEN_PROPERTY_FILE);
         int result = fileOpen.showOpenDialog(this);
         if (result == JFileChooser.CANCEL_OPTION)
             throw new FileNotFoundException();
