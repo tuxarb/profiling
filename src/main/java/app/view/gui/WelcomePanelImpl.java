@@ -12,26 +12,26 @@ import java.awt.event.ActionListener;
 
 
 public class WelcomePanelImpl extends JPanel implements Panel {
-    private GuiView guiView;
+    private GuiView view;
     private static final Logger LOG = Log.createLog(WelcomePanelImpl.class);
 
-    public WelcomePanelImpl(GuiView guiView) {
-        this.guiView = guiView;
-        guiView.setBackgroundImage(Utils.BACKGROUND_IMAGE, LOG);
-        guiView.setButtonImage(Utils.BUTTON_IMAGE, LOG);
+    public WelcomePanelImpl(GuiView view) {
+        this.view = view;
+        view.setBackgroundImage(Utils.BACKGROUND_IMAGE, LOG);
+        view.setButtonImage(Utils.BUTTON_IMAGE, LOG);
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(guiView.getBackgroundImage(), 0, 0, this);
+        g.drawImage(view.getBackgroundImage(), 0, 0, this);
     }
 
     @Override
     public void init() {
-        setSize(guiView.getSize());
+        setSize(view.getSize());
         setLayout(new FlowLayout(FlowLayout.CENTER, 500, 40));
-        guiView.getContentPane().add(this);
+        view.getContentPane().add(this);
         paint();
         setVisible(true);
         LOG.debug(Log.APP_IS_READY);
@@ -49,21 +49,21 @@ public class WelcomePanelImpl extends JPanel implements Panel {
         labelAction.setForeground(Color.WHITE);
 
 
-        JButton buttonForWindows = createButton("WINDOWS");
-        buttonForWindows.addActionListener(new ActionHandler());
-        buttonForWindows.setActionCommand("W");
+        JButton windowsButton = createButton("WINDOWS");
+        windowsButton.addActionListener(new ActionHandler());
+        windowsButton.setActionCommand("W");
 
-        JButton buttonForLinux = createButton("LINUX");
-        buttonForLinux.addActionListener(new ActionHandler());
-        buttonForLinux.setActionCommand("L");
+        JButton linuxButton = createButton("LINUX");
+        linuxButton.addActionListener(new ActionHandler());
+        linuxButton.setActionCommand("L");
 
-        JButton buttonForMac = createButton("MAC OS");
-        buttonForMac.addActionListener(new ActionHandler());
-        buttonForMac.setActionCommand("M");
+        JButton macButton = createButton("MAC OS");
+        macButton.addActionListener(new ActionHandler());
+        macButton.setActionCommand("M");
     }
 
     private JButton createButton(String name) {
-        JButton jButton = new JButton(name, new ImageIcon(guiView.getButtonImage()));
+        JButton jButton = new JButton(name, new ImageIcon(view.getButtonImage()));
         jButton.setPreferredSize(new Dimension(100, 70));
         jButton.setHorizontalTextPosition(JButton.CENTER);
         jButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -83,13 +83,13 @@ public class WelcomePanelImpl extends JPanel implements Panel {
 
     @Override
     public void update() {
-        guiView.renderMenu(this);
+        view.renderMenu(this);
     }
 
     private class ActionHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            guiView.setColorOptionPane();
+            view.setColorOptionPane();
             String command = e.getActionCommand();
 
             switch (command) {
@@ -119,13 +119,13 @@ public class WelcomePanelImpl extends JPanel implements Panel {
 
         private void updateView(OperatingSystems operatingSystem) {
             LOG.debug(Log.VALID_OS);
-            guiView.setOperatingSystem(operatingSystem);
-            guiView.getEventListener().update();
+            view.setOperatingSystem(operatingSystem);
+            view.getEventListener().update();
         }
 
         private void showMessageAboutError(String s) {
             LOG.warn(Log.WRONG_OS);
-            JOptionPane.showMessageDialog(guiView, s, Log.ERROR, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(view, s, Log.ERROR, JOptionPane.ERROR_MESSAGE);
         }
     }
 }

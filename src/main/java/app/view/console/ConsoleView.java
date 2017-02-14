@@ -8,9 +8,6 @@ public class ConsoleView {
     private EventListener eventListener;
     private OperatingSystems operatingSystem;
 
-    public ConsoleView() {
-    }
-
     public void init() {
         ConsoleWelcome welcome = new ConsoleWelcome(this);
         welcome.init();

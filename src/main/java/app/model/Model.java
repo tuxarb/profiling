@@ -20,10 +20,10 @@ public class Model {
     private final Characteristic characteristic;
     private long processId;
     private ProcessHandle task;
-    private volatile boolean isCompleted;
+    private volatile boolean isTaskCompleted;
     private volatile boolean isDetailedTest;
     private int numberTests;
-    private static final int DEFAULT_NUMBER_TEST = 3;
+    private static final int DEFAULT_NUMBER_TESTS = 3;
     private static final PropertyRepository PROPERTY_REPOSITORY = PropertyRepository.getInstance();
     private static final Logger LOG = Log.createLog(Model.class);
 
@@ -229,15 +229,15 @@ public class Model {
     }
 
     public void completed() {
-        this.isCompleted = true;
+        this.isTaskCompleted = true;
     }
 
-    public boolean isCompleted() {
-        return isCompleted;
+    public boolean isTaskCompleted() {
+        return isTaskCompleted;
     }
 
-    public void setCompleted(boolean isCompleted) {
-        this.isCompleted = isCompleted;
+    public void setTaskCompleted(boolean isCompleted) {
+        this.isTaskCompleted = isCompleted;
     }
 
     public boolean isDetailedTest() {
@@ -260,11 +260,11 @@ public class Model {
             if (numberTests >= 2 && numberTests <= 999) {
                 return;
             }
-            LOG.warn(Log.NUMBER_TESTS_RANGE_EXCEPTION + DEFAULT_NUMBER_TEST + ".");
+            LOG.warn(Log.NUMBER_TESTS_RANGE_EXCEPTION + DEFAULT_NUMBER_TESTS + ".");
         } catch (NumberFormatException e) {
-            LOG.warn(Log.NUMBER_TESTS_FORMAT_EXCEPTION + DEFAULT_NUMBER_TEST + ".");
+            LOG.warn(Log.NUMBER_TESTS_FORMAT_EXCEPTION + DEFAULT_NUMBER_TESTS + ".");
         }
-        numberTests = DEFAULT_NUMBER_TEST;
+        numberTests = DEFAULT_NUMBER_TESTS;
     }
 
     public Characteristic getCharacteristic() {

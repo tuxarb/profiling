@@ -1,5 +1,6 @@
 package app.view.gui;
 
+import app.model.beans.Characteristic;
 import app.model.enums.DatabaseTypes;
 import app.utils.Log;
 import app.utils.Utils;
@@ -13,41 +14,42 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 class ResultPanelImpl extends JPanel implements Panel {
-    private GuiView guiView;
+    private GuiView view;
     private String capacity;
     private String runtime;
     private String speed;
     private static final Logger LOG = Log.createLog(ResultPanelImpl.class);
 
-    ResultPanelImpl(GuiView guiView) {
-        this.guiView = guiView;
+    ResultPanelImpl(GuiView view) {
+        this.view = view;
         initResultData();
     }
 
     private void initResultData() {
         LOG.info(Log.DATA_INIT_FOR_DISPLAYING);
-        this.capacity = guiView.getEventListener().getModel().getCharacteristic().getCapacity();
-        this.runtime = guiView.getEventListener().getModel().getCharacteristic().getRuntime();
-        this.speed = guiView.getEventListener().getModel().getCharacteristic().getSpeed();
+        Characteristic characteristic = view.getEventListener().getModel().getCharacteristic();
+        this.capacity = characteristic.getCapacity();
+        this.runtime = characteristic.getRuntime();
+        this.speed = characteristic.getSpeed();
 
         if (this.capacity == null ||
                 this.runtime == null ||
                 this.speed == null) {
             LOG.error(Log.DATA_DISPLAYING_ERROR);
-            guiView.getEventListener().update();
+            view.getEventListener().update();
         }
     }
 
     @Override
     public void init() {
-        guiView.setSize(GuiView.WIDTH / 2 - 50, GuiView.WIDTH / 2 + 60);
-        guiView.setLocationRelativeTo(null);
-        guiView.getContentPane().add(this);
-        guiView.setColorOptionPane();
+        view.setSize(GuiView.WIDTH / 2 - 50, GuiView.WIDTH / 2 + 60);
+        view.setLocationRelativeTo(null);
+        view.getContentPane().add(this);
+        view.setColorOptionPane();
 
         setLayout(new FlowLayout(FlowLayout.CENTER, 35, 17));
         setBackground(Color.BLACK);
-        setSize(guiView.getSize());
+        setSize(view.getSize());
 
         paint();
         setVisible(true);
@@ -72,19 +74,19 @@ class ResultPanelImpl extends JPanel implements Panel {
         add(textArea);
         LOG.info(Log.DATA_DISPLAYING_SUCCESS);
 
-        JButton print = createButton(Log.SAVE_TO_FILE, Log.SAVE_FILE_BUTTON_MESSAGE);
-        print.addActionListener(new ActionListener() {
+        JButton saveToFileButton = createButton(Log.SAVE_TO_FILE, Log.SAVE_FILE_BUTTON_MESSAGE);
+        saveToFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Thread(() -> {
                     try {
-                        guiView.getEventListener().writeToFile();
+                        view.getEventListener().writeToFile();
                         SwingUtilities.invokeLater(() ->
-                                JOptionPane.showMessageDialog(guiView, Log.WRITING_FILE_DATA_SUCCESS, Log.INFORMATION,
+                                JOptionPane.showMessageDialog(view, Log.WRITING_FILE_DATA_SUCCESS, Log.INFORMATION,
                                         JOptionPane.INFORMATION_MESSAGE)
                         );
                     } catch (IOException e1) {
-                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(guiView, Log.FILE_DATA_DISPLAYING_ERROR, Log.ERROR,
+                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(view, Log.FILE_DATA_DISPLAYING_ERROR, Log.ERROR,
                                 JOptionPane.ERROR_MESSAGE)
                         );
                     }
@@ -92,8 +94,8 @@ class ResultPanelImpl extends JPanel implements Panel {
             }
         });
 
-        JButton addToDatabase = createButton(Log.SAVE_TO_DB, Log.SAVE_DB_BUTTON_MESSAGE);
-        addToDatabase.addActionListener(new ActionListener() {
+        JButton addToDatabaseButton = createButton(Log.SAVE_TO_DB, Log.SAVE_DB_BUTTON_MESSAGE);
+        addToDatabaseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JPopupMenu menu = new JPopupMenu();
@@ -147,30 +149,30 @@ class ResultPanelImpl extends JPanel implements Panel {
 
                 menu.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
                 menu.setBorderPainted(true);
-                menu.show(addToDatabase, addToDatabase.getWidth() / 2, addToDatabase.getHeight() / 2);
+                menu.show(addToDatabaseButton, addToDatabaseButton.getWidth() / 2, addToDatabaseButton.getHeight() / 2);
             }
         });
 
-        JButton updatePropertyFile = createButton(Log.UPDATE_FILE, Log.UPDATE_FILE_BUTTON_MESSAGE);
-        updatePropertyFile.addActionListener(new ActionListener() {
+        JButton updatePropertyFileButton = createButton(Log.UPDATE_FILE, Log.UPDATE_FILE_BUTTON_MESSAGE);
+        updatePropertyFileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Thread(() -> {
                     try {
-                        int result = JOptionPane.showConfirmDialog(guiView, Log.CONFIRMATION_OF_UPDATE_PROPERTY_FILE, Log.QUESTION,
+                        int result = JOptionPane.showConfirmDialog(view, Log.CONFIRMATION_OF_UPDATE_PROPERTY_FILE, Log.QUESTION,
                                 JOptionPane.YES_NO_OPTION);
                         if (result != JOptionPane.YES_OPTION) {
                             LOG.debug(Log.NO_OPTION_WHEN_UPDATE_THE_PROPERTY_FILE);
                             return;
                         }
-                        guiView.getEventListener().updatePropertyFile();
+                        view.getEventListener().updatePropertyFile();
                         LOG.info(Log.PROPERTY_FILE_UPDATED);
                         SwingUtilities.invokeLater(() ->
-                                JOptionPane.showMessageDialog(guiView, Log.PROPERTY_FILE_UPDATED, Log.INFORMATION,
+                                JOptionPane.showMessageDialog(view, Log.PROPERTY_FILE_UPDATED, Log.INFORMATION,
                                         JOptionPane.INFORMATION_MESSAGE)
                         );
                     } catch (Exception e1) {
-                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(guiView, Log.PROPERTY_READ_ERROR, Log.ERROR,
+                        SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(view, Log.PROPERTY_READ_ERROR, Log.ERROR,
                                 JOptionPane.ERROR_MESSAGE)
                         );
                     }
@@ -178,26 +180,26 @@ class ResultPanelImpl extends JPanel implements Panel {
             }
         });
 
-        JButton returningOnMenu = createButton(Log.REPEAT_TEST, Log.REPEAT_TEST_BUTTON_MESSAGE);
-        returningOnMenu.addActionListener(new ActionListener() {
+        JButton returnToMenuButton = createButton(Log.REPEAT_TEST, Log.REPEAT_TEST_BUTTON_MESSAGE);
+        returnToMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int result = JOptionPane.showConfirmDialog(guiView, Log.CONFIRMATION_OF_RETURNING_TO_MENU, Log.QUESTION,
+                int result = JOptionPane.showConfirmDialog(view, Log.CONFIRMATION_OF_RETURNING_TO_MENU, Log.QUESTION,
                         JOptionPane.YES_NO_OPTION);
                 if (result != JOptionPane.YES_OPTION) {
                     LOG.debug(Log.NO_OPTION_WHEN_RETURNING_TO_THE_MENU);
                     return;
                 }
-                guiView.getEventListener().update();
+                view.getEventListener().update();
             }
         });
 
-        JButton exit = createButton(Log.EXIT, Log.EXIT_BUTTON_MESSAGE);
-        exit.addActionListener(new ActionListener() {
+        JButton exitButton = createButton(Log.EXIT, Log.EXIT_BUTTON_MESSAGE);
+        exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new Thread(() ->
-                        guiView.getEventListener().exit()
+                        view.getEventListener().exit()
                 ).start();
             }
         });
@@ -210,7 +212,7 @@ class ResultPanelImpl extends JPanel implements Panel {
     }
 
     private JButton createButton(String name, String message) {
-        JButton jButton = new JButton(name, new ImageIcon(guiView.getButtonImage()));
+        JButton jButton = new JButton(name, new ImageIcon(view.getButtonImage()));
         jButton.setPreferredSize(new Dimension(115, 65));
         jButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jButton.setHorizontalTextPosition(JButton.CENTER);
@@ -226,21 +228,21 @@ class ResultPanelImpl extends JPanel implements Panel {
     @Override
     public void update() {
         LOG.info(Log.RETURNING_TO_THE_MENU_SUCCESS);
-        guiView.renderMenu(this);
+        view.renderMenu(this);
     }
 
     private void writeToDatabase(DatabaseTypes type) {
         new Thread(() -> {
             try {
-                guiView.getEventListener().writeToDatabase(type);
-                JOptionPane.showMessageDialog(guiView, Log.WRITING_DATABASE_SUCCESS, Log.INFORMATION,
+                view.getEventListener().writeToDatabase(type);
+                JOptionPane.showMessageDialog(view, Log.WRITING_DATABASE_SUCCESS, Log.INFORMATION,
                         JOptionPane.INFORMATION_MESSAGE);
             } catch (IOException e1) {
                 SwingUtilities.invokeLater(() ->
-                        JOptionPane.showMessageDialog(guiView, Log.WRITING_DATABASE_ERROR, Log.ERROR,
+                        JOptionPane.showMessageDialog(view, Log.WRITING_DATABASE_ERROR, Log.ERROR,
                                 JOptionPane.ERROR_MESSAGE));
             } catch (WrongSelectedDatabaseException e) {
-                SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(guiView, Log.WRONG_DATABASE_URL, Log.ERROR,
+                SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(view, Log.WRONG_DATABASE_URL, Log.ERROR,
                         JOptionPane.ERROR_MESSAGE));
             }
         }).start();
@@ -249,6 +251,6 @@ class ResultPanelImpl extends JPanel implements Panel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(guiView.getBackgroundImage(), 0, 0, this);
+        g.drawImage(view.getBackgroundImage(), 0, 0, this);
     }
 }

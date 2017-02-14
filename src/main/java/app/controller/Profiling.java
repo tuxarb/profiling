@@ -111,7 +111,7 @@ public class Profiling implements EventListener {
 
     @Override
     public boolean isCompleted() {
-        return model.isCompleted();
+        return model.isTaskCompleted();
     }
 
     @Override
@@ -152,7 +152,7 @@ public class Profiling implements EventListener {
 
     @Override
     public void setCompleted(boolean isCompleted) {
-        model.setCompleted(isCompleted);
+        model.setTaskCompleted(isCompleted);
     }
 
     @Override

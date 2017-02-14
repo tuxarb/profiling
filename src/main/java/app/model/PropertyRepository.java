@@ -12,7 +12,7 @@ public class PropertyRepository {
     private File propertyFile;
     private static PropertyRepository instance;
     private static final Logger LOG = Log.createLog(PropertyRepository.class);
-    private static Properties store = new Properties() {{
+    private static Properties STORE = new Properties() {{
         put("program_path", "");
         put("script_file_path", "");
         put("url", "");
@@ -48,9 +48,9 @@ public class PropertyRepository {
         Properties properties = new Properties();
         try {
             properties.load(new FileReader(propertyFile));
-            store.replaceAll((k, v) -> "");
+            STORE.replaceAll((k, v) -> "");
             for (Object key : properties.keySet()) {
-                store.computeIfPresent(key, (k, v) -> properties.get(k));
+                STORE.computeIfPresent(key, (k, v) -> properties.get(k));
             }
             LOG.info(Log.PROPERTY_FILE_READ + getPathToPropertyFile());
         } catch (Exception e) {
@@ -68,7 +68,7 @@ public class PropertyRepository {
     }
 
     Properties getProperties() {
-        return store;
+        return STORE;
     }
 
     public File getPropertyFile() {

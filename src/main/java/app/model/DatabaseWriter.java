@@ -15,8 +15,8 @@ class DatabaseWriter {
     private String url;
     private String username;
     private String password;
-    private static final Logger LOG = Log.createLog(DatabaseWriter.class);
     private static SessionFactory sessionFactory;
+    private static final Logger LOG = Log.createLog(DatabaseWriter.class);
 
     DatabaseWriter(DatabaseTypes databaseType) {
         this.databaseType = databaseType;

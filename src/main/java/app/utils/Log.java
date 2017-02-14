@@ -35,7 +35,7 @@ public class Log {
     public static final String SAVING_TO_DATABASE_ENDED = "Data was successfully written to the database!";
     public static final String INIT_HIBERNATE_PROPERTIES_ENDED = "Initialization of the properties was finished.";
     public static final String DATA_INIT_FOR_DISPLAYING = "The resulting data are being initialized for displaying...";
-    public static final String DATA_DISPLAYING_SUCCESS = "The resulting data were successfully displayed on the screen.";
+    public static final String DATA_DISPLAYING_SUCCESS = "The resulting data were successfully displayed on the screen!";
     public static final String WRITING_FILE_DATA_SUCCESS = "Data was successfully written to the file!";
     public static final String CREATING_DIR_FOR_WRITING = "Creating a directory for writing the resulting data...";
     public static final String RETURNING_TO_THE_MENU_SUCCESS = "Returning to the menu was finished successfully!";
@@ -49,10 +49,10 @@ public class Log {
     public static final String LOADING_PROGRESS_IMAGE_ERROR = "Error when loading the image for ProgressDialog.";
     public static final String PATH_TO_PROGRAM_INCORRECT = "Cannot run user's program. Please, check that path to program is correct and your command has the correct syntax.\nAlso note that your program must not be too small otherwise an error may occur.";
     public static final String EMPTY_PATH = "Path to your program or script file wasn't specified. Please, specify it at your .properties file. " +
-            "For example(WINDOWS): program_path=C:/../task.exe.\nAlso, if your program needs some additional parameters for start, " +
+            "For example: program_path=C:/../task.exe.\nAlso, if your program needs some additional parameters for start, " +
             "you can create some executable script file (bat, cmd, com, bash, sh, etc.), write at it your (ONE) command for start and specify path to this file at your .properties file.\nFor example: script_file_path=C:/../test.bat\n" +
             "Note: the profiling program can test only ONE process.";
-    public static final String ERROR_WHEN_CREATING_USER_PROCESS = "Can't create a new process for user's program. Probably, the user specified a wrong path to the program or a wrong parameters for start.";
+    public static final String ERROR_WHEN_CREATING_USER_PROCESS = "Can't create a new process for user's program. Probably, the user specified a wrong path to the program or a wrong parameters to start.";
     public static final String ERROR_WHEN_CREATING_USER_PROCESS_FROM_SCRIPT_FILE = "Can't create a new process. Probably, it happened for the following reasons:\n" +
             "1) The user specified a wrong path to the script file.\n" +
             "2) The user didn't specify a process inside the script file or provided more than ONE process.\n" +
@@ -63,7 +63,7 @@ public class Log {
     public static final String CREATING_SESSION_FACTORY_ERROR = "Failed to create sessionFactory instance.";
     public static final String SESSION_FACTORY_IS_NULL = "Error. SessionFactory instance is null.";
     public static final String URL_TO_DATABASE_IS_NULL = "Specify url for the connecting in your .properties file.";
-    public static final String DRIVER_CLASS_NOT_FOUND_ERROR = "Driver class was not found for your DBMS.";
+    public static final String DRIVER_CLASS_NOT_FOUND_ERROR = "Driver class was not found for your DBMS. Specify it in your .properties file.";
     public static final String PROPERTY_READ_ERROR = "Error occurred when reading the property file.";
     public static final String SMALL_PROGRAM_ERROR = "Your program is too small to test.";
     public static final String CANCELLING_PROPERTY_FILE = "Pressed 'cancel' when trying to open a .properties file.";
@@ -132,7 +132,7 @@ public class Log {
     public static final String OPEN_PROPERTY_BUTTON_MESSAGE = "Set .properties file with the attributes before to start the test";
     public static final String SAVE_FILE_BUTTON_MESSAGE = "Save the results of the user's program to a .txt file";
     public static final String SAVE_DB_BUTTON_MESSAGE = "Save the results of the user's program to a database";
-    public static final String UPDATE_FILE_BUTTON_MESSAGE = "Update the selected .properties file";
+    public static final String UPDATE_FILE_BUTTON_MESSAGE = "Update the .properties file";
     public static final String REPEAT_TEST_BUTTON_MESSAGE = "Return on the menu where you can repeat the test";
     public static final String EXIT_BUTTON_MESSAGE = "Exit from the application";
 
