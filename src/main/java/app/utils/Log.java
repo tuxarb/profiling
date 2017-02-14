@@ -56,7 +56,7 @@ public class Log {
     public static final String ERROR_WHEN_CREATING_USER_PROCESS_FROM_SCRIPT_FILE = "Can't create a new process. Probably, it happened for the following reasons:\n" +
             "1) The user specified a wrong path to the script file.\n" +
             "2) The user didn't specify a process inside the script file or provided more than ONE process.\n" +
-            "3) The user specified a wrong path to the process inside the script file or a wrong parameters for start.\n" +
+            "3) The user specified a wrong path to the process inside the script file or a wrong parameters to start.\n" +
             "4) The process inside the script file is too small to test.";
     public static final String DETAILED_TEST_ENDED_WITH_ERROR = "The detailed test for the user's program was finished with an error.";
     public static final String HIBERNATE_ERROR = "Error occurred when hibernate trying to save data to the database.";
@@ -143,7 +143,7 @@ public class Log {
     public static final String WRONG_ENTER = "Invalid input! Try again.";
     public static final String WELCOME_CONSOLE = "WELCOME TO THE PROGRAM PROFILING!";
     public static final String MENU_CONSOLE = "M E N U";
-    public static final String MENU_CHOICE = "Choose one of the next options (using 1-2):";
+    public static final String MENU_CHOICE = "Choose one of the next options (using 1-3):";
     public static final String RESULT_PANEL_CHOICE = "Choose one of the next options (using 0-4):";
     public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path. Try again or press 'enter' to exit.";
     public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your .properties file: ";

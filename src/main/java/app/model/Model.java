@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -31,7 +32,7 @@ public class Model {
     }
 
     public void startTestForWindows() throws IOException, ClientProcessException {
-        double capacity = 0;
+        BigInteger capacity = BigInteger.valueOf(0);
         long countIterations = 0;
         long startTime = startTestAndGetStartTime();
 
@@ -43,25 +44,28 @@ public class Model {
             while (scanner.hasNext()) {
                 String newLine = scanner.nextLine();
                 if (Utils.isMemoryLine(newLine.toLowerCase())) {
-                    capacity += Utils.getNumberFromString(newLine);
+                    capacity = capacity.add(
+                            BigInteger.valueOf(Utils.getNumberFromString(newLine))
+                    );
                     countIterations++;
                     break;
                 }
             }
-            waitSomeTime(20);
         }
         checkCountOfIterationsOnZero(countIterations);
 
         long time = getTestTime(startTime);
-        capacity /= countIterations;
-        long speed = 1000 * (long) capacity / time;
+        capacity = capacity.divide(
+                BigInteger.valueOf(countIterations)
+        );
+        long speed = 1000 * capacity.longValue() / time;
 
-        setResultingData((long) capacity, speed, time);
+        setResultingData(capacity.longValue(), speed, time);
         LOG.info(Log.READING_PROCESS_ENDED);
     }
 
     public void startTestForLinuxOrMac() throws IOException, ClientProcessException {
-        double capacity = 0;
+        BigInteger capacity = BigInteger.valueOf(0);
         long countIterations = 0;
         long startTime = startTestAndGetStartTime();
 
@@ -72,29 +76,25 @@ public class Model {
             scanner = new Scanner(process.getInputStream());
             while (scanner.hasNext()) {
                 String newLine = scanner.nextLine();
-                if ((!newLine.matches("^\\D*"))) {
-                    capacity += Utils.getNumberFromString(newLine);
+                if (!newLine.matches("^\\D*")) {
+                    capacity = capacity.add(
+                            BigInteger.valueOf(Utils.getNumberFromString(newLine))
+                    );
                     countIterations++;
                     break;
                 }
             }
-            waitSomeTime(20);
         }
         checkCountOfIterationsOnZero(countIterations);
 
         long time = getTestTime(startTime);
-        capacity /= countIterations;
-        long speed = 1000 * (long) capacity / time;
+        capacity = capacity.divide(
+                BigInteger.valueOf(countIterations)
+        );
+        long speed = 1000 * capacity.longValue() / time;
 
-        setResultingData((long) capacity, speed, time);
+        setResultingData(capacity.longValue(), speed, time);
         LOG.info(Log.READING_PROCESS_ENDED);
-    }
-
-    private void waitSomeTime(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException ignored) {
-        }
     }
 
     private long startTestAndGetStartTime() throws ClientProcessException {

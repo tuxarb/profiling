@@ -4,8 +4,8 @@ package app.model;
 import app.utils.Utils;
 
 public class ResultsCalculator {
-    private double capacity;
-    private double speed;
+    private long capacity;
+    private long speed;
     private long runtime;
     private Model model;
 
@@ -26,6 +26,6 @@ public class ResultsCalculator {
     }
 
     public void setResultingData() {
-        model.setResultingData((long) capacity, (long) speed, runtime);
+        model.setResultingData(capacity, speed, runtime);
     }
 }
