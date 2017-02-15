@@ -55,7 +55,7 @@ class FileWriter {
             pathToFolder = System.getProperty("user.home");
         }
         LOG.info(Log.CREATING_DIR_FOR_WRITING);
-        File dir = new File(pathToFolder + File.separator + ".profiling_result");
+        File dir = new File(pathToFolder + File.separator + ".profiling_results");
         dir.mkdir();
         return dir;
     }

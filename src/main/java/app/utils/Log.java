@@ -159,7 +159,7 @@ public class Log {
     /**
      * Other
      */
-    public static final String TEST_NUMBER = "Test № ";
+    public static final String TEST_NUMBER = "Test ";
     public static final String STARTED = " was started.";
     public static final String COMPLETED = " was completed!";
     public static final String A_TEST_ENDED_WITH_ERROR = " was finished with an error. Re-running this test...";
