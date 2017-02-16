@@ -18,6 +18,7 @@ import static app.utils.Utils.getUserCommandInfo;
 
 public class Model {
     private final Characteristic characteristic;
+    private PointsList points;
     private long processId;
     private ProcessHandle task;
     private volatile boolean isTaskCompleted;
@@ -32,8 +33,10 @@ public class Model {
     }
 
     public void startTestForWindows() throws IOException, ClientProcessException {
+        points = new PointsList();
         BigInteger capacity = BigInteger.valueOf(0);
         long countIterations = 0;
+        long currentTimeAfterStart = 0;
         long startTime = startTestAndGetStartTime();
 
         Process process;
@@ -47,10 +50,12 @@ public class Model {
                     capacity = capacity.add(
                             BigInteger.valueOf(Utils.getNumberFromString(newLine))
                     );
+                    currentTimeAfterStart = System.currentTimeMillis() - startTime;
                     countIterations++;
                     break;
                 }
             }
+            points.add(points.new Point(capacity, currentTimeAfterStart));
         }
         checkCountOfIterationsOnZero(countIterations);
 
@@ -60,6 +65,7 @@ public class Model {
         );
         long speed = 1000 * capacity.longValue() / time;
 
+        points.computeSpeedForAllPoints();
         setResultingData(capacity.longValue(), speed, time);
         LOG.info(Log.READING_PROCESS_ENDED);
     }
@@ -162,10 +168,8 @@ public class Model {
     }
 
     private long getTestTime(long startTime) {
-        long endTime = System.currentTimeMillis();
         LOG.info(Log.RUNNING_CODE_ENDED);
-
-        return endTime - startTime;
+        return System.currentTimeMillis() - startTime;
     }
 
     private void checkCountOfIterationsOnZero(long countIterations) throws ClientProcessException {
