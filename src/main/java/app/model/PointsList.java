@@ -5,7 +5,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-class PointsList {
+public class PointsList {
     private List<Point> points = new ArrayList<>(1000) {{
         add(new Point(
                 BigInteger.valueOf(0),
@@ -18,7 +18,7 @@ class PointsList {
         points.add(point);
     }
 
-    int size() {
+    public int size() {
         return points.size();
     }
 

@@ -2,6 +2,7 @@ package app.view.gui;
 
 import app.model.beans.Characteristic;
 import app.model.enums.DatabaseTypes;
+import app.utils.GraphicsConfig;
 import app.utils.Log;
 import app.utils.Utils;
 import app.utils.exceptions.WrongSelectedDatabaseException;
@@ -194,13 +195,36 @@ class ResultPanelImpl extends JPanel implements Panel {
             }
         });
 
-        JButton exitButton = createButton(Log.EXIT, Log.EXIT_BUTTON_MESSAGE);
-        exitButton.addActionListener(new ActionListener() {
+        JButton showGraphicsButton = createButton(Log.SHOW_GRAPHICS, Log.SHOW_GRAPHICS_BUTTON_MESSAGE);
+        showGraphicsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new Thread(() ->
-                        view.getEventListener().exit()
-                ).start();
+                if (!view.getEventListener().areGraphicsAvailableToPaint()) {
+                    JOptionPane.showMessageDialog(view, "  " + Log.NUMBER_OF_POINTS_IS_NOT_ENOUGH, Log.ERROR,
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                JPopupMenu menu = new JPopupMenu();
+                JMenuItem capacityTimeItem = new JMenuItem(Log.CAPACITY_TIME);
+                capacityTimeItem.addActionListener(
+                        e1 -> buildGraphic(GraphicsConfig.CAPACITY_TIME_TYPE)
+                );
+                menu.add(capacityTimeItem);
+                menu.addSeparator();
+
+                JMenuItem speedTimeItem = new JMenuItem(Log.SPEED_TIME);
+                speedTimeItem.addActionListener(
+                        e1 -> buildGraphic(GraphicsConfig.SPEED_TIME_TYPE)
+                );
+                menu.add(speedTimeItem);
+
+                menu.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+                menu.setBorderPainted(true);
+                menu.show(
+                        showGraphicsButton,
+                        showGraphicsButton.getWidth() / 2,
+                        showGraphicsButton.getHeight() / 2
+                );
             }
         });
     }
@@ -246,6 +270,11 @@ class ResultPanelImpl extends JPanel implements Panel {
                         JOptionPane.ERROR_MESSAGE));
             }
         }).start();
+    }
+
+    private void buildGraphic(int type) {
+        GraphicsPainter painter = new GraphicsPainter(view, type);
+        painter.init();
     }
 
     @Override

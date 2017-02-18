@@ -278,4 +278,8 @@ public class Model {
     public PropertyRepository getPropertyRepository() {
         return PROPERTY_REPOSITORY;
     }
+
+    public PointsList getPoints() {
+        return points;
+    }
 }

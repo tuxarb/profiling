@@ -5,6 +5,7 @@ import app.model.ResultsCalculator;
 import app.model.beans.Characteristic;
 import app.model.enums.DatabaseTypes;
 import app.model.enums.OperatingSystems;
+import app.utils.GraphicsConfig;
 import app.utils.Log;
 import app.utils.exceptions.ClientProcessException;
 import app.utils.exceptions.WrongSelectedDatabaseException;
@@ -148,6 +149,15 @@ public class Profiling implements EventListener {
     public boolean isPropertiesFileExists() {
         File file = model.getPropertyRepository().getPropertyFile();
         return file != null && file.exists();
+    }
+
+    @Override
+    public boolean areGraphicsAvailableToPaint() {
+        if (model.getPoints().size() < GraphicsConfig.MIN_NUMBER_POINTS_TO_PAINT) {
+            LOG.error(Log.GRAPHICS_ARE_NOT_AVAILABLE);
+            return false;
+        }
+        return true;
     }
 
     @Override

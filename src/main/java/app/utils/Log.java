@@ -7,6 +7,7 @@ public class Log {
      * General
      */
     public static final String PROFILING = "Profiling";
+    public static final String GRAPHICS = "Graphics";
     public static final String CAPACITY = "Capacity:";
     public static final String RUNTIME = "Runtime:";
     public static final String SPEED = "Speed:";
@@ -80,6 +81,7 @@ public class Log {
     public static final String PROPERTIES_IS_NULL_LOG = "A .properties file was not specified. Can't start the test.";
     public static final String NUMBER_TESTS_FORMAT_EXCEPTION = "The user provided the wrong value for { number_tests } or didn't specify it in the .properties file. DEFAULT -> number_tests = ";
     public static final String NUMBER_TESTS_RANGE_EXCEPTION = "The value { number_tests } in the .properties file must be between from 2 to 999. DEFAULT -> number_tests = ";
+    public static final String GRAPHICS_ARE_NOT_AVAILABLE = Log.NUMBER_OF_POINTS_IS_NOT_ENOUGH + " Can't build the graphics because the user's program was finished too quickly.";
 
     /**
      * Dialog's headers
@@ -103,6 +105,7 @@ public class Log {
     public static final String EMPTY_PATH_MESSAGE = "Path to your program | script file wasn't specified.";
     public static final String CONFIRMATION_OF_RETURNING_TO_MENU = "Do you want to return to the menu?";
     public static final String CONFIRMATION_OF_UPDATE_PROPERTY_FILE = "Do you want to update the property file?";
+    public static final String NUMBER_OF_POINTS_IS_NOT_ENOUGH = "Not enough points to paint.";
 
     /**
      * Text
@@ -122,7 +125,7 @@ public class Log {
     public static final String SAVE_TO_DB = "Save to DB";
     public static final String UPDATE_FILE = "Update file";
     public static final String REPEAT_TEST = "Repeat test";
-    public static final String EXIT = "Exit";
+    public static final String SHOW_GRAPHICS = "Show graphics";
 
     /**
      * Tooltips for buttons
@@ -133,8 +136,9 @@ public class Log {
     public static final String SAVE_FILE_BUTTON_MESSAGE = "Save the results of the user's program to a .txt file";
     public static final String SAVE_DB_BUTTON_MESSAGE = "Save the results of the user's program to a database";
     public static final String UPDATE_FILE_BUTTON_MESSAGE = "Update the .properties file";
-    public static final String REPEAT_TEST_BUTTON_MESSAGE = "Return on the menu where you can repeat the test";
-    public static final String EXIT_BUTTON_MESSAGE = "Exit from the application";
+    public static final String REPEAT_TEST_BUTTON_MESSAGE = "Return on the menu where user can repeat the test";
+    public static final String SHOW_GRAPHICS_BUTTON_MESSAGE = "Display <capacity-time> and <speed-time> the graphics";
+
 
     /**
      * Console
@@ -154,6 +158,7 @@ public class Log {
     public static final String PROCESSING_CONSOLE = "P r o c e s s i n g... <= ";
     public static final String PROCESSING_WAS_FINISHED = "The profiling was successfully finished!";
     public static final String BACK = "<--";
+    public static final String EXIT = "Exit";
     static final String SEE_LOGS = "See log files -> ";
 
     /**
@@ -164,6 +169,8 @@ public class Log {
     public static final String COMPLETED = " was completed!";
     public static final String A_TEST_ENDED_WITH_ERROR = " was finished with an error. Re-running this test...";
     public static final String CAUSE = "Cause -> ";
+    public static final String CAPACITY_TIME = "Capacity - time";
+    public static final String SPEED_TIME = "Speed - time";
 
     private Log() {
     }

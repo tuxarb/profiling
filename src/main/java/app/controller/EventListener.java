@@ -19,6 +19,7 @@ public interface EventListener {
     void readPropertyFile(File file) throws Exception;
     void updatePropertyFile() throws Exception;
     boolean isPropertiesFileExists();
+    boolean areGraphicsAvailableToPaint();
     void setCompleted(boolean isCompleted);
     void setDetailedTest(boolean isDetailedTest);
 }
