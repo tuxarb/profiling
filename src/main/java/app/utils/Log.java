@@ -7,7 +7,7 @@ public class Log {
      * General
      */
     public static final String PROFILING = "Profiling";
-    public static final String GRAPHICS = "Graphics";
+    public static final String GRAPHICS = "Graphic";
     public static final String CAPACITY = "Capacity:";
     public static final String RUNTIME = "Runtime:";
     public static final String SPEED = "Speed:";
@@ -40,6 +40,7 @@ public class Log {
     public static final String WRITING_FILE_DATA_SUCCESS = "Data was successfully written to the file!";
     public static final String CREATING_DIR_FOR_WRITING = "Creating a directory for writing the resulting data...";
     public static final String RETURNING_TO_THE_MENU_SUCCESS = "Returning to the menu was finished successfully!";
+    public static final String GRAPHIC_PAINTER_STARTED = "Paint <{}> graphic...";
     public static final String CLOSING_APP = "It is closing the application...";
 
     /**
@@ -113,7 +114,7 @@ public class Log {
     public static final String WELCOME_GUI = "Welcome to the program profiling!";
     public static final String CHOICE_OS = "Select your operating system";
     public static final String MENU_GUI = "Menu";
-    public static final String RESULTS = "The results of your program:";
+    public static final String RESULTS_GUI = "The results:";
 
     /**
      * Buttons
@@ -148,6 +149,7 @@ public class Log {
     public static final String WELCOME_CONSOLE = "WELCOME TO THE PROGRAM PROFILING!";
     public static final String MENU_CONSOLE = "M E N U";
     public static final String MENU_CHOICE = "Choose one of the next options (using 1-3):";
+    public static final String RESULTS_CONSOLE = "The results of your program:";
     public static final String RESULT_PANEL_CHOICE = "Choose one of the next options (using 0-4):";
     public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path. Try again or press 'enter' to exit.";
     public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your .properties file: ";
@@ -169,8 +171,8 @@ public class Log {
     public static final String COMPLETED = " was completed!";
     public static final String A_TEST_ENDED_WITH_ERROR = " was finished with an error. Re-running this test...";
     public static final String CAUSE = "Cause -> ";
-    public static final String CAPACITY_TIME = "Capacity - time";
-    public static final String SPEED_TIME = "Speed - time";
+    public static final String CAPACITY_TIME = "Capacity - Time";
+    public static final String SPEED_TIME = "Speed - Time";
 
     private Log() {
     }

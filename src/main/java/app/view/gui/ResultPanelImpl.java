@@ -57,14 +57,14 @@ class ResultPanelImpl extends JPanel implements Panel {
     }
 
     private void paint() {
-        JLabel labelAction = createLabel(Log.RESULTS);
-        Font font = new Font("Arial", Font.LAYOUT_NO_LIMIT_CONTEXT, 24);
+        JLabel labelAction = createLabel(Log.RESULTS_GUI);
+        Font font = new Font("Courier New", 2, 24);
         labelAction.setFont(font);
         labelAction.setForeground(Color.WHITE);
 
         JTextArea textArea = new JTextArea();
         textArea.setBackground(Color.ORANGE);
-        textArea.setFont(new Font("Arial", Font.CENTER_BASELINE, 20));
+        textArea.setFont(new Font("Arial", 3, 20));
         textArea.setLayout(new BorderLayout());
         textArea.setBorder(BorderFactory.createLoweredSoftBevelBorder());
         textArea.setEditable(false);
@@ -273,7 +273,7 @@ class ResultPanelImpl extends JPanel implements Panel {
     }
 
     private void buildGraphic(int type) {
-        GraphicsPainter painter = new GraphicsPainter(view, type);
+        GraphicsPainter painter = new GraphicsPainter(type);
         painter.init();
     }
 

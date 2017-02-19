@@ -176,7 +176,7 @@ class ConsoleResult {
     private void displayResultPanel() {
         print("\n\n");
         println("+---------------------------------------------------+");
-        println("\t     " + Log.RESULTS);
+        println("\t     " + Log.RESULTS_CONSOLE);
         println("+---------------------------------------------------+");
         println("\t\t" + Log.RUNTIME + "   " + runtime);
         println("\t\t" + Log.CAPACITY + "  " + capacity);
