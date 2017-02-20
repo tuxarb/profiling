@@ -36,6 +36,7 @@ public class Model {
         points = new PointsList();
         BigInteger capacity = BigInteger.valueOf(0);
         long countIterations = 0;
+        long currentTimeAfterStart = 0;
         long startTime = startTestAndGetStartTime();
 
         Process process;
@@ -49,7 +50,7 @@ public class Model {
                     capacity = capacity.add(
                             BigInteger.valueOf(Utils.getNumberFromString(newLine))
                     );
-                    long currentTimeAfterStart = System.currentTimeMillis() - startTime;
+                    currentTimeAfterStart = System.currentTimeMillis() - startTime;
                     points.add(points.new Point(capacity, currentTimeAfterStart));
                     countIterations++;
                     break;
@@ -57,21 +58,14 @@ public class Model {
             }
         }
         checkCountOfIterationsOnZero(countIterations);
-
-        long time = getTestTime(startTime);
-        capacity = capacity.divide(
-                BigInteger.valueOf(countIterations)
-        );
-        long speed = 1000 * capacity.longValue() / time;
-
-        points.computeSpeedForAllPoints();
-        setResultingData(capacity.longValue(), speed, time);
-        LOG.info(Log.READING_PROCESS_ENDED);
+        computeAndSetResultingData(capacity, currentTimeAfterStart, countIterations);
     }
 
     public void startTestForLinuxOrMac() throws IOException, ClientProcessException {
+        points = new PointsList();
         BigInteger capacity = BigInteger.valueOf(0);
         long countIterations = 0;
+        long currentTimeAfterStart = 0;
         long startTime = startTestAndGetStartTime();
 
         Process process;
@@ -85,19 +79,25 @@ public class Model {
                     capacity = capacity.add(
                             BigInteger.valueOf(Utils.getNumberFromString(newLine))
                     );
+                    currentTimeAfterStart = System.currentTimeMillis() - startTime;
+                    points.add(points.new Point(capacity, currentTimeAfterStart));
                     countIterations++;
                     break;
                 }
             }
         }
         checkCountOfIterationsOnZero(countIterations);
+        computeAndSetResultingData(capacity, currentTimeAfterStart, countIterations);
+    }
 
-        long time = getTestTime(startTime);
+    private void computeAndSetResultingData(BigInteger capacity, long time, long countIterations) {
+        LOG.info(Log.RUNNING_CODE_ENDED);
         capacity = capacity.divide(
                 BigInteger.valueOf(countIterations)
         );
         long speed = 1000 * capacity.longValue() / time;
 
+        points.computeSpeedForAllPoints();
         setResultingData(capacity.longValue(), speed, time);
         LOG.info(Log.READING_PROCESS_ENDED);
     }
@@ -164,11 +164,6 @@ public class Model {
 
     private Process execute(String command) throws IOException {
         return Runtime.getRuntime().exec(command);
-    }
-
-    private long getTestTime(long startTime) {
-        LOG.info(Log.RUNNING_CODE_ENDED);
-        return System.currentTimeMillis() - startTime;
     }
 
     private void checkCountOfIterationsOnZero(long countIterations) throws ClientProcessException {
