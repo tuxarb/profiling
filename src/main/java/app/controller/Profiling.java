@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.model.Model;
+import app.model.PointsList;
 import app.model.ResultsCalculator;
 import app.model.beans.Characteristic;
 import app.model.enums.DatabaseTypes;
@@ -158,6 +159,11 @@ public class Profiling implements EventListener {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public PointsList getPoints() {
+        return model.getPoints();
     }
 
     @Override

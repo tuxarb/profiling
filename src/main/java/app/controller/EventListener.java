@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.model.Model;
+import app.model.PointsList;
 import app.model.enums.DatabaseTypes;
 import app.model.enums.OperatingSystems;
 import app.utils.exceptions.WrongSelectedDatabaseException;
@@ -20,6 +21,7 @@ public interface EventListener {
     void updatePropertyFile() throws Exception;
     boolean isPropertiesFileExists();
     boolean areGraphicsAvailableToPaint();
+    PointsList getPoints();
     void setCompleted(boolean isCompleted);
     void setDetailedTest(boolean isDetailedTest);
 }

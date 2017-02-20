@@ -22,6 +22,14 @@ public class PointsList {
         return points.size();
     }
 
+    public Point get(int index) {
+        return points.get(index);
+    }
+
+    public Point getLast() {
+        return points.get(size() - 1);
+    }
+
     void computeSpeedForAllPoints() {
         for (Point point : points) {
             if (point.speed == null) {
@@ -32,7 +40,7 @@ public class PointsList {
         }
     }
 
-    class Point {
+    public class Point {
         private BigInteger capacity;
         private BigInteger speed;
         private long runtime;
@@ -48,13 +56,16 @@ public class PointsList {
             this.speed = speed;
         }
 
-        @Override
-        public String toString() {
-            return "Point{" +
-                    "capacity=" + capacity +
-                    ", speed=" + speed +
-                    ", runtime=" + runtime +
-                    '}';
+        public BigInteger getCapacity() {
+            return capacity;
+        }
+
+        public BigInteger getSpeed() {
+            return speed;
+        }
+
+        public long getRuntime() {
+            return runtime;
         }
     }
 }

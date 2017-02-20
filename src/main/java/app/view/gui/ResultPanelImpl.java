@@ -273,7 +273,7 @@ class ResultPanelImpl extends JPanel implements Panel {
     }
 
     private void buildGraphic(int type) {
-        GraphicsPainter painter = new GraphicsPainter(type);
+        GraphicsPainter painter = new GraphicsPainter(view, type);
         painter.init();
     }
 

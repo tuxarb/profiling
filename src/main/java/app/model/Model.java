@@ -36,7 +36,6 @@ public class Model {
         points = new PointsList();
         BigInteger capacity = BigInteger.valueOf(0);
         long countIterations = 0;
-        long currentTimeAfterStart = 0;
         long startTime = startTestAndGetStartTime();
 
         Process process;
@@ -50,12 +49,12 @@ public class Model {
                     capacity = capacity.add(
                             BigInteger.valueOf(Utils.getNumberFromString(newLine))
                     );
-                    currentTimeAfterStart = System.currentTimeMillis() - startTime;
+                    long currentTimeAfterStart = System.currentTimeMillis() - startTime;
+                    points.add(points.new Point(capacity, currentTimeAfterStart));
                     countIterations++;
                     break;
                 }
             }
-            points.add(points.new Point(capacity, currentTimeAfterStart));
         }
         checkCountOfIterationsOnZero(countIterations);
 
