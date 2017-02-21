@@ -2,6 +2,7 @@ package app.view.gui;
 
 import app.model.PointsList;
 import app.utils.Log;
+import app.utils.Utils;
 import org.slf4j.Logger;
 
 import javax.swing.*;
@@ -10,13 +11,14 @@ import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Locale;
 
 import static app.utils.GraphicsConfig.CAPACITY_TIME_TYPE;
 
 class GraphicsPainter extends JDialog {
     private final PointsList points;
     private final int TYPE;
-    private static final int BORDER_GAP = 50;
+    private static final int BORDER_GAP = 60;
     private static final Logger LOG = Log.createLog(GraphicsPainter.class);
 
     GraphicsPainter(GuiView view, final int TYPE) {
@@ -70,9 +72,9 @@ class GraphicsPainter extends JDialog {
         g.setFont(new Font("Courier New", 2, 16));
         g.drawString("s", BORDER_GAP - 15, BORDER_GAP + 4);
         if (this.TYPE == CAPACITY_TIME_TYPE) {
-            g.drawString("kB", getWidth() - BORDER_GAP, getHeight() - BORDER_GAP + 15);
+            g.drawString("Mb", getWidth() - BORDER_GAP + 5, getHeight() - BORDER_GAP + 5);
         } else {
-            g.drawString("kB/s", getWidth() - BORDER_GAP - 7, getHeight() - BORDER_GAP + 15);
+            g.drawString("Mb/s", getWidth() - BORDER_GAP + 5, getHeight() - BORDER_GAP + 5);
         }
         g.setColor(Color.WHITE);
         g.drawString("0", BORDER_GAP - 20, getHeight() - BORDER_GAP + 15);
@@ -80,7 +82,7 @@ class GraphicsPainter extends JDialog {
 
     private void createHatchMarksAndGrid(Graphics2D g) {
         int markSize = 5;
-        int marksCount = 16;
+        int marksCount = 21;
         int extra = 15;
         int graphicWidth = getWidth() - BORDER_GAP * 2 - extra;
         int graphicHeight = getHeight() - BORDER_GAP * 2 - extra;
@@ -134,7 +136,9 @@ class GraphicsPainter extends JDialog {
         long maxRuntime = lastPoint.getRuntime();
 
         BigDecimal stepByCapacityOrSpeed = maxCapacityOrSpeed.divide(
-                BigDecimal.valueOf(marksCount)
+                BigDecimal.valueOf(marksCount * 1024), //1024 - convert to MB
+                2,
+                RoundingMode.HALF_EVEN
         );
         double stepByRuntime = (double) maxRuntime / marksCount;
 
@@ -142,21 +146,31 @@ class GraphicsPainter extends JDialog {
         g.setFont(new Font("Courier New", 4, 11));
         for (int i = 1; i <= marksCount; i++) {
             g.drawString(
-                    String.valueOf(
-                            Math.round(i * stepByRuntime)
-                    ),
-                    (float) (BORDER_GAP - 35),
-                    (float) (getHeight() - BORDER_GAP - i * stepY)
+                    formatRuntime(Math.round(i * stepByRuntime)),
+                    (float) BORDER_GAP * 0.15f,
+                    (float) (getHeight() - BORDER_GAP - i * stepY + 5)
             );
             g.drawString(
                     stepByCapacityOrSpeed.multiply(
                             BigDecimal.valueOf(i))
                             .setScale(0, RoundingMode.CEILING)
                             .toString(),
-                    (float) (BORDER_GAP + i * stepX - stepX * 0.65),
-                    (float) (getHeight() - BORDER_GAP + 20)
+                    (float) (BORDER_GAP + i * stepX - 10),
+                    i % 2 == 1 ?
+                            (float) (getHeight() - BORDER_GAP + 20) :
+                            (float) (getHeight() - BORDER_GAP + 33)
             );
         }
+    }
+
+    private String formatRuntime(long runtime) {
+        if (runtime >= 100_000) //longer than 100 s
+            return Utils.getStringWithoutLastChars(Utils.formatNumber(runtime, Locale.GERMAN), 1);
+        if (runtime >= 1_000_000) //longer than 1000 s
+            return Utils.getStringWithoutLastChars(Utils.formatNumber(runtime, Locale.GERMAN), 2);
+        if (runtime >= 10_000_000) //longer than 10000 s
+            return String.valueOf(runtime / 1000);
+        return runtime < 1000 ? "0." + runtime : Utils.formatNumber(runtime, Locale.GERMAN);
     }
 
     private String getMessageDependingOnType() {

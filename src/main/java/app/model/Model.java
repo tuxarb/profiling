@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -174,9 +175,9 @@ public class Model {
     }
 
     void setResultingData(long capacity, long speed, long runtime) {
-        characteristic.setCapacity(Utils.formatNumber(capacity) + " kB");
-        characteristic.setSpeed(Utils.formatNumber(speed) + " kB/s");
-        String timeAsString = Utils.formatNumber(runtime);
+        characteristic.setCapacity(Utils.formatNumber(capacity, Locale.ENGLISH) + " kB");
+        characteristic.setSpeed(Utils.formatNumber(speed, Locale.ENGLISH) + " kB/s");
+        String timeAsString = Utils.formatNumber(runtime, Locale.ENGLISH);
         characteristic.setRuntime((runtime < 1000 ? "0," + timeAsString : timeAsString) + " s");
     }
 

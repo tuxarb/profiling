@@ -32,10 +32,8 @@ public class Utils {
         return Long.parseLong(result.toString());
     }
 
-    public static String formatNumber(long number) {
-        Locale loc = new Locale(Locale.ENGLISH.getLanguage());
-        NumberFormat formatter = NumberFormat.getInstance(loc);
-
+    public static String formatNumber(long number, Locale locale) {
+        NumberFormat formatter = NumberFormat.getInstance(locale);
         return formatter.format(number);
     }
 
@@ -52,7 +50,10 @@ public class Utils {
     public static boolean isLinux() {
         String os = System.getProperty("os.name").toLowerCase();
         return (os.contains("nix") || os.contains("nux"));
+    }
 
+    public static String getStringWithoutLastChars(String s, int numberExclusiveChars) {
+        return s.substring(0, s.length() - numberExclusiveChars);
     }
 
     public static String getCurrentDate() {
