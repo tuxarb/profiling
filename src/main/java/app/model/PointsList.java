@@ -30,6 +30,13 @@ public class PointsList {
         return points.get(size() - 1);
     }
 
+    public BigInteger getMaxSpeed() {
+        return points.stream()
+                .map(Point::getSpeed)
+                .max(BigInteger::compareTo)
+                .get();
+    }
+
     void computeSpeedForAllPoints() {
         for (Point point : points) {
             if (point.speed == null) {

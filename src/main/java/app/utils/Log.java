@@ -40,7 +40,8 @@ public class Log {
     public static final String WRITING_FILE_DATA_SUCCESS = "Data was successfully written to the file!";
     public static final String CREATING_DIR_FOR_WRITING = "Creating a directory for writing the resulting data...";
     public static final String RETURNING_TO_THE_MENU_SUCCESS = "Returning to the menu was finished successfully!";
-    public static final String GRAPHIC_PAINTER_STARTED = "Paint <{}> graphic...";
+    public static final String GRAPHIC_PAINTER_STARTED = "Painting <{}> graphic...";
+    public static final String GRAPHIC_PAINTER_ENDED = "The painting <{}> graphic was finished!";
     public static final String CLOSING_APP = "It is closing the application...";
 
     /**
