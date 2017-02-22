@@ -44,7 +44,7 @@ public class WelcomePanelImpl extends JPanel implements Panel {
         labWelcome.setForeground(Color.YELLOW);
 
         JLabel labelAction = createLabel(Log.CHOICE_OS);
-        font = new Font("Copperplate Gothic Light", Font.HANGING_BASELINE, 28);
+        font = new Font("Courier New", 4, 24);
         labelAction.setFont(font);
         labelAction.setForeground(Color.WHITE);
 

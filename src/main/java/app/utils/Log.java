@@ -112,7 +112,7 @@ public class Log {
     /**
      * Text
      */
-    public static final String WELCOME_GUI = "Welcome to the program profiling!";
+    public static final String WELCOME_GUI = "Welcome to the profiling program!";
     public static final String CHOICE_OS = "Select your operating system";
     public static final String MENU_GUI = "Menu";
     public static final String RESULTS_GUI = "The results:";
@@ -147,7 +147,7 @@ public class Log {
      */
     public static final String ENTER = "Enter: ";
     public static final String WRONG_ENTER = "Invalid input! Try again.";
-    public static final String WELCOME_CONSOLE = "WELCOME TO THE PROGRAM PROFILING!";
+    public static final String WELCOME_CONSOLE = "WELCOME TO THE PROFILING PROGRAM!";
     public static final String MENU_CONSOLE = "M E N U";
     public static final String MENU_CHOICE = "Choose one of the next options (using 1-3):";
     public static final String RESULTS_CONSOLE = "The results of your program:";

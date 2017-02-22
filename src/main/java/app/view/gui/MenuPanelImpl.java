@@ -35,7 +35,7 @@ class MenuPanelImpl extends JPanel implements Panel {
 
     private void paint() {
         Label menu = new Label(Log.MENU_GUI);
-        Font font = new Font("Hiragino Kaku Gothic Pro", Font.ITALIC, 26);
+        Font font = new Font("Courier New", 3, 26);
         menu.setFont(font);
         menu.setForeground(Color.YELLOW);
         add(menu);
