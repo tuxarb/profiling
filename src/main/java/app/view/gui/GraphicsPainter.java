@@ -6,7 +6,9 @@ import app.utils.Utils;
 import org.slf4j.Logger;
 
 import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -17,35 +19,46 @@ import java.util.Locale;
 import static app.utils.GraphicsConfig.CAPACITY_TIME_TYPE;
 
 class GraphicsPainter extends JDialog {
-    private final PointsList points;
-    private final int TYPE;
     private double gridX;
     private double gridY;
+    private final PointsList points;
+    private final CoordinatesPainter painter;
+    private final int TYPE;
     private static final int BORDER_GAP = 60;
     private static final Logger LOG = Log.createLog(GraphicsPainter.class);
 
     GraphicsPainter(GuiView view, final int TYPE) {
         this.TYPE = TYPE;
         this.points = view.getEventListener().getPoints();
+        this.painter = new CoordinatesPainter();
     }
 
     void init() {
         LOG.debug(Log.GRAPHIC_PAINTER_STARTED, getMessageDependingOnType());
         setTitle(String.format(Log.GRAPHICS + " <%s>", getMessageDependingOnType()));
-        setSize(
-                Toolkit.getDefaultToolkit().getScreenSize().width - 100,
-                Toolkit.getDefaultToolkit().getScreenSize().height - 100
-        );
+        setSize(getScreenWidth(), getScreenHeight());
         setModal(true);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addMouseListener(new MouseInputAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    painter.clearOutput();
+                    return;
+                }
+                painter.setX(e.getX() * gridX - BORDER_GAP);
+                painter.setY(getHeight() - BORDER_GAP - e.getY() * gridY);
+                painter.paint();
+            }
+        });
         setVisible(true);
     }
 
-    @Override
     public void paint(Graphics g) {
         super.paint(g);
+        painter.setGraphics((Graphics2D) g.create());
         setIgnoreRepaint(true);
         drawAxes((Graphics2D) g);
         drawFunc((Graphics2D) g);
@@ -264,5 +277,62 @@ class GraphicsPainter extends JDialog {
 
     private String getMessageDependingOnType() {
         return this.TYPE == CAPACITY_TIME_TYPE ? Log.CAPACITY_TIME : Log.SPEED_TIME;
+    }
+
+    private int getScreenWidth() {
+        return Toolkit.getDefaultToolkit().getScreenSize().width - 100;
+    }
+
+    private int getScreenHeight() {
+        return Toolkit.getDefaultToolkit().getScreenSize().height - 100;
+    }
+
+    private class CoordinatesPainter {
+        private String x;  // capacity or speed coordinate
+        private String y;  // runtime coordinate
+        private int outputWidth;
+        private final int SCREEN_WIDTH = getScreenWidth();
+        private Graphics2D g;
+
+        void paint() {
+            if (g == null) {
+                return;
+            }
+            String capacityOrSpeedText = (TYPE == CAPACITY_TIME_TYPE) ? "capacity=" + x : "speed=" + x;
+            String runtimeText = "runtime=" + y;
+            outputWidth = g.getFontMetrics().stringWidth(
+                    capacityOrSpeedText.length() > runtimeText.length() ? capacityOrSpeedText : runtimeText
+            );
+            g.setColor(Color.RED);
+            g.setFont(new Font("Courier New", 2, 14));
+            clearOutput();
+            g.drawString(capacityOrSpeedText, SCREEN_WIDTH / 2, BORDER_GAP - BORDER_GAP / 2 + 15);
+            g.drawString(runtimeText, SCREEN_WIDTH / 2, BORDER_GAP - BORDER_GAP / 4 + 20);
+        }
+
+        void setX(double x) {
+            this.x = Utils.formatNumber(Math.round(x), Locale.GERMAN);
+        }
+
+        void setY(double y) {
+            this.y = formatRuntime(Math.round(y));
+        }
+
+        void setGraphics(Graphics2D g) {
+            this.g = g;
+            this.g.setBackground((Color) UIManager.get("Panel.background"));
+        }
+
+        void clearOutput() {
+            if (g == null) {
+                return;
+            }
+            int height = 40;
+            g.clearRect(SCREEN_WIDTH / 2 - 3,
+                    BORDER_GAP - BORDER_GAP / 2 + 3,
+                    outputWidth + 30,
+                    height
+            );
+        }
     }
 }
