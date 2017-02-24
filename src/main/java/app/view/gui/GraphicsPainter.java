@@ -75,9 +75,23 @@ class GraphicsPainter extends JDialog {
         super.paint(g);
         painter.setGraphics((Graphics2D) g.create());
         setIgnoreRepaint(true);
+        paintBackground(((Graphics2D) g));
         drawAxes((Graphics2D) g);
         drawFunc((Graphics2D) g);
         LOG.debug(Log.GRAPHIC_PAINTER_ENDED, getMessageDependingOnType());
+    }
+
+    private void paintBackground(Graphics2D g) {
+        GradientPaint layer1 = new GradientPaint(
+                0, getHeight() / 2, new Color(12, 12, 11),
+                getWidth(), getHeight(), new Color(32, 32, 38));
+        g.setPaint(layer1);
+        g.fillRect(0, getHeight() / 2, getWidth(), getHeight() / 2);
+        GradientPaint layer2 = new GradientPaint(
+                getWidth(), getHeight(), new Color(32, 32, 38),
+                getWidth() - 2 * BORDER_GAP, getHeight() / 2, new Color(15, 5, 5));
+        g.setPaint(layer2);
+        g.fillRect(getWidth() - (BORDER_GAP + 30), getHeight() / 2, 2 * BORDER_GAP, getHeight() / 2);
     }
 
     private void drawAxes(Graphics2D g) {
@@ -136,14 +150,17 @@ class GraphicsPainter extends JDialog {
             );
         }
 
-        Color gridAreaColor = new Color(84, 84, 84);
-        g.setColor(gridAreaColor);
+        GradientPaint gridAreaColor = new GradientPaint(
+                BORDER_GAP, (float) (getHeight() - BORDER_GAP - marksCount * stepY), new Color(50, 50, 90),
+                (float) (BORDER_GAP + marksCount * stepX), getHeight() - BORDER_GAP, new Color(63, 63, 27)
+        );
+        g.setPaint(gridAreaColor);
         g.fill(new Rectangle2D.Double(
                 BORDER_GAP, getHeight() - BORDER_GAP - marksCount * stepY,
                 marksCount * stepX, marksCount * stepY)
         );
 
-        Color gridColor = new Color(55, 55, 55);
+        Color gridColor = new Color(75, 75, 75);
         g.setColor(gridColor);
         g.setStroke(new BasicStroke(
                 1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND, 1.0f, new float[]{5.0f}, 0.0f)
@@ -216,7 +233,7 @@ class GraphicsPainter extends JDialog {
 
     private void drawFunc(Graphics2D g) {
         int countSplits = getCountSplitsDependingOnCountPoints();
-        Color funcColor = new Color(0, 5, 230);
+        Color funcColor = new Color(0, 8, 255);
         g.setStroke(new BasicStroke(5.5f));
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
