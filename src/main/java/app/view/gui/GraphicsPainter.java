@@ -41,19 +41,34 @@ class GraphicsPainter extends JDialog {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
+        setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
         addMouseListener(new MouseInputAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (SwingUtilities.isRightMouseButton(e)) {
-                    painter.clearOutput();
+                    painter.clear();
                     return;
                 }
-                painter.setX(e.getX() * gridX - BORDER_GAP);
-                painter.setY(getHeight() - BORDER_GAP - e.getY() * gridY);
+                double pointX = e.getPoint().getX();
+                double pointY = e.getPoint().getY();
+                if (isPointOutOfBounds(pointX, pointY)) {
+                    painter.clear();
+                    return;
+                }
+                painter.setX((pointX - BORDER_GAP) * gridX);
+                painter.setY((getHeight() - BORDER_GAP - pointY) * gridY);
                 painter.paint();
             }
         });
         setVisible(true);
+    }
+
+    private boolean isPointOutOfBounds(double x, double y) {
+        boolean isCapacityTimeType = TYPE == CAPACITY_TIME_TYPE;
+        return x > computeX(isCapacityTimeType ? points.getLast() : points.getPointWithMaxSpeed()) ||
+                y < computeY(points.getLast()) ||
+                x < BORDER_GAP ||
+                y > getHeight() - BORDER_GAP;
     }
 
     public void paint(Graphics g) {
@@ -101,7 +116,7 @@ class GraphicsPainter extends JDialog {
 
     private void createHatchMarksAndGrid(Graphics2D g) {
         int markSize = 5;
-        int marksCount = 21;
+        int marksCount = 19;
         int extra = 15;
         int graphicWidth = getWidth() - BORDER_GAP * 2 - extra;
         int graphicHeight = getHeight() - BORDER_GAP * 2 - extra;
@@ -171,16 +186,27 @@ class GraphicsPainter extends JDialog {
                     (float) BORDER_GAP * 0.15f,
                     (float) (getHeight() - BORDER_GAP - i * stepY + 5)
             );
-            g.drawString(
-                    stepByCapacityOrSpeed.multiply(
-                            BigDecimal.valueOf(i))
-                            .setScale(0, RoundingMode.CEILING)
-                            .toString(),
-                    (float) (BORDER_GAP + i * stepX - 10),
-                    i % 2 == 1 ?
-                            (float) (getHeight() - BORDER_GAP + 20) :
-                            (float) (getHeight() - BORDER_GAP + 33)
-            );
+            if (maxCapacityOrSpeed.toString().length() < 12) {
+                g.drawString(stepByCapacityOrSpeed.multiply(
+                        BigDecimal.valueOf(i))
+                                .setScale(1, RoundingMode.HALF_EVEN)
+                                .toString(),
+                        (float) (BORDER_GAP + i * stepX - 20),
+                        i % 2 == 1 ?
+                                (float) (getHeight() - BORDER_GAP + 20) :
+                                (float) (getHeight() - BORDER_GAP + 33)
+                );
+            } else {
+                g.drawString(stepByCapacityOrSpeed.multiply(
+                        BigDecimal.valueOf(i))
+                                .setScale(0, RoundingMode.HALF_EVEN)
+                                .toString(),
+                        (float) (BORDER_GAP + i * stepX - BORDER_GAP * 0.6),
+                        i % 2 == 1 ?
+                                (float) (getHeight() - BORDER_GAP + 20) :
+                                (float) (getHeight() - BORDER_GAP + 33)
+                );
+            }
         }
         this.gridX = stepByCapacityOrSpeed.divide(
                 BigDecimal.valueOf(stepX), 16, RoundingMode.HALF_EVEN)
@@ -288,51 +314,53 @@ class GraphicsPainter extends JDialog {
     }
 
     private class CoordinatesPainter {
-        private String x;  // capacity or speed coordinate
-        private String y;  // runtime coordinate
+        private String x;  // a capacity or a speed coordinate
+        private String y;  // a runtime coordinate
         private int outputWidth;
-        private final int SCREEN_WIDTH = getScreenWidth();
         private Graphics2D g;
+        private final int OUTPUT_HEIGHT = 40;
+        private final int RIGTH_GAP = 30;
 
-        void paint() {
+        private void paint() {
             if (g == null) {
                 return;
             }
-            String capacityOrSpeedText = (TYPE == CAPACITY_TIME_TYPE) ? "capacity=" + x : "speed=" + x;
+            String capacityOrSpeedText = (TYPE == CAPACITY_TIME_TYPE ? "capacity=" : "speed=") + x;
             String runtimeText = "runtime=" + y;
             outputWidth = g.getFontMetrics().stringWidth(
                     capacityOrSpeedText.length() > runtimeText.length() ? capacityOrSpeedText : runtimeText
             );
             g.setColor(Color.RED);
             g.setFont(new Font("Courier New", 2, 14));
-            clearOutput();
-            g.drawString(capacityOrSpeedText, SCREEN_WIDTH / 2, BORDER_GAP - BORDER_GAP / 2 + 15);
-            g.drawString(runtimeText, SCREEN_WIDTH / 2, BORDER_GAP - BORDER_GAP / 4 + 20);
+            clear();
+            g.drawString(capacityOrSpeedText, BORDER_GAP + RIGTH_GAP, BORDER_GAP - BORDER_GAP / 2 + 15);
+            g.drawString(runtimeText, BORDER_GAP + RIGTH_GAP, BORDER_GAP - BORDER_GAP / 4 + 20);
         }
 
-        void setX(double x) {
-            this.x = Utils.formatNumber(Math.round(x), Locale.GERMAN);
-        }
-
-        void setY(double y) {
-            this.y = formatRuntime(Math.round(y));
-        }
-
-        void setGraphics(Graphics2D g) {
-            this.g = g;
-            this.g.setBackground((Color) UIManager.get("Panel.background"));
-        }
-
-        void clearOutput() {
+        private void clear() {
             if (g == null) {
                 return;
             }
-            int height = 40;
-            g.clearRect(SCREEN_WIDTH / 2 - 3,
-                    BORDER_GAP - BORDER_GAP / 2 + 3,
-                    outputWidth + 30,
-                    height
+            g.clearRect(
+                    BORDER_GAP + RIGTH_GAP - 5,
+                    BORDER_GAP - BORDER_GAP / 2,
+                    outputWidth + 200,
+                    OUTPUT_HEIGHT
             );
+        }
+
+        private void setX(double x) {
+            String remainderX = String.valueOf(x - Math.floor(x)).substring(1, 3);
+            this.x = Utils.formatNumber((long) x, Locale.CANADA_FRENCH) + remainderX;
+        }
+
+        private void setY(double y) {
+            this.y = formatRuntime(Math.round(y));
+        }
+
+        private void setGraphics(Graphics2D g) {
+            this.g = g;
+            this.g.setBackground((Color) UIManager.get("Panel.background"));
         }
     }
 }
