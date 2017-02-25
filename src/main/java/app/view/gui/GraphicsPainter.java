@@ -275,7 +275,7 @@ class GraphicsPainter extends JDialog {
     private void checkCapacityOnExcess(Graphics2D g, PointsList.Point first, PointsList.Point second) {
         long deltaRuntime = second.getRuntime() - first.getRuntime();
         double deltaCapacity = (second.getCapacity().subtract(first.getCapacity())).doubleValue() / deltaRuntime;
-        if (deltaCapacity > 1.25 * points.getAverageCapacityForOneMs()) {
+        if (deltaCapacity > 1.5 * points.getAverageCapacityForOneMs()) {
             g.setColor(Color.RED);
         }
     }
@@ -378,8 +378,8 @@ class GraphicsPainter extends JDialog {
         }
 
         private void setX(double x) {
-            String remainderX = String.valueOf(x - Math.floor(x)).substring(1, 3);
-            this.x = Utils.formatNumber((long) x, Locale.CANADA_FRENCH) + remainderX;
+            String remainder = String.valueOf(x - Math.floor(x)).substring(1, 3);
+            this.x = Utils.formatNumber((long) x, Locale.CANADA_FRENCH) + remainder;
         }
 
         private void setY(double y) {

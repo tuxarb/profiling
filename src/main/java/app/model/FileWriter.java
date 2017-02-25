@@ -19,13 +19,13 @@ class FileWriter {
     }
 
     void write() throws IOException {
-        LOG.info(Log.PREPARATION_FOR_WRITING_IN_THE_FILE);
         File file = new File(getPathToDir() + File.separator + "results.txt");
+        LOG.info(Log.PREPARATION_FOR_WRITING_IN_THE_FILE);
 
         String taskName = ch.getTaskName();
         LOG.info(Log.WRITING_IN_THE_FILE);
         try (java.io.FileWriter fileWriter = new java.io.FileWriter(file, true)) {
-            fileWriter.write("\t  Results for your program:\n\n");
+            fileWriter.write("\t  The results program:\n\n");
             fileWriter.write("------------------------------------------\n");
             if (!taskName.isEmpty())
                 fileWriter.write("\t\t" + taskName + "\n");
@@ -56,11 +56,17 @@ class FileWriter {
         }
         LOG.info(Log.CREATING_DIR_FOR_WRITING);
         File dir = new File(pathToFolder + File.separator + ".profiling_results");
-        dir.mkdir();
-        return dir;
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+        return dir.exists() ? dir : null;
     }
 
     private String getPathToDir() throws IOException {
+        if (directory == null) {
+            LOG.error(Log.CREATING_DIR_ERROR);
+            throw new IOException();
+        }
         return directory.getCanonicalPath();
     }
 }

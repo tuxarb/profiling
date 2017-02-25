@@ -76,6 +76,7 @@ public class Log {
     public static final String FILE_DATA_DISPLAYING_ERROR = "Error occurred when writing in the file.";
     public static final String DATA_DISPLAYING_ERROR = "Error!One of the characteristics or everyone weren't got when processing.";
     public static final String CREATING_FILE_ERROR = "Error when creating the file.";
+    public static final String CREATING_DIR_ERROR = "Error when creating the directory to save the results file. Check, if the directory path is correct and access to this directory is available.";
     public static final String WRITING_IN_FILE_ERROR = "Errors when writing the data to the file.";
     public static final String SETTING_BACKGROUND_ERROR = "Failed to set the background image. The .jar file is corrupted.";
     public static final String SETTING_BUTTON_IMAGE_ERROR = "Failed to set the button's image. The .jar file is corrupted.";
