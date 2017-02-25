@@ -31,10 +31,11 @@ public class Model {
 
     public Model(final Characteristic characteristic) {
         this.characteristic = characteristic;
+        this.points = new PointsList();
     }
 
     public void startTestForWindows() throws IOException, ClientProcessException {
-        points = new PointsList();
+        points.clear();
         BigInteger capacity = BigInteger.valueOf(0);
         long countIterations = 0;
         long currentTimeAfterStart = 0;
@@ -63,7 +64,7 @@ public class Model {
     }
 
     public void startTestForLinuxOrMac() throws IOException, ClientProcessException {
-        points = new PointsList();
+        points.clear();
         BigInteger capacity = BigInteger.valueOf(0);
         long countIterations = 0;
         long currentTimeAfterStart = 0;

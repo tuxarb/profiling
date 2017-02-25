@@ -3,6 +3,7 @@ package app.view.gui;
 import app.controller.EventListener;
 import app.model.enums.OperatingSystems;
 import app.utils.Log;
+import app.utils.Utils;
 import org.slf4j.Logger;
 
 import javax.imageio.ImageIO;
@@ -15,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URL;
 
 public class GuiView extends JFrame {
     private Panel panel;
@@ -36,6 +38,7 @@ public class GuiView extends JFrame {
         setFocusable(true);
         JFrame.setDefaultLookAndFeelDecorated(true);
         setLookAndFeel();
+        setIconImage();
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -82,6 +85,13 @@ public class GuiView extends JFrame {
         } catch (Exception e) {
             LOG.error(Log.SETTING_BUTTON_IMAGE_ERROR);
             getEventListener().exit();
+        }
+    }
+
+    private void setIconImage() {
+        URL resource = getClass().getResource(Utils.ICON_IMAGE);
+        if (resource != null) {
+            this.setIconImage(new ImageIcon(resource).getImage());
         }
     }
 

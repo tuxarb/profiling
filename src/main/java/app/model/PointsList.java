@@ -6,13 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PointsList {
-    private List<Point> points = new ArrayList<>(1000) {{
-        add(new Point(
-                BigInteger.valueOf(0),
-                0,
-                BigInteger.valueOf(0))
-        );
-    }};
+    private List<Point> points = new ArrayList<>(1000);
 
     void add(Point point) {
         points.add(point);
@@ -48,6 +42,15 @@ public class PointsList {
                         .divide(BigInteger.valueOf(point.runtime));
             }
         }
+    }
+
+    void clear() {
+        points.clear();
+        add(new Point(
+                BigInteger.valueOf(0),
+                0,
+                BigInteger.valueOf(0))
+        );
     }
 
     public class Point {

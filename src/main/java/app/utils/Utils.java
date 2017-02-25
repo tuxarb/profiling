@@ -9,6 +9,7 @@ import java.util.Locale;
 public class Utils {
     public static final String BACKGROUND_IMAGE = "/images/triangle.jpg"; //absolute path to resources
     public static final String BUTTON_IMAGE = "/images/round-button.jpg";
+    public static final String ICON_IMAGE = "/images/icon.jpg";
     public static final String PROGRESS = "/images/loading.gif";
     public static final String POSTGRESQL = "Postgresql";
     public static final String MYSQL = "Mysql";
