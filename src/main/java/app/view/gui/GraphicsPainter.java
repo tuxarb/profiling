@@ -83,15 +83,15 @@ class GraphicsPainter extends JDialog {
 
     private void paintBackground(Graphics2D g) {
         GradientPaint layer1 = new GradientPaint(
-                0, getHeight() / 2, new Color(12, 12, 11),
+                0, getHeight() / 2, new Color(12, 18, 11),
                 getWidth(), getHeight(), new Color(32, 32, 38));
         g.setPaint(layer1);
         g.fillRect(0, getHeight() / 2, getWidth(), getHeight() / 2);
         GradientPaint layer2 = new GradientPaint(
                 getWidth(), getHeight(), new Color(32, 32, 38),
-                getWidth() - 2 * BORDER_GAP, getHeight() / 2, new Color(15, 5, 5));
+                getWidth() - BORDER_GAP, 0, new Color(15, 5, 5));
         g.setPaint(layer2);
-        g.fillRect(getWidth() - (BORDER_GAP + 30), getHeight() / 2, 2 * BORDER_GAP, getHeight() / 2);
+        g.fillRect(getWidth() - (BORDER_GAP + 30), 0, 2 * BORDER_GAP, getHeight());
     }
 
     private void drawAxes(Graphics2D g) {
