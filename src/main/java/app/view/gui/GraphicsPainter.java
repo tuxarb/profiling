@@ -237,10 +237,13 @@ class GraphicsPainter extends JDialog {
         g.setStroke(new BasicStroke(5.5f));
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        g.setColor(funcColor);
         for (int i = 0; i < points.size() - 1; i++) {
+            g.setColor(funcColor);
             PointsList.Point firstPoint = points.get(i);
             PointsList.Point secondPoint = points.get(i + 1);
+            if (this.TYPE == CAPACITY_TIME_TYPE) {
+                checkCapacityOnExcess(g, firstPoint, secondPoint);
+            }
             double startPointX = computeX(firstPoint);
             double startPointY = computeY(firstPoint);
             double stepByX = (computeX(secondPoint) - startPointX) / countSplits;
@@ -252,7 +255,7 @@ class GraphicsPainter extends JDialog {
                 );
             }
         }
-        Color boundaryPointsColor = new Color(255, 0, 0);
+        Color boundaryPointsColor = new Color(174, 255, 16);
         double boundSize = 3.5;
         g.setColor(boundaryPointsColor);
         g.draw(new Ellipse2D.Double(
@@ -267,6 +270,14 @@ class GraphicsPainter extends JDialog {
                 boundSize,
                 boundSize)
         );
+    }
+
+    private void checkCapacityOnExcess(Graphics2D g, PointsList.Point first, PointsList.Point second) {
+        long deltaRuntime = second.getRuntime() - first.getRuntime();
+        double deltaCapacity = (second.getCapacity().subtract(first.getCapacity())).doubleValue() / deltaRuntime;
+        if (deltaCapacity > 1.25 * points.getAverageCapacityForOneMs()) {
+            g.setColor(Color.RED);
+        }
     }
 
     private int getCountSplitsDependingOnCountPoints() {

@@ -12,6 +12,25 @@ public class PointsList {
         points.add(point);
     }
 
+    void clear() {
+        points.clear();
+        add(new Point(
+                BigInteger.valueOf(0),
+                0,
+                BigInteger.valueOf(0))
+        );
+    }
+
+    void computeSpeedForAllPoints() {
+        for (Point point : points) {
+            if (point.speed == null) {
+                point.speed = point.capacity
+                        .multiply(BigInteger.valueOf(1000))
+                        .divide(BigInteger.valueOf(point.runtime));
+            }
+        }
+    }
+
     public int size() {
         return points.size();
     }
@@ -34,23 +53,11 @@ public class PointsList {
         return getPointWithMaxSpeed().getSpeed();
     }
 
-    void computeSpeedForAllPoints() {
-        for (Point point : points) {
-            if (point.speed == null) {
-                point.speed = point.capacity
-                        .multiply(BigInteger.valueOf(1000))
-                        .divide(BigInteger.valueOf(point.runtime));
-            }
-        }
-    }
-
-    void clear() {
-        points.clear();
-        add(new Point(
-                BigInteger.valueOf(0),
-                0,
-                BigInteger.valueOf(0))
-        );
+    public long getAverageCapacityForOneMs() {
+        Point last = getLast();
+        return last.capacity.divide(
+                BigInteger.valueOf(last.runtime)
+        ).longValue();
     }
 
     public class Point {
