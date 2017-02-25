@@ -67,7 +67,7 @@ public class WelcomePanelImpl extends JPanel implements Panel {
         jButton.setPreferredSize(new Dimension(100, 70));
         jButton.setHorizontalTextPosition(JButton.CENTER);
         jButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        jButton.setFont(new Font("Apple Symbols", Font.TRUETYPE_FONT, 12));
+        jButton.setFont(new Font("Eurostile", 4, 12));
         jButton.setForeground(Color.WHITE);
         jButton.setBorder(new RoundedBorder(5));
         add(jButton);
@@ -89,7 +89,6 @@ public class WelcomePanelImpl extends JPanel implements Panel {
     private class ActionHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.setColorOptionPane();
             String command = e.getActionCommand();
 
             switch (command) {

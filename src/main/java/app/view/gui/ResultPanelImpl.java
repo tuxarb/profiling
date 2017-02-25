@@ -46,7 +46,6 @@ class ResultPanelImpl extends JPanel implements Panel {
         view.setSize(GuiView.WIDTH / 2 - 50, GuiView.WIDTH / 2 + 60);
         view.setLocationRelativeTo(null);
         view.getContentPane().add(this);
-        view.setColorOptionPane();
 
         setLayout(new FlowLayout(FlowLayout.CENTER, 35, 17));
         setBackground(Color.BLACK);
@@ -240,7 +239,7 @@ class ResultPanelImpl extends JPanel implements Panel {
         jButton.setPreferredSize(new Dimension(115, 65));
         jButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jButton.setHorizontalTextPosition(JButton.CENTER);
-        jButton.setFont(new Font("Apple Symbols", Font.TRUETYPE_FONT, 12));
+        jButton.setFont(new Font("Futura", 2, 12));
         jButton.setForeground(Color.WHITE);
         jButton.setToolTipText(message);
         jButton.setBorder(new RoundedBorder(10));

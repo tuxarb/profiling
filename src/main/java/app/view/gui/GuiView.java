@@ -35,6 +35,7 @@ public class GuiView extends JFrame {
         setResizable(false);
         setFocusable(true);
         JFrame.setDefaultLookAndFeelDecorated(true);
+        setLookAndFeel();
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -56,7 +57,7 @@ public class GuiView extends JFrame {
         this.eventListener = eventListener;
     }
 
-    synchronized EventListener getEventListener() {
+    EventListener getEventListener() {
         return eventListener;
     }
 
@@ -92,10 +93,12 @@ public class GuiView extends JFrame {
         return buttonImage;
     }
 
-    void setColorOptionPane() {
+    private void setLookAndFeel() {
         UIManager.put("OptionPane.background", new Color(15, 5, 5));
         UIManager.put("Panel.background", new Color(15, 5, 5));
         UIManager.put("OptionPane.messageForeground", Color.WHITE);
+        UIManager.put("OptionPane.messageFont", new Font("Modern No. 20", 4, 12));
+        UIManager.put("Button.background", new Color(190, 190, 190));
     }
 
     File getSelectedPropertyFile() throws FileNotFoundException {

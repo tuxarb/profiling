@@ -23,8 +23,6 @@ class MenuPanelImpl extends JPanel implements Panel {
         view.setSize(GuiView.HEIGHT / 2, GuiView.WIDTH / 2 + 45);
         view.setLocationRelativeTo(null);
         view.getContentPane().add(this);
-        view.setColorOptionPane();
-
         setLayout(new FlowLayout(FlowLayout.CENTER, 40, 30));
         setBackground(Color.BLACK);
         setSize(view.getSize());
@@ -116,7 +114,7 @@ class MenuPanelImpl extends JPanel implements Panel {
         jButton.setPreferredSize(new Dimension(145, 65));
         jButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         jButton.setHorizontalTextPosition(JButton.CENTER);
-        jButton.setFont(new Font("Apple Symbols", Font.TRUETYPE_FONT, 14));
+        jButton.setFont(new Font("Futura", 2, 14));
         jButton.setForeground(Color.WHITE);
         jButton.setBorder(new RoundedBorder(10));
         jButton.setToolTipText(message);
