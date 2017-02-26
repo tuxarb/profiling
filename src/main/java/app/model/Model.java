@@ -61,7 +61,6 @@ public class Model {
         }
         checkCountOfIterationsOnZero(countIterations);
         computeAndSetResultingData(capacity, currentTimeAfterStart, countIterations);
-        System.gc();
     }
 
     public void startTestForLinuxOrMac() throws IOException, ClientProcessException {
@@ -91,7 +90,6 @@ public class Model {
         }
         checkCountOfIterationsOnZero(countIterations);
         computeAndSetResultingData(capacity, currentTimeAfterStart, countIterations);
-        System.gc();
     }
 
     private void computeAndSetResultingData(BigInteger capacity, long time, long countIterations) {
