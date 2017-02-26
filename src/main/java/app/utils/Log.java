@@ -45,6 +45,7 @@ public class Log {
     public static final String NO_OPTION_WHEN_RETURNING_TO_THE_MENU = "Returning to the menu wasn't happened because user chose 'no'.";
     public static final String GRAPHIC_PAINTER_STARTED = "Painting <{}> graphic...";
     public static final String GRAPHIC_PAINTER_ENDED = "The painting <{}> graphic was finished!";
+    public static final String POINTS_FILE_WRITER_MESSAGE = "Here you can see all the information about the profiling your program.";
     public static final String CLOSING_APP = "It is closing the application...";
 
     /**

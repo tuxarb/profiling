@@ -2,6 +2,7 @@ package app.view.console;
 
 
 import app.model.PointsList;
+import app.utils.Log;
 import app.utils.Utils;
 
 import java.io.File;
@@ -32,8 +33,13 @@ class PointsFileWriter {
             int blockLength = (
                     getWhitespaces("", maxRuntime) + getWhitespaces("", maxCapacity) + getWhitespaces("", maxSpeed)
             ).length();
-            String bounds = getBounds(blockLength);
-            writer.write(bounds + "|" + "\n");
+            writer.write(getBounds(Log.POINTS_FILE_WRITER_MESSAGE.length(), "*"));
+            writer.write("\n");
+            writer.write("<-----" + Log.POINTS_FILE_WRITER_MESSAGE + "----->\n");
+            writer.write(getBounds(Log.POINTS_FILE_WRITER_MESSAGE.length(), "*"));
+            writer.write("\n");
+            String bounds = getBounds(blockLength, "-");
+            writer.write(bounds + "#" + "\n");
             writer.write(MS + getWhitespaces(MS, maxRuntime) +
                     KB + getWhitespaces(KB, maxCapacity) +
                     KB_S + getWhitespaces(KB_S, maxSpeed) + "|" + "\n");
@@ -62,10 +68,15 @@ class PointsFileWriter {
         return stringWithSpaces.toString();
     }
 
-    private String getBounds(int length) {
+    private String getBounds(int length, String symb) {
         StringBuilder s = new StringBuilder();
+        if ("*".equals(symb)) {
+            for (int i = 0; i < 6; i++) {
+                s.append(" ");
+            }
+        }
         for (int i = 0; i < length; i++) {
-            s.append("-");
+            s.append(symb);
         }
         return s.toString();
     }
