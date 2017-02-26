@@ -38,6 +38,7 @@ public class Log {
     public static final String DATA_INIT_FOR_DISPLAYING = "The resulting data are being initialized for displaying...";
     public static final String DATA_DISPLAYING_SUCCESS = "The resulting data were successfully displayed on the screen!";
     public static final String WRITING_FILE_DATA_SUCCESS = "Data was successfully written to the file!";
+    public static final String WRITING_FILE_POINTS_SUCCESS = "Points were successfully written to the file!";
     public static final String CREATING_DIR_FOR_WRITING = "Creating a directory for writing the resulting data...";
     public static final String RETURNING_TO_THE_MENU_SUCCESS = "Returning to the menu was finished successfully!";
     public static final String NO_OPTION_WHEN_UPDATE_THE_PROPERTY_FILE = "The .properties file wasn't updated because user chose 'no'.";
@@ -69,10 +70,11 @@ public class Log {
     public static final String SESSION_FACTORY_IS_NULL = "Error. SessionFactory instance is null.";
     public static final String URL_TO_DATABASE_IS_NULL = "Specify url for the connecting in your .properties file.";
     public static final String DRIVER_CLASS_NOT_FOUND_ERROR = "Driver class was not found for your DBMS. Specify it in your .properties file.";
-    public static final String PROPERTY_READ_ERROR = "Error occurred when reading the property file.";
+    public static final String PROPERTY_READ_ERROR = "Error occurred when reading the .properties file.";
     public static final String SMALL_PROGRAM_ERROR = "Your program is too small to test.";
     public static final String CANCELLING_PROPERTY_FILE = "Pressed 'cancel' when trying to open a .properties file.";
     public static final String PROPERTY_FILE_WAS_NOT_SELECTED = "Path to a .properties file was not specified.";
+    public static final String FILE_WAS_NOT_SELECTED = "Path was not specified.";
     public static final String FILE_DATA_DISPLAYING_ERROR = "Error occurred when writing in the file.";
     public static final String DATA_DISPLAYING_ERROR = "Error!One of the characteristics or everyone weren't got when processing.";
     public static final String CREATING_FILE_ERROR = "Error when creating the file.";
@@ -152,11 +154,13 @@ public class Log {
     public static final String MENU_CONSOLE = "M E N U";
     public static final String MENU_CHOICE = "Choose one of the next options (using 1-3):";
     public static final String RESULTS_CONSOLE = "The results of your program:";
-    public static final String RESULT_PANEL_CHOICE = "Choose one of the next options (using 0-4):";
-    public static final String MENU_WRONG_PATH_TO_PROPERTY_FILE = "Wrong path. Try again or press 'enter' to exit.";
+    public static final String RESULT_PANEL_CHOICE = "Choose one of the next options (using 0-5):";
+    public static final String WRONG_PATH_TO_FILE = "Wrong path. Try again or press 'enter' to go back.";
     public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your .properties file: ";
+    public static final String RESULT_PATH_TO_FILE_TO_SAVE_POINTS = "Enter path where to save .txt file with all resulting points:";
     public static final String DATABASE_INPUT = "Choose the type of database (using 1-5) or exit (using 0):";
     public static final String SAVE_TO_DATABASE = "Save to database";
+    public static final String SAVE_POINTS_TO_FILE = "Save all points to file";
     public static final String TYPE_DATABASE_IS_NOT_SELECTED = "The type of database was not selected. Returning back...";
     public static final String UPDATE_PROPERTY_FILE = "Update the .properties file";
     public static final String PROCESSING_CONSOLE = "P r o c e s s i n g... <= ";

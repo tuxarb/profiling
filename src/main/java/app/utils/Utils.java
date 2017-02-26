@@ -33,7 +33,7 @@ public class Utils {
         return Long.parseLong(result.toString());
     }
 
-    public static String formatNumber(long number, Locale locale) {
+    public static String formatNumber(Number number, Locale locale) {
         NumberFormat formatter = NumberFormat.getInstance(locale);
         return formatter.format(number);
     }

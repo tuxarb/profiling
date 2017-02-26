@@ -131,7 +131,7 @@ class ConsoleMenu {
                 println(Log.PROPERTY_FILE_READ);
                 break;
             } catch (Exception e) {
-                println(Log.MENU_WRONG_PATH_TO_PROPERTY_FILE);
+                println(Log.WRONG_PATH_TO_FILE);
                 print("\n");
             }
         }

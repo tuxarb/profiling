@@ -7,6 +7,7 @@ import app.utils.Utils;
 import app.utils.exceptions.WrongSelectedDatabaseException;
 import org.slf4j.Logger;
 
+import java.io.File;
 import java.io.IOException;
 
 import static app.utils.ConsoleWorker.*;
@@ -72,6 +73,9 @@ class ConsoleResult {
                         break;
                     }
                     break L;
+                case "5":
+                    writePointsToFile();
+                    break;
                 case "0":
                     exit();
                 default:
@@ -106,6 +110,37 @@ class ConsoleResult {
     private void exit() {
         println(Log.CLOSING_APP);
         view.getEventListener().exit();
+    }
+
+    private void writePointsToFile() {
+        print(Log.RESULT_PATH_TO_FILE_TO_SAVE_POINTS);
+        while (true) {
+            print("\n>");
+            String path = readLine().trim();
+            if ("".equals(path)) {
+                println(Log.FILE_WAS_NOT_SELECTED);
+                LOG.warn(Log.FILE_WAS_NOT_SELECTED);
+                return;
+            }
+            File dir = new File(path);
+            if (dir.exists()) {
+                PointsFileWriter writer = new PointsFileWriter(view.getEventListener().getPoints(), dir);
+                try {
+                    writer.write();
+                    if (!writer.getNewFile().exists()) {
+                        throw new Exception(Log.CREATING_FILE_ERROR);
+                    }
+                    println(Log.WRITING_FILE_POINTS_SUCCESS);
+                    LOG.info(Log.WRITING_FILE_POINTS_SUCCESS);
+                    break;
+                } catch (Exception e) {
+                    print(Log.CREATING_FILE_ERROR);
+                    LOG.error(e.toString());
+                }
+            } else {
+                print(Log.WRONG_PATH_TO_FILE);
+            }
+        }
     }
 
     private void writeToFile() {
@@ -189,6 +224,7 @@ class ConsoleResult {
         println("\t\t2. " + Log.SAVE_TO_DATABASE);
         println("\t\t3. " + Log.UPDATE_PROPERTY_FILE);
         println("\t\t4. " + Log.REPEAT_TEST);
+        println("\t\t5. " + Log.SAVE_POINTS_TO_FILE);
         println("\t\t0. " + Log.EXIT);
         print("\n");
         println("+---------------------------------------------------+");

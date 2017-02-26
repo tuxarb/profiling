@@ -8,12 +8,12 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.IOException;
 
-class FileWriter {
+class ResultsFileWriter {
     private Characteristic ch;
     private File directory;
-    private static final Logger LOG = Log.createLog(FileWriter.class);
+    private static final Logger LOG = Log.createLog(ResultsFileWriter.class);
 
-    FileWriter(Characteristic characteristic, String pathToUserFolder) {
+    ResultsFileWriter(Characteristic characteristic, String pathToUserFolder) {
         this.ch = characteristic;
         this.directory = createDir(pathToUserFolder);
     }

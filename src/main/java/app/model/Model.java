@@ -61,6 +61,7 @@ public class Model {
         }
         checkCountOfIterationsOnZero(countIterations);
         computeAndSetResultingData(capacity, currentTimeAfterStart, countIterations);
+        System.gc();
     }
 
     public void startTestForLinuxOrMac() throws IOException, ClientProcessException {
@@ -90,6 +91,7 @@ public class Model {
         }
         checkCountOfIterationsOnZero(countIterations);
         computeAndSetResultingData(capacity, currentTimeAfterStart, countIterations);
+        System.gc();
     }
 
     private void computeAndSetResultingData(BigInteger capacity, long time, long countIterations) {
@@ -176,8 +178,8 @@ public class Model {
     }
 
     void setResultingData(long capacity, long speed, long runtime) {
-        characteristic.setCapacity(Utils.formatNumber(capacity, Locale.ENGLISH) + " kB");
-        characteristic.setSpeed(Utils.formatNumber(speed, Locale.ENGLISH) + " kB/s");
+        characteristic.setCapacity(Utils.formatNumber(capacity, Locale.ENGLISH) + " KB");
+        characteristic.setSpeed(Utils.formatNumber(speed, Locale.ENGLISH) + " KB/s");
         String timeAsString = Utils.formatNumber(runtime, Locale.ENGLISH);
         characteristic.setRuntime((runtime < 1000 ? "0," + timeAsString : timeAsString) + " s");
     }
@@ -199,8 +201,8 @@ public class Model {
         characteristic.setTaskName(properties.getProperty("program_name"));
         String pathToUserFolderForSaveResult = properties.getProperty("result_file_path");
 
-        app.model.FileWriter fileWriter = new app.model.FileWriter(characteristic, pathToUserFolderForSaveResult);
-        fileWriter.write();
+        ResultsFileWriter writer = new ResultsFileWriter(characteristic, pathToUserFolderForSaveResult);
+        writer.write();
     }
 
     public void writeToDatabase(DatabaseTypes type) throws IOException, WrongSelectedDatabaseException {
