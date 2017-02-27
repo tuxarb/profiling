@@ -113,7 +113,7 @@ class ConsoleResult {
     }
 
     private void writePointsToFile() {
-        print(Log.RESULT_PATH_TO_FILE_TO_SAVE_POINTS);
+        print(Log.RESULT_PATH_TO_FILES_TO_SAVE_POINTS);
         while (true) {
             print("\n>");
             String path = readLine().trim();
@@ -127,15 +127,12 @@ class ConsoleResult {
                 PointsFileWriter writer = new PointsFileWriter(view.getEventListener().getPoints(), dir);
                 try {
                     writer.write();
-                    if (!writer.getNewFile().exists()) {
-                        throw new Exception(Log.CREATING_FILE_ERROR);
-                    }
                     println(Log.WRITING_FILE_POINTS_SUCCESS);
                     LOG.info(Log.WRITING_FILE_POINTS_SUCCESS);
                     break;
                 } catch (Exception e) {
-                    print(Log.CREATING_FILE_ERROR);
-                    LOG.error(e.toString());
+                    print(e.getMessage());
+                    LOG.error(e.getMessage());
                 }
             } else {
                 print(Log.WRONG_PATH_TO_FILE);

@@ -38,7 +38,7 @@ public class Log {
     public static final String DATA_INIT_FOR_DISPLAYING = "The resulting data are being initialized for displaying...";
     public static final String DATA_DISPLAYING_SUCCESS = "The resulting data were successfully displayed on the screen!";
     public static final String WRITING_FILE_DATA_SUCCESS = "Data was successfully written to the file!";
-    public static final String WRITING_FILE_POINTS_SUCCESS = "Points were successfully written to the file!";
+    public static final String WRITING_FILE_POINTS_SUCCESS = "Points were successfully written in the files!";
     public static final String CREATING_DIR_FOR_WRITING = "Creating a directory for writing the resulting data...";
     public static final String RETURNING_TO_THE_MENU_SUCCESS = "Returning to the menu was finished successfully!";
     public static final String NO_OPTION_WHEN_UPDATE_THE_PROPERTY_FILE = "The .properties file wasn't updated because user chose 'no'.";
@@ -75,11 +75,11 @@ public class Log {
     public static final String SMALL_PROGRAM_ERROR = "Your program is too small to test.";
     public static final String CANCELLING_PROPERTY_FILE = "Pressed 'cancel' when trying to open a .properties file.";
     public static final String PROPERTY_FILE_WAS_NOT_SELECTED = "Path to a .properties file was not specified.";
-    public static final String FILE_WAS_NOT_SELECTED = "Path was not specified.";
+    public static final String FILE_WAS_NOT_SELECTED = "Path to the place where to save the directory was not specified.";
     public static final String FILE_DATA_DISPLAYING_ERROR = "Error occurred when writing in the file.";
     public static final String DATA_DISPLAYING_ERROR = "Error!One of the characteristics or everyone weren't got when processing.";
     public static final String CREATING_FILE_ERROR = "Error when creating the file.";
-    public static final String CREATING_DIR_ERROR = "Error when creating the directory to save the results file. Check, if the directory path is correct and access to this directory is available.";
+    public static final String CREATING_DIR_ERROR = "Error when creating the directory. Check that the path is correct and access is allowed.";
     public static final String WRITING_IN_FILE_ERROR = "Errors when writing the data to the file.";
     public static final String SETTING_BACKGROUND_ERROR = "Failed to set the background image. The .jar file is corrupted.";
     public static final String SETTING_BUTTON_IMAGE_ERROR = "Failed to set the button's image. The .jar file is corrupted.";
@@ -158,7 +158,7 @@ public class Log {
     public static final String RESULT_PANEL_CHOICE = "Choose one of the next options (using 0-5):";
     public static final String WRONG_PATH_TO_FILE = "Wrong path. Try again or press 'enter' to go back.";
     public static final String MENU_PATH_TO_PROPERTY_FILE = "Enter path to your .properties file: ";
-    public static final String RESULT_PATH_TO_FILE_TO_SAVE_POINTS = "Enter path where to save .txt file with all resulting points:";
+    public static final String RESULT_PATH_TO_FILES_TO_SAVE_POINTS = "Enter path where to save the directory:";
     public static final String DATABASE_INPUT = "Choose the type of database (using 1-5) or exit (using 0):";
     public static final String SAVE_TO_DATABASE = "Save to database";
     public static final String SAVE_POINTS_TO_FILE = "Save all points to file";
@@ -180,6 +180,9 @@ public class Log {
     public static final String CAUSE = "Cause -> ";
     public static final String CAPACITY_TIME = "Capacity - Time";
     public static final String SPEED_TIME = "Speed - Time";
+    public static final String FILE_OUTPUT_INFO = "[Runtime - Capacity - Speed - Increment runtime - Increment capacity - Increment speed]";
+    public static final String DIR_WAS_CREATED = "The directory was successfully created![ {} ]";
+    public static final String FILE_WAS_CREATED = "The file was successfully created and filled![ {} ]";
 
     private Log() {
     }
