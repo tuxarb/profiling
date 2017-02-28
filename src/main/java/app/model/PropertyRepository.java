@@ -55,6 +55,9 @@ public class PropertyRepository {
             LOG.info(Log.PROPERTY_FILE_READ + getPathToPropertyFile());
         } catch (Exception e) {
             LOG.error(Log.PROPERTY_READ_ERROR + getPathToPropertyFile());
+            if (e.getMessage() != null && !e.getMessage().isEmpty()) {
+                LOG.error(e.getMessage());
+            }
             throw e;
         }
     }
