@@ -53,11 +53,14 @@ public class PointsList {
         return getPointWithMaxSpeed().getSpeed();
     }
 
-    public long getAverageCapacityForOneMs() {
-        Point last = getLast();
-        return last.capacity.divide(
-                BigInteger.valueOf(last.runtime)
-        ).longValue();
+    public double getAverageCapacityForOneMs() {
+        double capacitySumForOneMs = 0;
+        for (int i = 0; i < size() - 1; i++) {
+            long incrementCapacity = get(i + 1).getCapacity().subtract(get(i).getCapacity()).longValue();
+            long incrementRuntime = get(i + 1).getRuntime() - get(i).getRuntime();
+            capacitySumForOneMs += (double) (incrementCapacity / incrementRuntime);
+        }
+        return capacitySumForOneMs / (size() - 1);
     }
 
     public long getMaxIncrementRuntime() {
