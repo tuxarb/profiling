@@ -217,7 +217,7 @@ public class Model {
         System.exit(0);
     }
 
-    private void killAllChildrenProcesses() {
+    public void killAllChildrenProcesses() {
         ProcessHandle.current()
                 .descendants()
                 .forEach(ProcessHandle::destroyForcibly);
@@ -306,5 +306,9 @@ public class Model {
 
     public PointsList getPoints() {
         return points;
+    }
+
+    public TopResultKeeper getTopResultKeeper() {
+        return topResultKeeper;
     }
 }

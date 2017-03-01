@@ -70,10 +70,12 @@ public class Profiling implements EventListener {
 
     private void startDetailedTest(boolean isWindows) throws ClientProcessException, IOException {
         model.setNumberTests();
+        model.getTopResultKeeper().reset();
         LOG.info(Log.DETAILED_TEST_STARTED);
         for (int i = 1; i <= model.getNumberTests(); i++) {
             LOG.debug(Log.TEST_NUMBER + i + Log.STARTED);
             try {
+                model.killAllChildrenProcesses();
                 if (isWindows) {
                     model.startTestForWindows();
                 } else {
