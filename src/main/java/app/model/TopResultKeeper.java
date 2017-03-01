@@ -11,7 +11,6 @@ public class TopResultKeeper {
     }
 
     boolean isTopResult(long capacity, long speed, long runtime) {
-        System.out.println(runtime + "  " + capacity);
         if (this.runtime != Long.MAX_VALUE && this.runtime > 1.85 * runtime) {
             return false;
         }

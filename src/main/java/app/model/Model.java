@@ -228,7 +228,7 @@ public class Model {
         characteristic.setTaskName(properties.getProperty("program_name"));
         String pathToUserFolderForSaveResult = properties.getProperty("result_file_path");
 
-        ResultsFileWriter writer = new ResultsFileWriter(characteristic, pathToUserFolderForSaveResult);
+        ResultsFileWriter writer = new ResultsFileWriter(this, pathToUserFolderForSaveResult);
         writer.write();
     }
 

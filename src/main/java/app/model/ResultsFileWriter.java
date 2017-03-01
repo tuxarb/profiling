@@ -9,13 +9,15 @@ import java.io.File;
 import java.io.IOException;
 
 class ResultsFileWriter {
-    private Characteristic ch;
-    private File directory;
+    private final Characteristic ch;
+    private final File directory;
+    private final int TESTS_NUMBER;
     private static final Logger LOG = Log.createLog(ResultsFileWriter.class);
 
-    ResultsFileWriter(Characteristic characteristic, String pathToUserFolder) {
-        this.ch = characteristic;
+    ResultsFileWriter(Model model, String pathToUserFolder) {
+        this.ch = model.getCharacteristic();
         this.directory = createDir(pathToUserFolder);
+        this.TESTS_NUMBER = model.isDetailedTest() ? model.getNumberTests() : 1;
     }
 
     void write() throws IOException {
@@ -30,9 +32,12 @@ class ResultsFileWriter {
             if (!taskName.isEmpty())
                 fileWriter.write("\t\t" + taskName + "\n");
             fileWriter.write("------------------------------------------\n");
+            fileWriter.write("******************************************\n");
             fileWriter.write("Runtime: \t" + ch.getRuntime() + "\n");
             fileWriter.write("Capacity:\t" + ch.getCapacity() + "\n");
             fileWriter.write("Speed:   \t" + ch.getSpeed() + "\n");
+            fileWriter.write("******************************************\n");
+            fileWriter.write("Number of tests:  " + TESTS_NUMBER + "\n");
             fileWriter.write("------------------------------------------\n");
             fileWriter.write("\t\t" + Utils.getCurrentDate() + "\n");
             fileWriter.write("------------------------------------------\n\n");
