@@ -19,6 +19,7 @@ import static app.utils.Utils.getUserCommandInfo;
 
 public class Model {
     private final Characteristic characteristic;
+    private final TopResultKeeper topResultKeeper;
     private PointsList points;
     private long processId;
     private ProcessHandle task;
@@ -31,6 +32,7 @@ public class Model {
 
     public Model(final Characteristic characteristic) {
         this.characteristic = characteristic;
+        this.topResultKeeper = new TopResultKeeper();
         this.points = new PointsList();
     }
 
@@ -60,7 +62,7 @@ public class Model {
             }
         }
         checkCountOfIterationsOnZero(countIterations);
-        computeAndSetResultingData(capacity, currentTimeAfterStart, countIterations);
+        computeAndSaveResultingData(capacity, currentTimeAfterStart, countIterations);
     }
 
     public void startTestForLinuxOrMac() throws IOException, ClientProcessException {
@@ -89,18 +91,18 @@ public class Model {
             }
         }
         checkCountOfIterationsOnZero(countIterations);
-        computeAndSetResultingData(capacity, currentTimeAfterStart, countIterations);
+        computeAndSaveResultingData(capacity, currentTimeAfterStart, countIterations);
     }
 
-    private void computeAndSetResultingData(BigInteger capacity, long time, long countIterations) {
+    private void computeAndSaveResultingData(BigInteger capacity, long time, long countIterations) {
         LOG.info(Log.RUNNING_CODE_ENDED);
         capacity = capacity.divide(
                 BigInteger.valueOf(countIterations)
         );
-        long speed = 1000 * capacity.longValue() / time;
+        long speed = (long) (1000 * capacity.doubleValue() / time);
 
         points.computeSpeedForAllPoints();
-        setResultingData(capacity.longValue(), speed, time);
+        checkResultAndSaveResultingData(capacity.longValue(), speed, time);
         LOG.info(Log.READING_PROCESS_ENDED);
     }
 
@@ -175,11 +177,37 @@ public class Model {
         }
     }
 
-    void setResultingData(long capacity, long speed, long runtime) {
-        characteristic.setCapacity(Utils.formatNumber(capacity, Locale.ENGLISH) + " KB");
-        characteristic.setSpeed(Utils.formatNumber(speed, Locale.ENGLISH) + " KB/s");
-        String timeAsString = Utils.formatNumber(runtime, Locale.ENGLISH);
-        characteristic.setRuntime((runtime < 1000 ? "0," + timeAsString : timeAsString) + " s");
+    private void checkResultAndSaveResultingData(long capacity, long speed, long runtime) {
+        if (isDetailedTest()) {
+            if (topResultKeeper.isTopResult(capacity, speed, runtime)) {
+                saveResultingData(capacity, speed, runtime);
+                points.saveNewTopResult();
+            } else {
+                saveResultingData(
+                        topResultKeeper.getCapacity(), topResultKeeper.getSpeed(), topResultKeeper.getRuntime()
+                );
+                points.clearAndWriteTopResult();
+            }
+        } else {
+            saveResultingData(capacity, speed, runtime);
+        }
+    }
+
+    private void saveResultingData(long capacity, long speed, long runtime) {
+        characteristic.setCapacity(Utils.formatNumber(capacity, Locale.CANADA_FRENCH) + " KB");
+        characteristic.setSpeed(Utils.formatNumber(speed, Locale.CANADA_FRENCH) + " KB/s");
+        String timeAsString = String.valueOf(runtime);
+        if (runtime < 10) {
+            timeAsString = "0,00" + timeAsString;
+        } else if (runtime < 100) {
+            timeAsString = "0,0" + timeAsString;
+        } else if (runtime < 1000) {
+            timeAsString = "0," + timeAsString;
+        } else {
+            String ms = timeAsString.substring(timeAsString.length() - 3);
+            timeAsString = runtime / 1000 + "," + ms;
+        }
+        characteristic.setRuntime(timeAsString + " s");
     }
 
     public void exit() {

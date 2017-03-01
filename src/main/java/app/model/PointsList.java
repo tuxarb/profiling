@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PointsList {
-    private List<Point> points = new ArrayList<>(1000);
+    private List<Point> points = new ArrayList<>(500);
+    private List<Point> topResultPoints = new ArrayList<>(500);
 
     void add(Point point) {
         points.add(point);
@@ -29,6 +30,16 @@ public class PointsList {
                         .divide(BigInteger.valueOf(point.runtime));
             }
         }
+    }
+
+    void clearAndWriteTopResult() {
+        points.clear();
+        points.addAll(topResultPoints);
+    }
+
+    void saveNewTopResult() {
+        topResultPoints.clear();
+        topResultPoints.addAll(points);
     }
 
     public int size() {

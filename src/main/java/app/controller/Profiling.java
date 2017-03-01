@@ -2,7 +2,6 @@ package app.controller;
 
 import app.model.Model;
 import app.model.PointsList;
-import app.model.ResultsCalculator;
 import app.model.beans.Characteristic;
 import app.model.enums.DatabaseTypes;
 import app.model.enums.OperatingSystems;
@@ -70,7 +69,6 @@ public class Profiling implements EventListener {
     }
 
     private void startDetailedTest(boolean isWindows) throws ClientProcessException, IOException {
-        ResultsCalculator calculator = new ResultsCalculator(model);
         model.setNumberTests();
         LOG.info(Log.DETAILED_TEST_STARTED);
         for (int i = 1; i <= model.getNumberTests(); i++) {
@@ -81,7 +79,6 @@ public class Profiling implements EventListener {
                 } else {
                     model.startTestForLinuxOrMac();
                 }
-                calculator.addResultsForTestToSum();
                 LOG.debug(Log.TEST_NUMBER + i + Log.COMPLETED);
             } catch (Exception e) {
                 waitSomeTime(40);
@@ -94,8 +91,6 @@ public class Profiling implements EventListener {
                 }
             }
         }
-        calculator.computeAverageResultsForAllTests();
-        calculator.setResultingData();
         LOG.info(Log.DETAILED_TEST_ENDED);
     }
 
