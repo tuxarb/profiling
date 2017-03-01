@@ -320,13 +320,24 @@ class GraphicsPainter extends JDialog {
     }
 
     private String formatRuntime(long runtime) {
-        if (runtime >= 100_000) //longer than 100 s
-            return Utils.getStringWithoutLastChars(Utils.formatNumber(runtime, Locale.GERMAN), 1);
-        if (runtime >= 1_000_000) //longer than 1000 s
-            return Utils.getStringWithoutLastChars(Utils.formatNumber(runtime, Locale.GERMAN), 2);
+        String timeAsString = String.valueOf(runtime);
+        if (runtime < 10) {
+            timeAsString = "0.00" + timeAsString;
+        } else if (runtime < 100) {
+            timeAsString = "0.0" + timeAsString;
+        } else if (runtime < 1000) {
+            timeAsString = "0." + timeAsString;
+        } else {
+            String ms = timeAsString.substring(timeAsString.length() - 3);
+            timeAsString = runtime / 1000 + "." + ms;
+        }
         if (runtime >= 10_000_000) //longer than 10000 s
             return String.valueOf(runtime / 1000);
-        return runtime < 1000 ? "0." + runtime : Utils.formatNumber(runtime, Locale.GERMAN);
+        if (runtime >= 1_000_000) //longer than 1000 s
+            return Utils.getStringWithoutLastChars(timeAsString, 2);
+        if (runtime >= 100_000) //longer than 100 s
+            return Utils.getStringWithoutLastChars(timeAsString, 1);
+        return timeAsString;
     }
 
     private String getMessageDependingOnType() {

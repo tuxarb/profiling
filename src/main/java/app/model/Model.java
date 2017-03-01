@@ -15,6 +15,7 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.Scanner;
 
+import static app.utils.Utils.formatNumber;
 import static app.utils.Utils.getUserCommandInfo;
 
 public class Model {
@@ -205,7 +206,7 @@ public class Model {
             timeAsString = "0," + timeAsString;
         } else {
             String ms = timeAsString.substring(timeAsString.length() - 3);
-            timeAsString = runtime / 1000 + "," + ms;
+            timeAsString = formatNumber(runtime / 1000, Locale.CANADA_FRENCH) + "," + ms;
         }
         characteristic.setRuntime(timeAsString + " s");
     }
