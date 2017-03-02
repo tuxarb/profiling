@@ -120,9 +120,9 @@ class GraphicsPainter extends JDialog {
         g.setFont(new Font("Courier New", 2, 16));
         g.drawString("s", BORDER_GAP - 15, BORDER_GAP + 4);
         if (this.TYPE == CAPACITY_TIME_TYPE) {
-            g.drawString("Mb", getWidth() - BORDER_GAP + 5, getHeight() - BORDER_GAP + 5);
+            g.drawString("MB", getWidth() - BORDER_GAP + 5, getHeight() - BORDER_GAP + 5);
         } else {
-            g.drawString("Mb/s", getWidth() - BORDER_GAP + 5, getHeight() - BORDER_GAP + 5);
+            g.drawString("MB/s", getWidth() - BORDER_GAP + 5, getHeight() - BORDER_GAP + 5);
         }
         g.setColor(Color.WHITE);
         g.drawString("0", BORDER_GAP - 20, getHeight() - BORDER_GAP + 15);

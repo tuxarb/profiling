@@ -62,7 +62,7 @@ class ResultPanelImpl extends JPanel implements Panel {
         labelAction.setForeground(Color.WHITE);
 
         JTextArea textArea = new JTextArea();
-        textArea.setBackground(Color.ORANGE);
+        textArea.setBackground(new Color(250, 212, 9));
         textArea.setFont(new Font("Arial", 3, 20));
         textArea.setLayout(new BorderLayout());
         textArea.setBorder(BorderFactory.createLoweredSoftBevelBorder());

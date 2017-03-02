@@ -32,7 +32,7 @@ public class Log {
     public static final String WRITING_IN_THE_FILE = "Writing to the file....";
     public static final String WRITING_IN_THE_FILE_SUCCESS = "Writing was successfully finished!";
     public static final String INIT_HIBERNATE_PROPERTIES_STARTED = "Initialization of the properties was started...";
-    public static final String SAVING_TO_DATABASE_STARTED = "Saving to the database was started...";
+    public static final String SAVING_TO_DATABASE_STARTED = "Saving the data to the database was started...";
     public static final String SAVING_TO_DATABASE_ENDED = "Data was successfully written to the database!";
     public static final String INIT_HIBERNATE_PROPERTIES_ENDED = "Initialization of the properties was finished.";
     public static final String DATA_INIT_FOR_DISPLAYING = "The resulting data are being initialized for displaying...";
