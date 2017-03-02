@@ -107,7 +107,7 @@ public class GuiView extends JFrame {
         UIManager.put("OptionPane.background", new Color(15, 5, 5));
         UIManager.put("Panel.background", new Color(15, 5, 5));
         UIManager.put("OptionPane.messageForeground", Color.WHITE);
-        UIManager.put("OptionPane.messageFont", new Font("Modern No. 20", 4, 12));
+        UIManager.put("OptionPane.messageFont", new Font("Modern No. 20", 4, 13));
         UIManager.put("Button.background", new Color(190, 190, 190));
     }
 

@@ -118,7 +118,7 @@ public class Model {
             }
             isScriptFile = true;
         }
-
+        LOG.info(Log.READING_PROCESS_STARTED, pathToProgram.trim());
         long startTime = System.currentTimeMillis();
         createAndRunUserProcess(pathToProgram, isScriptFile);
 
@@ -126,7 +126,6 @@ public class Model {
     }
 
     private void createAndRunUserProcess(String pathToProgram, boolean isScriptFile) throws ClientProcessException {
-        LOG.info(Log.READING_PROCESS_STARTED);
         try {
             execute(pathToProgram);
 

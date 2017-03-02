@@ -19,7 +19,7 @@ public class Log {
     public static final String APP_IS_READY = "The application was successfully initialized!";
     public static final String RUNNING_CODE_STARTED = "Running the client process...";
     public static final String RUNNING_CODE_ENDED = "The client process was finished!";
-    public static final String READING_PROCESS_STARTED = "There is creating a new process, received from the user...";
+    public static final String READING_PROCESS_STARTED = "There is creating a new process, received from the user...[ {} ]";
     public static final String READING_PROCESS_ENDED = "The resulting data were successfully got!";
     public static final String DETAILED_TEST_STARTED = "Start the detailed test for the user's program...";
     public static final String DETAILED_TEST_ENDED = "The detailed test for the user's program was successfully finished!";

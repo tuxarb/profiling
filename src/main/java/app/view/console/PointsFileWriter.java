@@ -11,6 +11,8 @@ import java.io.FileWriter;
 import java.math.BigInteger;
 import java.util.Locale;
 
+import static app.utils.Utils.LF;
+
 class PointsFileWriter {
     private final PointsList points;
     private final File userPath;
@@ -72,23 +74,25 @@ class PointsFileWriter {
                             getWhitespaces("", maxIncrementCapacity) + getWhitespaces("", maxIncrementSpeed)
             ).length();
             writer.write(getBounds(Log.POINTS_FILE_WRITER_MESSAGE.length(), "*"));
-            writer.write("\n");
-            writer.write("<-----" + Log.POINTS_FILE_WRITER_MESSAGE + "----->\n");
+            writer.write(LF);
+            writer.write("<-----" + Log.POINTS_FILE_WRITER_MESSAGE + "----->");
+            writer.write(LF);
             writer.write(Log.FILE_OUTPUT_INFO);
-            writer.write("\n");
+            writer.write(LF);
             writer.write(getBounds(Log.POINTS_FILE_WRITER_MESSAGE.length(), "*"));
-            writer.write("\n\n");
+            writer.write(LF + LF);
             String bounds = getBounds(blockLength, "-");
-            writer.write(bounds + "#" + "\n");
+            writer.write(bounds + "#" + LF);
             writer.write(
                     MS + getWhitespaces(MS, maxRuntime) +
                             KB + getWhitespaces(KB, maxCapacity) +
                             KB_S + getWhitespaces(KB_S, maxSpeed) +
                             INCREMENT_MS + getWhitespaces(INCREMENT_MS, maxIncrementRuntime) +
                             INCREMENT_KB + getWhitespaces(INCREMENT_KB, maxIncrementCapacity) +
-                            INCREMENT_KB_S + getWhitespaces(INCREMENT_KB_S, maxIncrementSpeed) + "|" + "\n"
+                            INCREMENT_KB_S + getWhitespaces(INCREMENT_KB_S, maxIncrementSpeed) + "|"
             );
-            writer.write(bounds + "|" + "\n");
+            writer.write(LF);
+            writer.write(bounds + "|" + LF);
             long prevRuntime = points.get(0).getRuntime();
             BigInteger prevCapacity = points.get(0).getCapacity();
             BigInteger prevSpeed = points.get(0).getSpeed();
@@ -114,9 +118,9 @@ class PointsFileWriter {
                 writer.write(incrementCapacityAsStr + getWhitespaces(incrementCapacityAsStr, maxIncrementCapacity));
                 writer.write(incrementSpeedAsStr + getWhitespaces(incrementSpeedAsStr, maxIncrementSpeed));
                 writer.write("|");
-                writer.write("\n");
+                writer.write(LF);
                 if (i != points.size() - 1) {
-                    writer.write("\n");
+                    writer.write(LF);
                 }
                 prevRuntime = curRuntime;
                 prevCapacity = curCapacity;
@@ -135,7 +139,7 @@ class PointsFileWriter {
                 writer.write(";");
                 writer.write(String.valueOf(points.get(i).getCapacity()));
                 if (i != points.size() - 1) {
-                    writer.write("\n");
+                    writer.write(LF);
                 }
             }
         }
@@ -150,7 +154,7 @@ class PointsFileWriter {
                 writer.write(";");
                 writer.write(String.valueOf(points.get(i).getSpeed()));
                 if (i != points.size() - 1) {
-                    writer.write("\n");
+                    writer.write(LF);
                 }
             }
         }
@@ -169,7 +173,7 @@ class PointsFileWriter {
                 writer.write(";");
                 writer.write(String.valueOf(curCapacity.subtract(prevCapacity)));
                 if (i != points.size() - 1) {
-                    writer.write("\n");
+                    writer.write(LF);
                 }
                 prevRuntime = curRuntime;
                 prevCapacity = curCapacity;
@@ -190,7 +194,7 @@ class PointsFileWriter {
                 writer.write(";");
                 writer.write(String.valueOf(curSpeed.subtract(prevSpeed)));
                 if (i != points.size() - 1) {
-                    writer.write("\n");
+                    writer.write(LF);
                 }
                 prevRuntime = curRuntime;
                 prevSpeed = curSpeed;

@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.io.IOException;
 
+import static app.utils.Utils.LF;
+
 class ResultsFileWriter {
     private final Characteristic ch;
     private final File directory;
@@ -27,20 +29,28 @@ class ResultsFileWriter {
         String taskName = ch.getTaskName();
         LOG.info(Log.WRITING_IN_THE_FILE);
         try (java.io.FileWriter fileWriter = new java.io.FileWriter(file, true)) {
-            fileWriter.write("\t  The results program:\n\n");
-            fileWriter.write("------------------------------------------\n");
-            if (!taskName.isEmpty())
-                fileWriter.write("\t\t" + taskName + "\n");
-            fileWriter.write("------------------------------------------\n");
-            fileWriter.write("******************************************\n");
-            fileWriter.write("Runtime: \t" + ch.getRuntime() + "\n");
-            fileWriter.write("Capacity:\t" + ch.getCapacity() + "\n");
-            fileWriter.write("Speed:   \t" + ch.getSpeed() + "\n");
-            fileWriter.write("******************************************\n");
-            fileWriter.write("Number of tests:  " + TESTS_NUMBER + "\n");
-            fileWriter.write("------------------------------------------\n");
-            fileWriter.write("\t\t" + Utils.getCurrentDate() + "\n");
-            fileWriter.write("------------------------------------------\n\n");
+            fileWriter.write("\t  The results program:");
+            fileWriter.write(LF + LF);
+            fileWriter.write("------------------------------------------" + LF);
+            if (!taskName.isEmpty()) {
+                fileWriter.write("\t\t" + taskName);
+                fileWriter.write(LF);
+            }
+            fileWriter.write("------------------------------------------" + LF);
+            fileWriter.write("******************************************" + LF);
+            fileWriter.write("Runtime: \t" + ch.getRuntime());
+            fileWriter.write(LF);
+            fileWriter.write("Capacity:\t" + ch.getCapacity());
+            fileWriter.write(LF);
+            fileWriter.write("Speed:   \t" + ch.getSpeed());
+            fileWriter.write(LF);
+            fileWriter.write("******************************************" + LF);
+            fileWriter.write("Number of tests:  " + TESTS_NUMBER + LF);
+            fileWriter.write("------------------------------------------" + LF);
+            fileWriter.write("\t\t" + Utils.getCurrentDate());
+            fileWriter.write(LF);
+            fileWriter.write("------------------------------------------");
+            fileWriter.write(LF + LF);
             if (directory == null || directory.listFiles().length == 0) {
                 throw new IOException(Log.CREATING_FILE_ERROR);
             }

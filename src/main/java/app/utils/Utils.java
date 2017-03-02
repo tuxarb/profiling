@@ -17,6 +17,7 @@ public class Utils {
     public static final String SQL_SERVER = "SqlServer";
     public static final String OTHER_DBMS = "Other";
     public static final String SEPARATOR = System.getProperty("file.separator");
+    public static final String LF = System.getProperty("line.separator");
 
     private Utils() {
     }
