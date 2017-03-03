@@ -131,7 +131,11 @@ class ConsoleMenu {
                 println(Log.PROPERTY_FILE_READ);
                 break;
             } catch (Exception e) {
-                println(Log.WRONG_PATH_TO_FILE);
+                if (e.getMessage() != null && !e.getMessage().isEmpty()) {
+                    println(Log.ERROR + ". " + e.getMessage());
+                } else {
+                    println(Log.WRONG_PATH_TO_FILE);
+                }
                 print("\n");
             }
         }

@@ -24,7 +24,7 @@ public class TopResultKeeper {
                                 //new value capacity is not more than prev not more than a quarter and and the runtime difference is not less than 20 ms
                                 (newCapacity <= this.capacity * 1.25 && this.runtime - newRuntime >= 20))) ||
                         (newRuntime == this.runtime && newCapacity < this.capacity) ||
-                        (newRuntime > this.runtime && newRuntime - this.runtime <= 15 &&
+                        (newRuntime > this.runtime && newRuntime - this.runtime <= 20 &&
                                 newCapacity <= 0.95 * this.capacity))) {
             update(newCapacity, newSpeed, newRuntime);
             return true;

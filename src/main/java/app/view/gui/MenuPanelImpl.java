@@ -8,10 +8,12 @@ import org.slf4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 class MenuPanelImpl extends JPanel implements Panel {
     private GuiView view;
     private static volatile boolean isExceptionOccurred;
+    private static volatile boolean isFileAccessPermitted;
     private static final Logger LOG = Log.createLog(MenuPanelImpl.class);
 
     MenuPanelImpl(GuiView view) {
@@ -56,16 +58,25 @@ class MenuPanelImpl extends JPanel implements Panel {
 
         JButton openPropertyFileButton = createButton(Log.OPEN_PROPERTY_FILE, Log.OPEN_PROPERTY_BUTTON_MESSAGE);
         openPropertyFileButton.addActionListener(e -> {
+            File userFile = view.getSelectedPropertyFile();
+            if (userFile == null) {
+                LOG.warn(Log.CANCELLING_PROPERTY_FILE);
+                return;
+            }
             new Thread(() -> {
                 try {
-                    view.getEventListener().readPropertyFile(view.getSelectedPropertyFile());
+                    view.getEventListener().readPropertyFile(userFile);
+                    isFileAccessPermitted = true;
                 } catch (TheFileIsNotPropertiesException e1) {
                     LOG.error(Log.ERROR + ". " + Log.THE_FILE_IS_NOT_PROPERTIES);
                     SwingUtilities.invokeLater(() ->
                             JOptionPane.showMessageDialog(view, Log.THE_FILE_IS_NOT_PROPERTIES, Log.ERROR, JOptionPane.ERROR_MESSAGE)
                     );
                 } catch (Exception e2) {
-                    LOG.warn(Log.CANCELLING_PROPERTY_FILE);
+                    isFileAccessPermitted = false;
+                    SwingUtilities.invokeLater(() ->
+                            JOptionPane.showMessageDialog(view, Log.ACCESS_IS_DENIED, Log.ERROR, JOptionPane.ERROR_MESSAGE)
+                    );
                 }
             }).start();
         });
@@ -95,7 +106,7 @@ class MenuPanelImpl extends JPanel implements Panel {
     }
 
     private boolean isPropertiesFileExists() {
-        if (!view.getEventListener().isPropertiesFileExists()) {
+        if (!view.getEventListener().isPropertiesFileExists() || !isFileAccessPermitted) {
             LOG.error(Log.PROPERTIES_IS_NULL_LOG);
             JOptionPane.showMessageDialog(view, Log.PROPERTIES_IS_NULL_DIALOG, Log.ERROR, JOptionPane.ERROR_MESSAGE);
             return false;

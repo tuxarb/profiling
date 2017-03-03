@@ -84,6 +84,7 @@ public class Log {
     public static final String SETTING_BACKGROUND_ERROR = "Failed to set the background image. The .jar file is corrupted.";
     public static final String SETTING_BUTTON_IMAGE_ERROR = "Failed to set the button's image. The .jar file is corrupted.";
     public static final String THE_FILE_IS_NOT_PROPERTIES = "The selected file is not .properties file.";
+    public static final String ACCESS_IS_DENIED = "Access to the file is denied.";
     public static final String PROPERTIES_IS_NULL_LOG = "A .properties file was not specified. Can't start the test.";
     public static final String NUMBER_TESTS_FORMAT_EXCEPTION = "The user provided the wrong value for { number_tests } or didn't specify it in the .properties file. DEFAULT -> number_tests = ";
     public static final String NUMBER_TESTS_RANGE_EXCEPTION = "The value { number_tests } in the .properties file must be between from 2 to 999. DEFAULT -> number_tests = ";

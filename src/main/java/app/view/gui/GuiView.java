@@ -14,7 +14,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -111,15 +110,16 @@ public class GuiView extends JFrame {
         UIManager.put("Button.background", new Color(190, 190, 190));
     }
 
-    File getSelectedPropertyFile() throws FileNotFoundException {
+    File getSelectedPropertyFile() {
         JFileChooser fileOpen = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.properties", "properties");
         fileOpen.setAcceptAllFileFilterUsed(false);
         fileOpen.setFileFilter(filter);
         fileOpen.setDialogTitle(Log.OPEN_PROPERTY_FILE);
         int result = fileOpen.showOpenDialog(this);
-        if (result == JFileChooser.CANCEL_OPTION)
-            throw new FileNotFoundException();
+        if (result == JFileChooser.CANCEL_OPTION) {
+            return null;
+        }
         return fileOpen.getSelectedFile();
     }
 
