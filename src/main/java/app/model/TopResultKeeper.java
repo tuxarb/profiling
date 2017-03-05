@@ -18,14 +18,14 @@ public class TopResultKeeper {
         if (newRuntime < 0.5 * this.runtime) {              //new value runtime is too small
             return false;
         }
-        if (newCapacity >= this.capacity * 0.75 && (       //new value capacity is not smaller than prev not more than a quarter
+        if (newCapacity >= this.capacity * 0.7 && (       //new value capacity is not smaller than prev not more than a quarter
                 (newRuntime < this.runtime &&               //new value runtime is less than prev
                         (newCapacity <= this.capacity ||     //new value capacity is not more than prev
                                 //new value capacity is not more than prev not more than a quarter and and the runtime difference is not less than 20 ms
                                 (newCapacity <= this.capacity * 1.25 && this.runtime - newRuntime >= 20))) ||
                         (newRuntime == this.runtime && newCapacity < this.capacity) ||
-                        (newRuntime > this.runtime && newRuntime - this.runtime <= 20 &&
-                                newCapacity <= 0.95 * this.capacity))) {
+                        (newRuntime > this.runtime && newRuntime <= this.runtime * 1.2 &&
+                                newCapacity <= this.capacity * 0.9))) {
             update(newCapacity, newSpeed, newRuntime);
             return true;
         }
