@@ -285,7 +285,7 @@ public class Model {
             numberTests = Integer.valueOf(
                     PROPERTY_REPOSITORY.getProperties().getProperty("number_tests")
             );
-            if (numberTests >= 2 && numberTests <= 999) {
+            if (numberTests >= 2 && numberTests <= 1_000_000_000) {
                 return;
             }
             LOG.warn(Log.NUMBER_TESTS_RANGE_EXCEPTION + DEFAULT_NUMBER_TESTS + ".");

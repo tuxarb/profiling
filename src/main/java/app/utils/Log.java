@@ -87,7 +87,7 @@ public class Log {
     public static final String ACCESS_IS_DENIED = "Access to the file is denied.";
     public static final String PROPERTIES_IS_NULL_LOG = "A .properties file was not specified. Can't start the test.";
     public static final String NUMBER_TESTS_FORMAT_EXCEPTION = "The user provided the wrong value for { number_tests } or didn't specify it in the .properties file. DEFAULT -> number_tests = ";
-    public static final String NUMBER_TESTS_RANGE_EXCEPTION = "The value { number_tests } in the .properties file must be between from 2 to 999. DEFAULT -> number_tests = ";
+    public static final String NUMBER_TESTS_RANGE_EXCEPTION = "The value { number_tests } in the .properties file must be between from 2 to 1 000 000 000. DEFAULT -> number_tests = ";
     public static final String GRAPHICS_ARE_NOT_AVAILABLE = Log.NUMBER_OF_POINTS_IS_NOT_ENOUGH + " Can't build the graphics because the user's program was finished too quickly.";
 
     /**

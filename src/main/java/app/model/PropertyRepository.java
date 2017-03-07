@@ -12,7 +12,7 @@ public class PropertyRepository {
     private File propertyFile;
     private static PropertyRepository instance;
     private static final Logger LOG = Log.createLog(PropertyRepository.class);
-    private static Properties STORE = new Properties() {{
+    private static final Properties STORE = new Properties() {{
         put("program_path", "");
         put("script_file_path", "");
         put("url", "");
