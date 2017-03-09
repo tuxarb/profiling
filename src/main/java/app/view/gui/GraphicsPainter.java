@@ -24,7 +24,8 @@ class GraphicsPainter extends JDialog {
     private final PointsList points;
     private final CoordinatesPainter painter;
     private final int TYPE;
-    private static final int BORDER_GAP = 60;
+    private static final int BORDER_GAP = 58;
+    private static final int RIGHT_SHIFT = 35;
     private static final Logger LOG = Log.createLog(GraphicsPainter.class);
 
     GraphicsPainter(GuiView view, final int TYPE) {
@@ -49,7 +50,7 @@ class GraphicsPainter extends JDialog {
                     painter.clear();
                     return;
                 }
-                double pointX = e.getPoint().getX();
+                double pointX = e.getPoint().getX() - RIGHT_SHIFT;
                 double pointY = e.getPoint().getY();
                 if (isPointOutOfBounds(pointX, pointY)) {
                     painter.clear();
@@ -65,14 +66,15 @@ class GraphicsPainter extends JDialog {
 
     private boolean isPointOutOfBounds(double x, double y) {
         boolean isCapacityTimeType = TYPE == CAPACITY_TIME_TYPE;
-        return x > computeX(isCapacityTimeType ? points.getLast() : points.getPointWithMaxSpeed()) ||
-                y < computeY(points.getLast()) ||
+        return x > computeX(points.getLast()) ||
+                y < computeY(isCapacityTimeType ? points.getLast() : points.getPointWithMaxSpeed()) ||
                 x < BORDER_GAP ||
                 y > getHeight() - BORDER_GAP;
     }
 
     public void paint(Graphics g) {
         super.paint(g);
+        g.translate(RIGHT_SHIFT, 0);
         painter.setGraphics((Graphics2D) g.create());
         setIgnoreRepaint(true);
         paintBackground(((Graphics2D) g));
@@ -83,14 +85,19 @@ class GraphicsPainter extends JDialog {
 
     private void paintBackground(Graphics2D g) {
         GradientPaint layer1 = new GradientPaint(
-                0, getHeight() / 2, new Color(12, 18, 11),
+                -RIGHT_SHIFT, getHeight() / 2, new Color(12, 18, 11),
                 getWidth(), getHeight(), new Color(32, 32, 38));
         g.setPaint(layer1);
-        g.fillRect(0, getHeight() / 2, getWidth(), getHeight() / 2);
+        g.fillRect(-RIGHT_SHIFT, getHeight() / 2, getWidth(), getHeight() / 2);
         GradientPaint layer2 = new GradientPaint(
+                -RIGHT_SHIFT, 0, new Color(15, 5, 5),
+                BORDER_GAP, getHeight() / 2, new Color(12, 18, 11));
+        g.setPaint(layer2);
+        g.fillRect(-RIGHT_SHIFT, 0, BORDER_GAP + RIGHT_SHIFT, getHeight() / 2);
+        GradientPaint layer3 = new GradientPaint(
                 getWidth(), getHeight(), new Color(32, 32, 38),
                 getWidth() - BORDER_GAP, 0, new Color(15, 5, 5));
-        g.setPaint(layer2);
+        g.setPaint(layer3);
         g.fillRect(getWidth() - (BORDER_GAP + 30), 0, 2 * BORDER_GAP, getHeight());
     }
 
@@ -117,12 +124,13 @@ class GraphicsPainter extends JDialog {
 
     private void labelSignatures(Graphics2D g) {
         g.setColor(Color.RED);
+        g.setFont(new Font("Courier New", 2, 18));
+        g.drawString("s", getWidth() - BORDER_GAP + 3, getHeight() - BORDER_GAP + 5);
         g.setFont(new Font("Courier New", 2, 16));
-        g.drawString("s", BORDER_GAP - 15, BORDER_GAP + 4);
         if (this.TYPE == CAPACITY_TIME_TYPE) {
-            g.drawString("MB", getWidth() - BORDER_GAP + 5, getHeight() - BORDER_GAP + 5);
+            g.drawString("MB", BORDER_GAP - 10, BORDER_GAP - 5);
         } else {
-            g.drawString("MB/s", getWidth() - BORDER_GAP + 5, getHeight() - BORDER_GAP + 5);
+            g.drawString("MB/s", BORDER_GAP - 25, BORDER_GAP - 5);
         }
         g.setColor(Color.WHITE);
         g.drawString("0", BORDER_GAP - 20, getHeight() - BORDER_GAP + 15);
@@ -130,7 +138,7 @@ class GraphicsPainter extends JDialog {
 
     private void createHatchMarksAndGrid(Graphics2D g) {
         int markSize = 5;
-        int marksCount = 19;
+        int marksCount = 25;
         int extra = 15;
         int graphicWidth = getWidth() - BORDER_GAP * 2 - extra;
         int graphicHeight = getHeight() - BORDER_GAP * 2 - extra;
@@ -198,37 +206,23 @@ class GraphicsPainter extends JDialog {
         g.setColor(Color.WHITE);
         g.setFont(new Font("Courier New", 4, 11));
         for (int i = 1; i <= marksCount; i++) {
-            g.drawString(
-                    formatRuntime(Math.round(i * stepByRuntime)),
-                    (float) BORDER_GAP * 0.15f,
+            g.drawString(formatCapacityOrSpeed(stepByCapacityOrSpeed.multiply(
+                    BigDecimal.valueOf(i))
+                            .setScale(1, RoundingMode.HALF_EVEN)
+                            .toString()),
+                    (float) -(RIGHT_SHIFT * 0.8),
                     (float) (getHeight() - BORDER_GAP - i * stepY + 5)
             );
-            if (maxCapacityOrSpeed.toString().length() < 12) {
-                g.drawString(stepByCapacityOrSpeed.multiply(
-                        BigDecimal.valueOf(i))
-                                .setScale(1, RoundingMode.HALF_EVEN)
-                                .toString(),
-                        (float) (BORDER_GAP + i * stepX - 20),
-                        i % 2 == 1 ?
-                                (float) (getHeight() - BORDER_GAP + 20) :
-                                (float) (getHeight() - BORDER_GAP + 33)
-                );
-            } else {
-                g.drawString(stepByCapacityOrSpeed.multiply(
-                        BigDecimal.valueOf(i))
-                                .setScale(0, RoundingMode.HALF_EVEN)
-                                .toString(),
-                        (float) (BORDER_GAP + i * stepX - BORDER_GAP * 0.6),
-                        i % 2 == 1 ?
-                                (float) (getHeight() - BORDER_GAP + 20) :
-                                (float) (getHeight() - BORDER_GAP + 33)
-                );
-            }
+            g.drawString(formatRuntime(Math.round(i * stepByRuntime)),
+                    (float) (BORDER_GAP + i * stepX - 20),
+                    i % 2 == 1 ?
+                            (float) (getHeight() - BORDER_GAP + 20) :
+                            (float) (getHeight() - BORDER_GAP + 33));
         }
-        this.gridX = stepByCapacityOrSpeed.divide(
-                BigDecimal.valueOf(stepX), 16, RoundingMode.HALF_EVEN)
+        this.gridX = stepByRuntime / stepX;
+        this.gridY = stepByCapacityOrSpeed.divide(
+                BigDecimal.valueOf(stepY), 16, RoundingMode.HALF_EVEN)
                 .doubleValue();
-        this.gridY = stepByRuntime / stepY;
     }
 
     private void drawFunc(Graphics2D g) {
@@ -236,7 +230,7 @@ class GraphicsPainter extends JDialog {
         Color funcColor = new Color(0, 8, 255);
         g.setStroke(new BasicStroke(5.5f));
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         for (int i = 0; i < points.size() - 1; i++) {
             g.setColor(funcColor);
             PointsList.Point firstPoint = points.get(i);
@@ -275,7 +269,7 @@ class GraphicsPainter extends JDialog {
     private void checkCapacityOnExcess(Graphics2D g, PointsList.Point first, PointsList.Point second) {
         long deltaRuntime = second.getRuntime() - first.getRuntime();
         double deltaCapacity = (second.getCapacity().subtract(first.getCapacity())).doubleValue() / deltaRuntime;
-        if (deltaCapacity > 1.5 * points.getAverageCapacityForOneMs()) {
+        if (deltaCapacity > 1.7 * points.getAverageCapacityForOneMs()) {
             g.setColor(Color.RED);
         }
     }
@@ -301,22 +295,24 @@ class GraphicsPainter extends JDialog {
             countSplits = 7;
         } else if (countPoints < 1000) {
             countSplits = 3;
+        } else if (countPoints < 1750) {
+            countSplits = 2;
         } else {
             countSplits = 1;
         }
         return countSplits;
     }
 
-    private double computeX(PointsList.Point point) {
+    private double computeY(PointsList.Point point) {
         if (this.TYPE == CAPACITY_TIME_TYPE) {
-            return BORDER_GAP + point.getCapacity().doubleValue() / (1024 * gridX);
+            return getHeight() - BORDER_GAP - point.getCapacity().doubleValue() / (1024 * gridY);
         } else {
-            return BORDER_GAP + point.getSpeed().doubleValue() / (1024 * gridX);
+            return getHeight() - BORDER_GAP - point.getSpeed().doubleValue() / (1024 * gridY);
         }
     }
 
-    private double computeY(PointsList.Point point) {
-        return getHeight() - BORDER_GAP - point.getRuntime() / gridY;
+    private double computeX(PointsList.Point point) {
+        return BORDER_GAP + point.getRuntime() / gridX;
     }
 
     private String formatRuntime(long runtime) {
@@ -332,12 +328,28 @@ class GraphicsPainter extends JDialog {
             timeAsString = runtime / 1000 + "." + ms;
         }
         if (runtime >= 10_000_000) //longer than 10000 s
-            return String.valueOf(runtime / 1000);
+            return Utils.formatNumber(runtime / 1000, Locale.CANADA_FRENCH);
         if (runtime >= 1_000_000) //longer than 1000 s
             return Utils.getStringWithoutLastChars(timeAsString, 2);
         if (runtime >= 100_000) //longer than 100 s
             return Utils.getStringWithoutLastChars(timeAsString, 1);
         return timeAsString;
+    }
+
+    private String formatCapacityOrSpeed(String value) {
+        if (value.length() >= 12) {
+            int index = value.indexOf(".");
+            if (index > 0) {
+                return value.substring(0, index);
+            }
+        }
+        int maxNumberCharsInLine = 11;
+        int numberWhitespaces = maxNumberCharsInLine - value.length();
+        StringBuilder spaces = new StringBuilder();
+        for (int i = 0; i < numberWhitespaces; i++) {
+            spaces.append(" ");
+        }
+        return spaces.toString() + value;
     }
 
     private String getMessageDependingOnType() {
@@ -353,8 +365,8 @@ class GraphicsPainter extends JDialog {
     }
 
     private class CoordinatesPainter {
-        private String x;  // a capacity or a speed coordinate
-        private String y;  // a runtime coordinate
+        private String x;    // a runtime coordinate
+        private String y;    // a capacity or a speed coordinate
         private int outputWidth;
         private Graphics2D g;
         private final int OUTPUT_HEIGHT = 40;
@@ -364,8 +376,8 @@ class GraphicsPainter extends JDialog {
             if (g == null) {
                 return;
             }
-            String capacityOrSpeedText = (TYPE == CAPACITY_TIME_TYPE ? "capacity=" : "speed=") + x;
-            String runtimeText = "runtime=" + y;
+            String runtimeText = "runtime=" + x;
+            String capacityOrSpeedText = (TYPE == CAPACITY_TIME_TYPE ? "capacity=" : "speed=") + y;
             outputWidth = g.getFontMetrics().stringWidth(
                     capacityOrSpeedText.length() > runtimeText.length() ? capacityOrSpeedText : runtimeText
             );
@@ -389,12 +401,12 @@ class GraphicsPainter extends JDialog {
         }
 
         private void setX(double x) {
-            String remainder = String.valueOf(x - Math.floor(x)).substring(1, 3);
-            this.x = Utils.formatNumber((long) x, Locale.CANADA_FRENCH) + remainder;
+            this.x = formatRuntime(Math.round(x));
         }
 
         private void setY(double y) {
-            this.y = formatRuntime(Math.round(y));
+            String remainder = String.valueOf(y - Math.floor(y)).substring(1, 3);
+            this.y = Utils.formatNumber((long) y, Locale.CANADA_FRENCH) + remainder;
         }
 
         private void setGraphics(Graphics2D g) {
