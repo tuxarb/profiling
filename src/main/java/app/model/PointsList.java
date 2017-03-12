@@ -3,11 +3,19 @@ package app.model;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class PointsList {
-    private List<Point> points = new ArrayList<>(500);
-    private List<Point> topResultPoints = new ArrayList<>(500);
+    private List<Point> points;
+
+    PointsList(PointsList points) {
+        this.points = new ArrayList<>(points.get());
+    }
+
+    PointsList() {
+        points = new ArrayList<>(500);
+    }
 
     void add(Point point) {
         points.add(point);
@@ -32,14 +40,8 @@ public class PointsList {
         }
     }
 
-    void clearAndWriteTopResult() {
-        points.clear();
-        points.addAll(topResultPoints);
-    }
-
-    void saveNewTopResult() {
-        topResultPoints.clear();
-        topResultPoints.addAll(points);
+    private List<Point> get() {
+        return points;
     }
 
     public int size() {
@@ -56,7 +58,7 @@ public class PointsList {
 
     public Point getPointWithMaxSpeed() {
         return points.stream()
-                .max((p1, p2) -> p1.getSpeed().compareTo(p2.getSpeed()))
+                .max(Comparator.comparing(Point::getSpeed))
                 .get();
     }
 

@@ -22,6 +22,8 @@ public class Log {
     public static final String READING_PROCESS_STARTED = "There is creating a new process, received from the user...[ {} ]";
     public static final String READING_PROCESS_ENDED = "The resulting data were successfully got!";
     public static final String DETAILED_TEST_STARTED = "Start the detailed test for the user's program...";
+    public static final String DETAILED_TEST_RESULT_COMPUTING_STARTED = "It is computing the program result...";
+    public static final String DETAILED_TEST_RESULT_COMPUTING_ENDED = "The computing of the program result was finished!";
     public static final String DETAILED_TEST_ENDED = "The detailed test for the user's program was successfully finished!";
     public static final String VALID_OS = "The selected operating system is available for the test. Redirecting to the menu...";
     public static final String PROCESS_INFO_STARTED = "The progress info bar was started. Processing...";
@@ -66,6 +68,7 @@ public class Log {
             "3) The user specified a wrong path to the process inside the script file or a wrong parameters to start.\n" +
             "4) The process inside the script file is too small to test.";
     public static final String DETAILED_TEST_ENDED_WITH_ERROR = "The detailed test for the user's program was finished with an error.";
+    public static final String DETAILED_TEST_RESULT_COMPUTING_ERROR = "Sorry. It was occurred some kind of error when the computing the program result.";
     public static final String HIBERNATE_ERROR = "Error occurred when hibernate trying to save data to the database.";
     public static final String CREATING_SESSION_FACTORY_ERROR = "Failed to create sessionFactory instance.";
     public static final String SESSION_FACTORY_IS_NULL = "Error. SessionFactory instance is null.";

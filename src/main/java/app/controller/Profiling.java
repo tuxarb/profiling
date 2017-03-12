@@ -1,5 +1,6 @@
 package app.controller;
 
+import app.model.DetailedTestResultsCalculator;
 import app.model.Model;
 import app.model.PointsList;
 import app.model.beans.Characteristic;
@@ -69,8 +70,8 @@ public class Profiling implements EventListener {
     }
 
     private void startDetailedTest(boolean isWindows) throws ClientProcessException, IOException {
+        DetailedTestResultsCalculator calculator = new DetailedTestResultsCalculator(model);
         model.setNumberTests();
-        model.getTopResultKeeper().reset();
         LOG.info(Log.DETAILED_TEST_STARTED);
         for (int i = 1; i <= model.getNumberTests(); i++) {
             LOG.debug(Log.TEST_NUMBER + i + Log.STARTED);
@@ -81,6 +82,7 @@ public class Profiling implements EventListener {
                 } else {
                     model.startTestForLinuxOrMac();
                 }
+                calculator.saveResultForTest(model.getCharacteristic());
                 LOG.debug(Log.TEST_NUMBER + i + Log.COMPLETED);
             } catch (Exception e) {
                 waitSomeTime(40);
@@ -93,6 +95,17 @@ public class Profiling implements EventListener {
                 }
             }
         }
+        LOG.debug(Log.DETAILED_TEST_RESULT_COMPUTING_STARTED);
+        try {
+            calculator.computeAndSaveAverageResult();
+        } catch (Exception e) {
+            LOG.error(Log.DETAILED_TEST_RESULT_COMPUTING_ERROR);
+            if (e.getMessage() != null && !e.getMessage().isEmpty()) {
+                LOG.error(e.toString());
+            }
+            throw new ClientProcessException();
+        }
+        LOG.debug(Log.DETAILED_TEST_RESULT_COMPUTING_ENDED);
         LOG.info(Log.DETAILED_TEST_ENDED);
     }
 

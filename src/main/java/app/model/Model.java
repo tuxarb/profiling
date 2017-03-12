@@ -20,7 +20,6 @@ import static app.utils.Utils.getUserCommandInfo;
 
 public class Model {
     private final Characteristic characteristic;
-    private final TopResultKeeper topResultKeeper;
     private PointsList points;
     private long processId;
     private ProcessHandle task;
@@ -33,7 +32,6 @@ public class Model {
 
     public Model(final Characteristic characteristic) {
         this.characteristic = characteristic;
-        this.topResultKeeper = new TopResultKeeper();
         this.points = new PointsList();
     }
 
@@ -103,7 +101,7 @@ public class Model {
         long speed = (long) (1000 * capacity.doubleValue() / time);
 
         points.computeSpeedForAllPoints();
-        checkResultAndSaveResultingData(capacity.longValue(), speed, time);
+        saveResultingData(capacity.longValue(), speed, time);
         LOG.info(Log.READING_PROCESS_ENDED);
     }
 
@@ -177,23 +175,7 @@ public class Model {
         }
     }
 
-    private void checkResultAndSaveResultingData(long capacity, long speed, long runtime) {
-        if (isDetailedTest()) {
-            if (topResultKeeper.isTopResult(capacity, speed, runtime)) {
-                saveResultingData(capacity, speed, runtime);
-                points.saveNewTopResult();
-            } else {
-                saveResultingData(
-                        topResultKeeper.getCapacity(), topResultKeeper.getSpeed(), topResultKeeper.getRuntime()
-                );
-                points.clearAndWriteTopResult();
-            }
-        } else {
-            saveResultingData(capacity, speed, runtime);
-        }
-    }
-
-    private void saveResultingData(long capacity, long speed, long runtime) {
+    void saveResultingData(long capacity, long speed, long runtime) {
         characteristic.setCapacity(Utils.formatNumber(capacity, Locale.CANADA_FRENCH) + " KB");
         characteristic.setSpeed(Utils.formatNumber(speed, Locale.CANADA_FRENCH) + " KB/s");
         String timeAsString = String.valueOf(runtime);
@@ -307,7 +289,7 @@ public class Model {
         return points;
     }
 
-    public TopResultKeeper getTopResultKeeper() {
-        return topResultKeeper;
+    void setPoints(PointsList points) {
+        this.points = points;
     }
 }
