@@ -22,8 +22,8 @@ public class Log {
     public static final String READING_PROCESS_STARTED = "There is creating a new process, received from the user...[ {} ]";
     public static final String READING_PROCESS_ENDED = "The resulting data were successfully got!";
     public static final String DETAILED_TEST_STARTED = "Start the detailed test for the user's program...";
-    public static final String DETAILED_TEST_RESULT_COMPUTING_STARTED = "It is computing the program result...";
-    public static final String DETAILED_TEST_RESULT_COMPUTING_ENDED = "The computing of the program result was finished!";
+    public static final String DETAILED_TEST_COMPUTING_RESULT_STARTED = "It is computing the program result...";
+    public static final String DETAILED_TEST_COMPUTING_RESULT_ENDED = "The computing of the program result was finished!";
     public static final String DETAILED_TEST_ENDED = "The detailed test for the user's program was successfully finished!";
     public static final String VALID_OS = "The selected operating system is available for the test. Redirecting to the menu...";
     public static final String PROCESS_INFO_STARTED = "The progress info bar was started. Processing...";
@@ -54,6 +54,7 @@ public class Log {
      * Errors and warnings
      */
     public static final String INTERNAL_APPLICATION_ERROR = "Sorry. An internal error has occurred in the application. Probably, your OS version is out of date and doesn't support some types of commands.";
+    public static final String UNEXPECTED_ERROR = "An unexpected error occurred.";
     public static final String WRONG_OS = "This operating system is not for you. Select your operating system.";
     public static final String LOADING_PROGRESS_IMAGE_ERROR = "Error when loading the image for ProgressDialog.";
     public static final String PATH_TO_PROGRAM_INCORRECT = "Cannot run user's program. Please, check that path to program is correct and your command has the correct syntax.\nAlso note that your program must not be too small otherwise an error may occur.";
@@ -68,6 +69,8 @@ public class Log {
             "3) The user specified a wrong path to the process inside the script file or a wrong parameters to start.\n" +
             "4) The process inside the script file is too small to test.";
     public static final String DETAILED_TEST_ENDED_WITH_ERROR = "The detailed test for the user's program was finished with an error.";
+    public static final String DETAILED_TEST_FIRST_START_ERROR = "Can't test the user's program. Attempts remaining: {}";
+    public static final String DETAILED_TEST_NUMBER_ATTEMPTS_EXCEEDED = "The number of attempts has exceeded the allowable value = {}";
     public static final String DETAILED_TEST_RESULT_COMPUTING_ERROR = "Sorry. It was occurred some kind of error when the computing the program result.";
     public static final String HIBERNATE_ERROR = "Error occurred when hibernate trying to save data to the database.";
     public static final String CREATING_SESSION_FACTORY_ERROR = "Failed to create sessionFactory instance.";

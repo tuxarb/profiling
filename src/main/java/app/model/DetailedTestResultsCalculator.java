@@ -89,7 +89,7 @@ public class DetailedTestResultsCalculator {
         TempResultKeeper optimalResult;
         int increment = 10;
         int delta = 0;
-        int iterationsNumber = 0;
+        int curIterationsNumber = 0;
         int maxIterationsNumber = 25;
         L:
         while (true) {
@@ -97,8 +97,8 @@ public class DetailedTestResultsCalculator {
             for (TempResultKeeper curResultKeeper : results) {
                 long runtime = curResultKeeper.runtime;
                 long capacity = curResultKeeper.capacity;
-                if (capacity >= (long) (1.15 * averageCapacity) ||
-                        capacity <= (long) (0.85 * averageCapacity)) {
+                if (capacity >= (long) (1.1 * averageCapacity) ||
+                        capacity <= (long) (0.9 * averageCapacity)) {
                     continue;
                 }
                 if ((runtime <= averageRuntime && runtime >= averageRuntime - delta) ||
@@ -107,14 +107,15 @@ public class DetailedTestResultsCalculator {
                     break L;
                 }
             }
-            if (iterationsNumber == maxIterationsNumber) {
+            if (curIterationsNumber == maxIterationsNumber ||
+                    (averageRuntime + delta >= 1.1 * averageRuntime && averageRuntime > 600)) {
                 optimalResult = results.stream()
                         .sorted(Comparator.comparing(TempResultKeeper::getRuntime))
                         .collect(Collectors.toList())
                         .get(results.size() / 2);
                 break;
             }
-            iterationsNumber++;
+            curIterationsNumber++;
         }
         model.setPoints(optimalResult.points);
     }

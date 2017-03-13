@@ -68,12 +68,21 @@ public class Profiling implements EventListener {
             waitSomeTime(40);
             LOG.error(Log.INTERNAL_APPLICATION_ERROR);
             throw new ClientProcessException();
+        } catch (ClientProcessException e) {
+            throw e;
+        } catch (Throwable e) {
+            waitSomeTime(40);
+            LOG.error(Log.UNEXPECTED_ERROR + "\n" + e.toString());
+            throw new ClientProcessException();
         }
         model.completed();
     }
 
     private void startDetailedTest(boolean isWindows) throws ClientProcessException, IOException {
         DetailedTestResultsCalculator calculator = new DetailedTestResultsCalculator(model);
+        int maxAttemptsNumberForStartTheFirstTest = 3;
+        int maxAttemptsNumberForStartTheFollowingTests = 15;
+        int curAttemptsNumberForStart = 0;
         model.setNumberTests();
         LOG.info(Log.DETAILED_TEST_STARTED);
         for (int i = 1; i <= model.getNumberTests(); i++) {
@@ -86,19 +95,33 @@ public class Profiling implements EventListener {
                     model.startTestForLinuxOrMac();
                 }
                 calculator.saveResultForTest(model.getCharacteristic());
+                curAttemptsNumberForStart = 0;
                 LOG.debug(Log.TEST_NUMBER + i + Log.COMPLETED);
             } catch (Exception e) {
                 waitSomeTime(40);
                 if (i == 1) {
-                    LOG.error(Log.DETAILED_TEST_ENDED_WITH_ERROR);
-                    throw e;
+                    int rest = maxAttemptsNumberForStartTheFirstTest - curAttemptsNumberForStart;
+                    if (rest > 0) {
+                        LOG.warn(Log.DETAILED_TEST_FIRST_START_ERROR, rest);
+                    } else {
+                        LOG.error(Log.DETAILED_TEST_ENDED_WITH_ERROR);
+                        throw e;
+                    }
                 } else {
-                    LOG.debug(Log.TEST_NUMBER + i + Log.A_TEST_ENDED_WITH_ERROR);
-                    i--;
+                    if (curAttemptsNumberForStart == maxAttemptsNumberForStartTheFollowingTests) {
+                        LOG.error(Log.DETAILED_TEST_NUMBER_ATTEMPTS_EXCEEDED,
+                                maxAttemptsNumberForStartTheFollowingTests
+                        );
+                        LOG.error(Log.DETAILED_TEST_ENDED_WITH_ERROR);
+                        throw e;
+                    }
                 }
+                LOG.debug(Log.TEST_NUMBER + i + Log.A_TEST_ENDED_WITH_ERROR);
+                i--;
+                curAttemptsNumberForStart++;
             }
         }
-        LOG.debug(Log.DETAILED_TEST_RESULT_COMPUTING_STARTED);
+        LOG.debug(Log.DETAILED_TEST_COMPUTING_RESULT_STARTED);
         try {
             calculator.computeAndSaveAverageResult();
         } catch (Exception e) {
@@ -108,7 +131,7 @@ public class Profiling implements EventListener {
             }
             throw new ClientProcessException();
         }
-        LOG.debug(Log.DETAILED_TEST_RESULT_COMPUTING_ENDED);
+        LOG.debug(Log.DETAILED_TEST_COMPUTING_RESULT_ENDED);
         LOG.info(Log.DETAILED_TEST_ENDED);
     }
 
