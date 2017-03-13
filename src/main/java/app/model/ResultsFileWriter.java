@@ -45,7 +45,7 @@ class ResultsFileWriter {
             fileWriter.write("Speed:   \t" + ch.getSpeed());
             fileWriter.write(LF);
             fileWriter.write("******************************************" + LF);
-            fileWriter.write("Number of tests:  " + TESTS_NUMBER + LF);
+            fileWriter.write("The number of tests:  " + TESTS_NUMBER + LF);
             fileWriter.write("------------------------------------------" + LF);
             fileWriter.write("\t\t" + Utils.getCurrentDate());
             fileWriter.write(LF);
