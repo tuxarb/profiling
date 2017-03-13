@@ -19,6 +19,9 @@ public class Characteristic {
     @Column(name = "speed", length = 18, nullable = false)
     private String speed;
 
+    @Column(name = "iterations_number", nullable = false)
+    private int iterationsNumber;
+
     @Column(name = "program_name", length = 50, nullable = false)
     private String taskName = "";
 
@@ -65,6 +68,14 @@ public class Characteristic {
         this.id = id;
     }
 
+    public int getIterationsNumber() {
+        return iterationsNumber;
+    }
+
+    public void setIterationsNumber(int iterationsNumber) {
+        this.iterationsNumber = iterationsNumber;
+    }
+
     @Override
     public String toString() {
         return "Characteristic{" +
@@ -72,7 +83,8 @@ public class Characteristic {
                 ", runtime='" + runtime + '\'' +
                 ", capacity='" + capacity + '\'' +
                 ", speed='" + speed + '\'' +
-                ", programName='" + taskName + '\'' +
+                ", iterationsNumber='" + iterationsNumber + '\'' +
+                ", taskName='" + taskName + '\'' +
                 '}';
     }
 }

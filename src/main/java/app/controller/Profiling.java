@@ -61,6 +61,9 @@ public class Profiling implements EventListener {
                     model.startTestForLinuxOrMac();
                 }
             }
+            model.getCharacteristic().setIterationsNumber(
+                    model.isDetailedTest() ? model.getNumberTests() : 1
+            );
         } catch (IOException e) {
             waitSomeTime(40);
             LOG.error(Log.INTERNAL_APPLICATION_ERROR);
