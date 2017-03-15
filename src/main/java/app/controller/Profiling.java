@@ -8,6 +8,7 @@ import app.model.enums.DatabaseTypes;
 import app.model.enums.OperatingSystems;
 import app.utils.GraphicsConfig;
 import app.utils.Log;
+import app.utils.Utils;
 import app.utils.exceptions.ClientProcessException;
 import app.utils.exceptions.WrongSelectedDatabaseException;
 import app.view.console.ConsoleView;
@@ -37,11 +38,48 @@ public class Profiling implements EventListener {
                 guiView.setPanel(new WelcomePanelImpl(guiView));
                 guiView.getPanel().init();
             });
+        } else if (isNonInteractiveConsoleUI()) {
+            startTestInNonInteractiveMode();
         } else {
             consoleView = new ConsoleView();
             consoleView.setEventListener(this);
             consoleView.init();
         }
+    }
+
+    private void startTestInNonInteractiveMode() {
+        setDetailedTest(true);
+        OperatingSystems os = null;
+        if (Utils.isWindows()) {
+            os = OperatingSystems.WINDOWS;
+        } else if (Utils.isLinux()) {
+            os = OperatingSystems.LINUX;
+        } else if (Utils.isMac()) {
+            os = OperatingSystems.MAC;
+        } else {
+            LOG.error(Log.NOT_SUPPORTED_OS);
+            printErrorMessageAndExit();
+        }
+        String filePath = getPropertiesFilePath();
+        if (filePath.isEmpty()) {
+            LOG.error(Log.PROPERTIES_PATH_WAS_NOT_SPECIFIED);
+            printErrorMessageAndExit();
+        }
+        try {
+            model.readPropertyFile(new File(filePath));
+            findOutOS(os);
+            model.writeToFile();
+        } catch (Exception e) {
+            if (model.getPropertyRepository().getPropertyFile() == null) {
+                LOG.error(Log.ERROR + ". " + Log.THE_FILE_IS_NOT_PROPERTIES);
+            }
+            printErrorMessageAndExit();
+        }
+    }
+
+    private void printErrorMessageAndExit() {
+        System.out.println(Log.ERROR_OCCURRED + " " + Utils.getPathToLogs());
+        exit();
     }
 
     @Override
@@ -138,6 +176,16 @@ public class Profiling implements EventListener {
     private boolean isGUI() {
         String mode = System.getProperty("mode");
         return "gui".equalsIgnoreCase(mode);
+    }
+
+    private boolean isNonInteractiveConsoleUI() {
+        String mode = System.getProperty("mode");
+        return "non_interactive".equalsIgnoreCase(mode);
+    }
+
+    private String getPropertiesFilePath() {
+        String path = System.getProperty("path");
+        return path != null ? path.trim() : "";
     }
 
     private void waitSomeTime(long millis) {

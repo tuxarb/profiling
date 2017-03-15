@@ -178,6 +178,13 @@ public class Log {
     static final String SEE_LOGS = "See log files -> ";
 
     /**
+     * Non-interactive UI
+     */
+    public static final String NOT_SUPPORTED_OS = "Sorry. Your operating system is not supported by the application.";
+    public static final String PROPERTIES_PATH_WAS_NOT_SPECIFIED = "Specify path to your .properties file as a parameter when starting the application.\n( java -jar -Dpath=<your_path> ... )";
+    public static final String ERROR_OCCURRED = "An error has occurred.";
+
+    /**
      * Other
      */
     public static final String TEST_NUMBER = "Test ";

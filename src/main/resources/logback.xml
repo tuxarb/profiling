@@ -6,6 +6,7 @@
 
     <property scope="system" name="mode" value="${mode}"/>
     <property scope="local" name="isGUI" value='property("mode").equalsIgnoreCase("gui")'/>
+    <property scope="local" name="isNonInteractiveUI" value='property("mode").equalsIgnoreCase("non_interactive")'/>
 
     <appender name="file" class="ch.qos.logback.core.FileAppender">
         <if condition='${isGUI}'>
@@ -13,10 +14,17 @@
                 <file>${user.home}/.profiling_logs/app_gui.log</file>
             </then>
             <else>
-                <file>${user.home}/.profiling_logs/app_console.log</file>
+                <if condition="${isNonInteractiveUI}">
+                    <then>
+                        <file>${user.home}/.profiling_logs/app_non-interactive.log</file>
+                    </then>
+                    <else>
+                        <file>${user.home}/.profiling_logs/app_console.log</file>
+                    </else>
+                </if>
             </else>
         </if>
-        <append>true</append>
+        <append>false</append>
         <encoder>
             <charset>UTF-8</charset>
             <pattern>%-5level %date [%file:%line] %msg%n</pattern>
