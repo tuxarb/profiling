@@ -22,7 +22,6 @@ import java.io.IOException;
 
 public class Profiling implements EventListener {
     private GuiView guiView;
-    private ConsoleView consoleView;
     private Model model;
     private static final Logger LOG = Log.createLog(Profiling.class);
 
@@ -41,7 +40,7 @@ public class Profiling implements EventListener {
         } else if (isNonInteractiveConsoleUI()) {
             startTestInNonInteractiveMode();
         } else {
-            consoleView = new ConsoleView();
+            ConsoleView consoleView = new ConsoleView();
             consoleView.setEventListener(this);
             consoleView.init();
         }

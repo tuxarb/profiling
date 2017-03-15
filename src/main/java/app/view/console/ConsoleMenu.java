@@ -14,6 +14,7 @@ class ConsoleMenu {
     private ConsoleView view;
     private int second = 0;
     private static volatile boolean isExceptionOccurred;
+    private static volatile boolean isFileAccessPermitted;
     private static final Logger LOG = Log.createLog(ConsoleMenu.class);
 
     ConsoleMenu(ConsoleView view) {
@@ -67,7 +68,7 @@ class ConsoleMenu {
     }
 
     private boolean isPropertiesFileExists() {
-        if (!view.getEventListener().isPropertiesFileExists()) {
+        if (!view.getEventListener().isPropertiesFileExists() || !isFileAccessPermitted) {
             println(Log.PROPERTIES_IS_NULL_LOG);
             LOG.warn(Log.PROPERTIES_IS_NULL_LOG);
             return false;
@@ -128,9 +129,11 @@ class ConsoleMenu {
             }
             try {
                 view.getEventListener().readPropertyFile(new File(path));
+                isFileAccessPermitted = true;
                 println(Log.PROPERTY_FILE_READ);
                 break;
             } catch (Exception e) {
+                isFileAccessPermitted = false;
                 if (e.getMessage() != null && !e.getMessage().isEmpty()) {
                     println(Log.ERROR + ". " + e.getMessage());
                 } else {
