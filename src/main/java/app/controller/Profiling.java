@@ -68,7 +68,7 @@ public class Profiling implements EventListener {
         try {
             model.readPropertyFile(new File(filePath));
             findOutOS(os);
-            model.writeToFile();
+            model.writeAllToFile();
         } catch (Exception e) {
             if (model.getPropertyRepository().getPropertyFile() == null) {
                 LOG.error(Log.ERROR + ". " + Log.THE_FILE_IS_NOT_PROPERTIES);

@@ -213,6 +213,19 @@ public class Model {
         writer.write();
     }
 
+    // it is using at non-interactive mode
+    public void writeAllToFile() throws Exception {
+        writeToFile();
+        String userDirPath = PROPERTY_REPOSITORY.getProperties().getProperty("result_file_path");
+        if ("".equals(userDirPath)) {
+            userDirPath = System.getProperty("user.home");
+        }
+        new PointsFileWriter(
+                points,
+                new File(userDirPath)
+        ).write();
+    }
+
     public void writeToDatabase(DatabaseTypes type) throws IOException, WrongSelectedDatabaseException {
         DatabaseWriter dw = new DatabaseWriter(type);
         Properties properties = PROPERTY_REPOSITORY.getProperties();

@@ -1,6 +1,7 @@
 package app.view.console;
 
 
+import app.model.PointsFileWriter;
 import app.model.enums.DatabaseTypes;
 import app.utils.Log;
 import app.utils.Utils;

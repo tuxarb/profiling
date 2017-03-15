@@ -1,7 +1,6 @@
-package app.view.console;
+package app.model;
 
 
-import app.model.PointsList;
 import app.utils.Log;
 import app.utils.Utils;
 import org.slf4j.Logger;
@@ -13,11 +12,11 @@ import java.util.Locale;
 
 import static app.utils.Utils.LF;
 
-class PointsFileWriter {
+public class PointsFileWriter {
     private final PointsList points;
     private final File userPath;
     private static final Locale LOC = Locale.CANADA_FRENCH;
-    private static final String DIR_NAME = ".profiling_points";
+    private static final String DIR_NAME = "profiling_points";
     private static final String FILE_NAME_MAIN = "main.txt";
     private static final String FILE_NAME_RUNTIME_CAPACITY = "runtime_capacity.csv";
     private static final String FILE_NAME_RUNTIME_SPEED = "runtime_speed.csv";
@@ -32,12 +31,12 @@ class PointsFileWriter {
     private static final Logger LOG = Log.createLog(PointsFileWriter.class);
 
 
-    PointsFileWriter(PointsList points, File userPath) {
+    public PointsFileWriter(PointsList points, File userPath) {
         this.points = points;
         this.userPath = userPath;
     }
 
-    void write() throws Exception {
+    public void write() throws Exception {
         File newDir = createDir();
         if (newDir == null) {
             throw new Exception(Log.CREATING_DIR_ERROR);

@@ -70,7 +70,7 @@ class ResultsFileWriter {
             pathToFolder = System.getProperty("user.home");
         }
         LOG.info(Log.CREATING_DIR_FOR_WRITING);
-        File dir = new File(pathToFolder + File.separator + ".profiling_results");
+        File dir = new File(pathToFolder + File.separator + "profiling_results");
         if (!dir.exists()) {
             dir.mkdir();
         }
