@@ -27,7 +27,7 @@ class MenuPanelImpl extends JPanel implements Panel {
         view.getContentPane().add(this);
         setLayout(new FlowLayout(FlowLayout.CENTER, 55, 30));
         setBackground(Color.BLACK);
-        setSize(view.getSize());
+        setPreferredSize(view.getSize());
 
         paint();
         setVisible(true);

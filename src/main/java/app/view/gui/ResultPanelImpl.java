@@ -49,7 +49,7 @@ class ResultPanelImpl extends JPanel implements Panel {
 
         setLayout(new FlowLayout(FlowLayout.CENTER, 35, 17));
         setBackground(Color.BLACK);
-        setSize(view.getSize());
+        setPreferredSize(view.getSize());
 
         paint();
         setVisible(true);

@@ -25,7 +25,7 @@ public class Profiling implements EventListener {
     private Model model;
     private static final Logger LOG = Log.createLog(Profiling.class);
 
-    public Profiling() {
+    private Profiling() {
         LOG.debug(Log.APP_IS_BEING_INITIALIZED);
 
         model = new Model(new Characteristic());

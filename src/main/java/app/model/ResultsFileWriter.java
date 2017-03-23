@@ -29,8 +29,9 @@ class ResultsFileWriter {
         String taskName = ch.getTaskName();
         LOG.info(Log.WRITING_IN_THE_FILE);
         try (java.io.FileWriter fileWriter = new java.io.FileWriter(file, true)) {
-            fileWriter.write("\t  The results program:");
-            fileWriter.write(LF + LF);
+            if (file.length() != 0) {
+                fileWriter.write(LF + LF);
+            }
             fileWriter.write("------------------------------------------" + LF);
             if (!taskName.isEmpty()) {
                 fileWriter.write("\t\t" + taskName);
