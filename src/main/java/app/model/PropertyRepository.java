@@ -50,7 +50,7 @@ public class PropertyRepository {
             properties.load(new FileReader(propertyFile));
             STORE.replaceAll((k, v) -> "");
             for (Object key : properties.keySet()) {
-                STORE.computeIfPresent(key, (k, v) -> properties.get(k));
+                STORE.computeIfPresent(((String)key).toLowerCase(), (k, v) -> properties.get(key));
             }
             LOG.info(Log.PROPERTY_FILE_READ + getPathToPropertyFile());
         } catch (Exception e) {
