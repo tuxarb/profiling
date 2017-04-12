@@ -35,11 +35,11 @@ If you use "GUI" mode when starting the profiling system, all log information du
 
 
 ## How to start
-The system developed on Java 9 and requires its the installation. <br/>
+The system developed on **Java 9** and requires its the installation. <br/>
 Use the next steps:
-* Download Java 9 from https://jdk9.java.net/download/ if you haven't.
+* Download **Java 9** from https://jdk9.java.net/download/ if you haven't.
 * Download profiling.jar from [here](https://github.com/tuxarb/profiling).
-* Create **.properties file** on your computer and write down in this file **the couples key-value** using as example |example.properties| that you can see [here](https://github.com/tuxarb/profiling/blob/master/example.properties).
+* Create **.properties file** on your computer and write down in this file **the couples key-value** using as example **example.properties** that you can see [here](https://github.com/tuxarb/profiling/blob/master/example.properties).
 * Open console and run __profiling.jar__ using java commands:
     * "GUI" mode -> java -jar -Dmode=gui path/to/your/profiling.jar
     * "Non-interactive" mode -> java -jar -Dmode=non_interactive -Dpath=path/to/your/.properties_file path/to/your/profiling.jar
@@ -47,7 +47,7 @@ Use the next steps:
 
 
 ## Additional information
-If you want to get a more accurate result, you should use **Detailed test** and specify in your .properties file the key **number_tests** huge as possible to program can finish. <br />
+If you want to get a more accurate result, you should use **detailed test** and specify in your .properties file the key **number_tests** huge as possible to program can finish. <br />
 Also for the serious purposes it is better to use **non_interactive** mode.
 
 
