@@ -13,7 +13,7 @@ Speed - the average amount of memory that the program spent for 1 second of time
 ### Modes
 The system provided the next different modes:
 * GUI mode
-* Console mode (convenient for operating systems that doesn't support the graphic interface)
+* Console mode (convenient for operating systems that doesn't support the graphical interface)
 * Non-interactive console mode (convenient for servers)
 
 ### Opportunities
