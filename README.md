@@ -1,9 +1,9 @@
 ![](https://cloud.githubusercontent.com/assets/15519803/24955260/57217880-1f8b-11e7-8425-1ef022f4c7ae.jpg)
 ## **Overview**
 #### **The system provides the ability to test of any executable operating system program by runtime/capacity/speed.**
-Runtime - the amount of time that the program was executing. (s)<br />
-Capacity - the average amount of memory (RAM) that the program spent when executing. (KB)<br />
-Speed - the average amount of memory that the program spent for 1 second of time when executing. (KB / s)<br />
+*Runtime - the amount of time that the program was executing. (s)*<br />
+*Capacity - the average amount of memory (RAM) that the program spent when executing. (KB)*<br />
+*Speed - the average amount of memory that the program spent for 1 second of time when executing. (KB / s)*<br />
 
 ### Supportable operating systems
 * Windows XP and above
