@@ -38,7 +38,7 @@ If you use "GUI" mode when starting the profiling system, all log information du
 The system developed on **Java 9** and requires its the installation. <br/>
 Use the next steps:
 * Download **Java 9** from https://jdk9.java.net/download/ if you haven't.
-* Download profiling.jar from [here](https://github.com/tuxarb/profiling).
+* Download profiling.jar from [here](https://github.com/tuxarb/profiling/blob/master/profiling.jar).
 * Create **.properties file** on your computer and write down in this file **the couples key-value** using as example **example.properties** that you can see [here](https://github.com/tuxarb/profiling/blob/master/example.properties).
 * Open console and run __profiling.jar__ using java commands:
     * "GUI" mode -> java -jar -Dmode=gui path/to/your/profiling.jar
