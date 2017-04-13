@@ -1,6 +1,6 @@
 ![](https://cloud.githubusercontent.com/assets/15519803/24955260/57217880-1f8b-11e7-8425-1ef022f4c7ae.jpg)
 ## **Overview**
-#### **The system provides the ability to test of any executable operating system program by runtime/capacity/speed.**
+#### **The system provides the ability to test any executable operating system program by runtime/capacity/speed.**
 *Runtime - the amount of time that the program was executing. (s)*<br />
 *Capacity - the average amount of memory (RAM) that the program spent when executing. (KB)*<br />
 *Speed - the average amount of memory that the program spent for 1 second of time when executing. (KB / s)*<br />
@@ -41,9 +41,9 @@ Use the next steps:
 * Download profiling.jar from [here](https://github.com/tuxarb/profiling/blob/master/profiling.jar).
 * Create **.properties file** on your computer and write down in this file the couples **key=value** using as example **example.properties** that you can see [here](https://github.com/tuxarb/profiling/blob/master/example.properties).
 * Open console and run __profiling.jar__ using java commands:
-    * "GUI" mode -> java -jar -Dmode=gui path/to/your/profiling.jar
-    * "Non-interactive" mode -> java -jar -Dmode=non_interactive -Dpath=path/to/your/.properties_file path/to/your/profiling.jar
-    * "Console" mode -> java -jar path/to/your/profiling.jar
+    * "GUI" mode -> **java -jar -Dmode=gui path/to/your/profiling.jar**
+    * "Non-interactive" mode -> **java -jar -Dmode=non_interactive -Dpath=path/to/your/.properties_file path/to/your/profiling.jar**
+    * "Console" mode -> **java -jar path/to/your/profiling.jar**
 
 
 ## Additional information
