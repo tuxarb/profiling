@@ -14,7 +14,7 @@ public interface EventListener {
     void update();
     boolean isCompleted();
     Model getModel();
-    void exit();
+    void exit(int digit);
     void writeToFile() throws IOException;
     void writeToDatabase(DatabaseTypes type) throws IOException, WrongSelectedDatabaseException;
     void readPropertyFile(File file) throws Exception;

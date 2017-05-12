@@ -41,7 +41,7 @@ public class GuiView extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                getEventListener().exit();
+                getEventListener().exit(0);
             }
         });
         setVisible(true);
@@ -73,7 +73,7 @@ public class GuiView extends JFrame {
             backgroundImage = ImageIO.read(fileAsStream);
         } catch (Exception e) {
             LOG.error(Log.SETTING_BACKGROUND_ERROR);
-            getEventListener().exit();
+            getEventListener().exit(1);
         }
     }
 
@@ -83,7 +83,7 @@ public class GuiView extends JFrame {
             buttonImage = ImageIO.read(fileAsStream);
         } catch (Exception e) {
             LOG.error(Log.SETTING_BUTTON_IMAGE_ERROR);
-            getEventListener().exit();
+            getEventListener().exit(1);
         }
     }
 

@@ -53,6 +53,7 @@ public class Log {
     /**
      * Errors and warnings
      */
+    public static final String UNSUPPORTED_JAVA_VERSION = "Your Java version is not 9! Install Java 9 and above.";
     public static final String INTERNAL_APPLICATION_ERROR = "Sorry. An internal error has occurred in the application. Probably, your OS version is out of date and doesn't support some types of commands.";
     public static final String UNEXPECTED_ERROR = "An unexpected error occurred.";
     public static final String WRONG_OS = "This operating system is not for you. Select your operating system.";
@@ -117,8 +118,8 @@ public class Log {
     public static final String CLIENT_PROCESS_ERROR = "Error occurred when running your program.";
     public static final String EMPTY_PATH_MESSAGE = "Path to your program | script file wasn't specified.";
     public static final String CONFIRMATION_OF_RETURNING_TO_MENU = "Do you want to return to the menu?";
-    public static final String CONFIRMATION_OF_UPDATE_PROPERTY_FILE = "Do you want to update the property file?";
-    public static final String NUMBER_OF_POINTS_IS_NOT_ENOUGH = "Not enough points to paint.";
+    public static final String CONFIRMATION_OF_UPDATE_PROPERTY_FILE = "Do you want to update the .properties file?";
+    public static final String NUMBER_OF_POINTS_IS_NOT_ENOUGH = "Not enough the points to paint.";
 
     /**
      * Text

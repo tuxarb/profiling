@@ -83,6 +83,6 @@ public class Utils {
         return " [ " +
                 info.command().orElse("") +
                 (flag ? " " + Arrays.toString(info.arguments().get()) : "") +
-                " ]" + ", pid -> " + "[ " + processHandle.getPid() + " ]";
+                " ]" + ", pid -> " + "[ " + processHandle.pid() + " ]";
     }
 }

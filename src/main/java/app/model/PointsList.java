@@ -76,7 +76,7 @@ public class PointsList {
         return capacitySumForOneMs / (size() - 1);
     }
 
-    public long getMaxIncrementRuntime() {
+    long getMaxIncrementRuntime() {
         long maxIncrement = 0;
         for (int i = 0; i < size() - 1; i++) {
             long currentIncrement = get(i + 1).getRuntime() - get(i).getRuntime();
@@ -87,7 +87,7 @@ public class PointsList {
         return maxIncrement;
     }
 
-    public long getMaxIncrementCapacity() {
+    long getMaxIncrementCapacity() {
         long maxIncrement = 0;
         for (int i = 0; i < size() - 1; i++) {
             long currentIncrement = get(i + 1).getCapacity().subtract(get(i).getCapacity()).longValue();
@@ -98,7 +98,7 @@ public class PointsList {
         return maxIncrement;
     }
 
-    public long getMaxIncrementSpeed() {
+    long getMaxIncrementSpeed() {
         long maxIncrement = Long.MIN_VALUE;
         for (int i = 0; i < size() - 1; i++) {
             long currentIncrement = Math.abs(get(i + 1).getSpeed().subtract(get(i).getSpeed()).longValue());

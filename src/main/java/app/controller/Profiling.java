@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
 
 public class Profiling implements EventListener {
     private GuiView guiView;
@@ -78,7 +79,7 @@ public class Profiling implements EventListener {
 
     private void printErrorMessageAndExit() {
         System.out.println(Log.ERROR_OCCURRED + " " + Utils.getPathToLogs());
-        exit();
+        exit(1);
     }
 
     @Override
@@ -109,7 +110,8 @@ public class Profiling implements EventListener {
             throw e;
         } catch (Throwable e) {
             waitSomeTime(40);
-            LOG.error(Log.UNEXPECTED_ERROR + "\n" + e.toString());
+            LOG.error(Log.UNEXPECTED_ERROR + e.toString());
+            e.printStackTrace();
             throw new ClientProcessException();
         }
         model.completed();
@@ -260,11 +262,23 @@ public class Profiling implements EventListener {
     }
 
     @Override
-    public void exit() {
-        model.exit();
+    public void exit(int digit) {
+        model.exit(digit);
     }
 
     public static void main(String[] args) {
+        checkJavaVersion();
         new Profiling();
+    }
+
+    private static void checkJavaVersion() {
+        int version = Integer.valueOf(
+                ManagementFactory.getRuntimeMXBean().getSpecVersion().substring(0, 1)
+        );
+        if (version != 9) {
+            System.out.println(Log.UNSUPPORTED_JAVA_VERSION);
+            LOG.error(Log.UNSUPPORTED_JAVA_VERSION);
+            System.exit(1);
+        }
     }
 }

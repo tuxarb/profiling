@@ -110,7 +110,7 @@ class ConsoleResult {
 
     private void exit() {
         println(Log.CLOSING_APP);
-        view.getEventListener().exit();
+        view.getEventListener().exit(0);
     }
 
     private void writePointsToFile() {

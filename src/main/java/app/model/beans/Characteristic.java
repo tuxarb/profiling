@@ -1,10 +1,11 @@
 package app.model.beans;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "results")
-public class Characteristic {
+public class Characteristic implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")

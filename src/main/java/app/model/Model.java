@@ -138,7 +138,7 @@ public class Model {
                                 .children()
                                 .findFirst()
                                 .orElseThrow(() -> new Exception(Log.SMALL_PROGRAM_ERROR))
-                                .getPid();
+                                .pid();
                         break;
                     }
                     if (System.currentTimeMillis() - startTime > 700) {
@@ -150,7 +150,7 @@ public class Model {
                         .children()
                         .findFirst()
                         .orElseThrow(() -> new Exception(Log.ERROR_WHEN_CREATING_USER_PROCESS))
-                        .getPid();
+                        .pid();
             }
             task = ProcessHandle.of(processId)
                     .orElseThrow(() -> new Exception(Log.PATH_TO_PROGRAM_INCORRECT));
@@ -192,10 +192,10 @@ public class Model {
         characteristic.setRuntime(timeAsString + " s");
     }
 
-    public void exit() {
+    public void exit(int digit) {
         LOG.debug(Log.CLOSING_APP);
         killAllChildrenProcesses();
-        System.exit(0);
+        System.exit(digit);
     }
 
     public void killAllChildrenProcesses() {
@@ -213,7 +213,7 @@ public class Model {
         writer.write();
     }
 
-    // it is using at non-interactive mode
+    // it uses at the non-interactive mode
     public void writeAllToFile() throws Exception {
         writeToFile();
         String userDirPath = PROPERTY_REPOSITORY.getProperties().getProperty("result_file_path");
