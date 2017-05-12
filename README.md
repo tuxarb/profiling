@@ -44,7 +44,7 @@ Use the next steps:
     * "GUI" mode -> **java -jar -Dmode=gui path/to/your/profiling.jar**
     * "Non-interactive" mode -> **java -jar -Dmode=non_interactive -Dpath=path/to/your/.properties_file path/to/your/profiling.jar**
     * "Console" mode -> **java -jar path/to/your/profiling.jar**
-* After running and selecting your OS, specify .properties file, what you have already created in paragraph 3, using Open file.
+* After running and selecting your __OS__, specify __.properties file__, what you have already created in __paragraph 3__, using __Open file.__
 * Start the testing.
 
 
