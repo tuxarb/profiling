@@ -13,8 +13,8 @@
 ### Modes
 This system provides such different list of modes as:
 * GUI mode
-* Console mode (convenient for operating systems that doesn't support the graphical interface)
-* Non-interactive console mode (convenient for servers)
+* Console mode (it is convenient for operating systems that doesn't support the graphical interface)
+* Non-interactive console mode (it is convenient for a servers)
 
 ### Opportunities
 The profiling system provides the next list of opportunities:
@@ -37,13 +37,15 @@ If you use "GUI" mode when starting the profiling system, all log information du
 ## How to start
 The system was developed on **Java 9** and requires its the installation. <br/>
 Use the next steps:
-* Download **Java 9** from https://jdk9.java.net/download/ if you haven't.
+* Download **Java 9** from http://jdk.java.net/9/ if you haven't.
 * Download **profiling.jar** from [here](https://github.com/tuxarb/profiling/blob/master/profiling.jar).
 * Create **.properties file** on your computer and write down in this file the couples **key=value** using as example **example.properties** that you can see [here](https://github.com/tuxarb/profiling/blob/master/example.properties).
 * Open console and run __profiling.jar__ using java commands:
     * "GUI" mode -> **java -jar -Dmode=gui path/to/your/profiling.jar**
     * "Non-interactive" mode -> **java -jar -Dmode=non_interactive -Dpath=path/to/your/.properties_file path/to/your/profiling.jar**
     * "Console" mode -> **java -jar path/to/your/profiling.jar**
+* After running and selecting your __OS__, specify __.properties file__, using __Open file.__, what you have already created in __paragraph 3.__
+* Start testing.
 
 
 ## Additional information
