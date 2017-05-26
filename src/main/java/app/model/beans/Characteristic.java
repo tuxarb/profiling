@@ -1,11 +1,13 @@
 package app.model.beans;
 
+import app.utils.Utils;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "results")
-public class Characteristic implements Serializable{
+public class Characteristic implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -25,6 +27,9 @@ public class Characteristic implements Serializable{
 
     @Column(name = "program_name", length = 50, nullable = false)
     private String taskName = "";
+
+    @Column(name = "test_date", nullable = false, precision = 6)
+    private String testxDate = Utils.getCurrentDate();   // it's named as testxDate because Hibernate saves in alphabetical order
 
     public Characteristic() {
     }
@@ -77,6 +82,14 @@ public class Characteristic implements Serializable{
         this.testsNumber = iterationsNumber;
     }
 
+    public String getTestxDate() {
+        return testxDate;
+    }
+
+    public void setTestxDate(String testxDate) {
+        this.testxDate = testxDate;
+    }
+
     @Override
     public String toString() {
         return "Characteristic{" +
@@ -84,8 +97,9 @@ public class Characteristic implements Serializable{
                 ", runtime='" + runtime + '\'' +
                 ", capacity='" + capacity + '\'' +
                 ", speed='" + speed + '\'' +
-                ", iterationsNumber='" + testsNumber + '\'' +
+                ", testsNumber=" + testsNumber +
                 ", taskName='" + taskName + '\'' +
+                ", testxDate='" + testxDate + '\'' +
                 '}';
     }
 }
