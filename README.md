@@ -14,7 +14,7 @@
 This system provides such different list of modes as:
 * GUI mode
 * Console mode (it is convenient for operating systems that doesn't support the graphical interface)
-* Non-interactive console mode (it is convenient for a servers)
+* Non-interactive console mode (it is convenient for a server usage)
 
 ### Opportunities
 The profiling system provides the next list of opportunities:
