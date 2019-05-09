@@ -51,3 +51,8 @@ Use the next steps:
 ## Additional information
 If you want to get a more accurate result, you should use **detailed test** and set the value for the key **number_tests** as much as it possible in your .properties file. Use appropriate value for successfully program's finishing. <br />
 Also for the serious purposes it is better to use **non_interactive** mode.
+
+## View
+1) GUI mode ![](https://user-images.githubusercontent.com/15519803/57470461-8b09a400-7291-11e9-9b73-b407aa0a190e.gif)
+2) Console mode ![](https://user-images.githubusercontent.com/15519803/57476959-594c0980-72a0-11e9-9e04-33c2bc0979ae.gif)
+3) Non-interactive mode ![](https://user-images.githubusercontent.com/15519803/57475682-792dfe00-729d-11e9-8bb2-8e98f8a1f45a.png)
